@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	</head>
+
+	<script>
+		function toonAlleOefeningen(){
+			var xhr = new XMLHttpRequest();
+			xhr.onreadystatechange = function(){
+				if(this.readyState == 4){
+					var rijtjeOefeningen = JSON.parse(this.responseText);
+					console.log(rijtjeOefeningen);
+					var eindtekst = "<table>";
+					for(var x = 0; x<rijtjeOefeningen.length;x++){
+						eindtekst += "<tr><td>" + rijtjeOefeningen[x].uitleg + 
+								 "</td><td>" + rijtjeOefeningen[x].naam + "</td></tr>";  
+					}
+					eindtekst += "</table>";
+					document.getElementById("uitkomstOefening").innerHTML = eindtekst;
+				}
+			};
+
+			xhr.open("GET", "http://localhost:8082/allOefeningen",true);
+			xhr.send();
+		}
+	</script>
+
+	<body>
+		<input type=button value="toon deadlift" onclick="toonAlleOefeningen()">
+		<input type=button value="toon squats" onclick="toonAlleOefeningen()">
+		<input type=button value="toon barble row" onclick="toonAlleOefeningen()">
+		<input type=button value="toon shoulder press" onclick="toonAlleOefeningen()">
+		<input type=button value="toon bench press" onclick="toonAlleOefeningen()">
+
+		<div id="uitkomstOefening"></div>
+	</body>
+
+</html>
