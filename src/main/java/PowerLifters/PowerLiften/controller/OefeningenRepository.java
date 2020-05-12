@@ -1,5 +1,9 @@
 package PowerLifters.PowerLiften.controller;
 
-public interface OefeningenRepository {
+import org.springframework.data.repository.CrudRepository;
+
+import PowerLifters.PowerLiften.domein.Oefening;
+
+public interface OefeningenRepository extends CrudRepository<Oefening,Long>{
 
 }
