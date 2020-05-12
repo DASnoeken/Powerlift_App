@@ -9,5 +9,4 @@ public class PowerLiftenApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(PowerLiftenApplication.class, args);
 	}
-
 }
