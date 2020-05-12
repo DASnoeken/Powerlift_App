@@ -23,9 +23,36 @@
 			xhr.open("GET", "http://localhost:8082/allOefeningen",true);
 			xhr.send();
 		}
+		function verstuurOefening(){
+			var naam = document.getElementById("ipnaam").value;
+			var uitleg = document.getElementById("ipuitleg").value;
+
+			var hetObject = {};
+			hetObject.naam = naam;
+			hetObject.uitleg = uitleg;
+			var objJSON = JSON.stringify(hetObject);
+			var xhr = new XMLHttpRequest();
+			xhr.onreadystatechange = function() {
+				if(this.readyState == 4) {
+					alert(hetObject.naam + " is opgeslagen");
+					
+				}
+			};
+			xhr.open("POST", "http://localhost:8082/vulOefeningen", true);
+			xhr.setRequestHeader("Content-Type", "application/json");
+			xhr.send(objJSON);
+		}
+
 	</script>
 
 	<body>
+		naam: <input type=text id=ipnaam>
+		uitleg: <input type=text id=ipuitleg>
+		<input type="button" value="Maak aan" onclick="verstuurOefening()">
+
+		<br>
+		<br>
+
 		<input type=button value="toon deadlift" onclick="toonAlleOefeningen()">
 		<input type=button value="toon squats" onclick="toonAlleOefeningen()">
 		<input type=button value="toon barble row" onclick="toonAlleOefeningen()">

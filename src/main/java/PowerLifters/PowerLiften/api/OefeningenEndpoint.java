@@ -22,7 +22,7 @@ public class OefeningenEndpoint {
 	
 	@PostMapping("/vulOefeningen")
 	public void maakOefening(@RequestBody Oefening oefening) {
-		System.out.println("Oefening: " + oefening + " is toegevoegd!");
+		System.out.println("Oefening: " + oefening.getNaam() + " is toegevoegd!");
 		os.opslaanOefening(oefening);
 	}
 }
