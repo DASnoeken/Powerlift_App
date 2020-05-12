@@ -15,8 +15,9 @@ public class OefeningenService {
 	OefeningenRepository or;
 	
 	public void opslaanOefening(Oefening o) {
+		System.out.println("Oefening: " + o + " wordt opgeslagen!");
 		or.save(o);
-		System.out.println("hoi");
+		
 	}
 	
 	public Iterable<Oefening> vindOefening(){
