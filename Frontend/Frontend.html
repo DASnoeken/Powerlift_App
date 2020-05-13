@@ -23,6 +23,23 @@
 			xhr.open("GET", "http://localhost:8082/allOefeningen",true);
 			xhr.send();
 		}
+		function toonOefening(i){
+			var xhr = new XMLHttpRequest();
+			xhr.onreadystatechange = function(){
+				if(this.readyState == 4){
+					var rijtjeOefeningen = JSON.parse(this.responseText);
+					console.log(rijtjeOefeningen);
+					var naam = "<h1>" + rijtjeOefeningen[i].naam + "</h1>" ;
+					var breakie = "<br>";
+					var uitleg = "<p>" + rijtjeOefeningen[i].uitleg + "</p>";
+					document.getElementById("uitkomstOefening").innerHTML = naam + breakie + uitleg;
+				}
+			};
+
+			xhr.open("GET", "http://localhost:8082/allOefeningen",true);
+			xhr.send();
+
+		}
 		function verstuurOefening(){
 			var naam = document.getElementById("ipnaam").value;
 			var uitleg = document.getElementById("ipuitleg").value;
@@ -53,11 +70,11 @@
 		<br>
 		<br>
 
-		<input type=button value="toon deadlift" onclick="toonAlleOefeningen()">
-		<input type=button value="toon squats" onclick="toonAlleOefeningen()">
-		<input type=button value="toon barble row" onclick="toonAlleOefeningen()">
-		<input type=button value="toon shoulder press" onclick="toonAlleOefeningen()">
-		<input type=button value="toon bench press" onclick="toonAlleOefeningen()">
+		<input type=button value="toon deadlift" onclick="toonOefening(0)">
+		<input type=button value="toon squats" onclick="toonOefening(1)">
+		<input type=button value="toon barble row" onclick="toonOefening(2)">
+		<input type=button value="toon shoulder press" onclick="toonOefening(3)">
+		<input type=button value="toon bench press" onclick="toonOefening(4)">
 
 		<div id="uitkomstOefening"></div>
 	</body>
