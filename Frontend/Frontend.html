@@ -16,12 +16,29 @@
 								 "</td><td>" + rijtjeOefeningen[x].naam + "</td></tr>";  
 					}
 					eindtekst += "</table>";
-					document.getElementById("uitkomstOefening").innerHTML = eindtekst;
+					document.getElementById("scherm").innerHTML = eindtekst;
 				}
 			};
 
 			xhr.open("GET", "http://localhost:8082/allOefeningen",true);
 			xhr.send();
+		}
+		function toonOefening(i){
+			var xhr = new XMLHttpRequest();
+			xhr.onreadystatechange = function(){
+				if(this.readyState == 4){
+					var rijtjeOefeningen = JSON.parse(this.responseText);
+					console.log(rijtjeOefeningen);
+					var naam = "<h1>" + rijtjeOefeningen[i].naam + "</h1>" ;
+					var breakie = "<br>";
+					var uitleg = "<p>" + rijtjeOefeningen[i].uitleg + "</p>";
+					document.getElementById("scherm").innerHTML = naam + breakie + uitleg;
+				}
+			};
+
+			xhr.open("GET", "http://localhost:8082/allOefeningen",true);
+			xhr.send();
+
 		}
 		function verstuurOefening(){
 			var naam = document.getElementById("ipnaam").value;
@@ -43,23 +60,80 @@
 			xhr.send(objJSON);
 		}
 
+		function maakNaam(){
+			var inlognaam = document.getElementById("inlognaam").value;
+			var wachtwoord = document.getElementById("wachtwoord").value;
+
+			var hetObject = {};
+			hetObject.inlognaam = inlognaam;
+			hetObject.wachtwoord = wachtwoord;
+			var objJSON = JSON.stringify(hetObject);
+			var xhr = new XMLHttpRequest();
+			xhr.onreadystatechange = function() {
+				if(this.readyState == 4) {
+					alert(hetObject.inlognaam + " is opgeslagen");
+					
+				}
+			};
+			xhr.open("POST", "http://localhost:8082/registreerdeSporter", true);
+			xhr.setRequestHeader("Content-Type", "application/json");
+			xhr.send(objJSON);
+		}
+
+		function verstuurNaam(inlognaam){
+			var xhr = new XMLHttpRequest();
+			xhr.onreadystatechange = function(){
+				if(this.readyState == 4){
+					var inLijst = false;
+					var rijtjesSporters = JSON.parse(this.responseText);
+					console.log(rijtjesSporters);
+					rijtjesSporters.forEach(element => {
+						if(element.inlognaam == inlognaam){
+							document.getElementById("nieuweSporter").hidden = true;
+							document.getElementById("registreerdeSporter").hidden = false;
+							document.getElementById("scherm").innerHTML = "<p>Welkom, </p>" + inlognaam;
+						}
+					});	
+				}
+			};
+			xhr.open("GET", "http://localhost:8082/allSporters",true);
+			xhr.send();
+		}
+
+
+		function toonHomescreen(){
+			var text = "<textarea id=inlognaam></textarea><br>"
+						+ "<textarea id=wachtwoord></textarea><br> "
+			            + "<input type=button value=\"LOG IN\" onclick = \"verstuurNaam(inlognaam.value)\"><br>" 
+						+ "<input type=button value=\"REGISTREER\" onclick = \"maakNaam()\">"
+			document.getElementById("scherm").innerHTML = text;
+		}
+
 	</script>
 
 	<body>
-		naam: <input type=text id=ipnaam>
-		uitleg: <input type=text id=ipuitleg>
-		<input type="button" value="Maak aan" onclick="verstuurOefening()">
-
-		<br>
-		<br>
-
-		<input type=button value="toon deadlift" onclick="toonAlleOefeningen()">
-		<input type=button value="toon squats" onclick="toonAlleOefeningen()">
-		<input type=button value="toon barble row" onclick="toonAlleOefeningen()">
-		<input type=button value="toon shoulder press" onclick="toonAlleOefeningen()">
-		<input type=button value="toon bench press" onclick="toonAlleOefeningen()">
-
-		<div id="uitkomstOefening"></div>
+		<div id="invullenOefening" hidden>
+			naam: <input type=text id=ipnaam>
+			uitleg: <input type=text id=ipuitleg>
+			<input type="button" value="Maak aan" onclick="verstuurOefening()">
+			<br>
+			<br>
+		</div>
+		<div id="nieuweSporter">
+			<input type=button value="HOME" onclick = "toonHomescreen()" >
+			<input type=button value="toon deadlift" onclick="toonOefening(0)" >
+			<input type=button value="toon squats" onclick="toonOefening(2)">
+			<input type=button value="toon barble row" onclick="toonOefening(1)">
+			<input type=button value="toon shoulder press" onclick="toonOefening(4)">
+			<input type=button value="toon bench press" onclick="toonOefening(3)">
+	    </div>
+		<div id="registreerdeSporter" hidden>
+			<input type=button value="HOME" onclick = "toonHomescreen()" >
+			<input type=button value="Planning" onclick="" >
+			<input type=button value="Oefeningen bekijken" onclick="">
+			<input type=button value="Oefeningen registreren" onclick="">
+		</div>
+		<div id="scherm"></div>
 	</body>
 
 </html>
