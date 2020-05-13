@@ -1,0 +1,54 @@
+<html>
+    <head><title>Coach Scherm</title></head>
+    <script>
+        function geefFeedback(){
+            var feedback = document.getElementById("Feedback").value;
+            var oefening = document.getElementById("oefening").value;
+            //var id = document.getElementById("id").value;
+
+            var voortgangObject = {};
+            voortgangObject.oefening = oefening;
+            //voortgangObject.id=id;
+            voortgangObject.feedback = feedback;
+            var objJSON = JSON.stringify(voortgangObject);
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function(){
+                if(this.readyState == 4) {
+					alert(voortgangObject.feedback + " is opgeslagen");
+				}
+            };
+            xhr.open("POST","http://localhost:8082/geefFeedback",true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+			xhr.send(objJSON);
+        }
+        function showVoortgang(){
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if(this.readyState == 4){
+                    var rijtjeVoortgang = JSON.parse(this.responseText);
+					console.log(rijtjeVoortgang);
+					var eindtekst = "<table><tr><td>Oefening</td><td>Tijdsduur</td><td>Aantal reps</td><td>Gegeven feedback</td><td></tr>";
+					for(var x = 0; x<rijtjeVoortgang.length;x++){
+						eindtekst += "<tr><td>" + rijtjeVoortgang[x].oefening + 
+                                 "</td><td>" + rijtjeVoortgang[x].oefeningtijd + 
+								 "</td><td>" + rijtjeVoortgang[x].liftaantal + 
+                                 "</td><td>"+ rijtjeVoortgang[x].feedback +"</td></tr>";  
+					}
+					eindtekst += "</table>";
+                    document.getElementById("voortgangDiv").innerHTML = eindtekst;
+                }
+            };
+            xhr.open("GET","http://localhost:8082/allVoortgang",true);
+            xhr.send();
+        }
+    </script>
+    <body>
+        Geef feedback aan de student.<br>
+        Oefening naam: <input type="text" id="oefening"><br>
+        Feedback: <input type="text" id="Feedback"><br>
+        <input type="button" value="Verstuur" onclick="geefFeedback()">
+        <input type="button" value="Laat voortgang zien" onclick="showVoortgang()"><br>
+        <div id="voortgangDiv"></div>
+    </body>
+
+</html>
