@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import PowerLifters.PowerLiften.controller.VoortgangService;
@@ -26,5 +27,11 @@ public class VoortgangEndpoint {
 	{
 		System.out.println("Voortgang: " + voortgang.getLiftaantal() + " is toegevoegd!");
 		vs.opslaanVoortgang(voortgang);
+	}
+	
+	@PostMapping("/verwijderOefening")
+	public void verwijderOefening(@RequestBody Long id) {
+		System.out.println("Voortgang: " + id + " is verwijderd!");
+		vs.verwijderVoortgang(id);
 	}
 }
