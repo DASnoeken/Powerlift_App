@@ -50,7 +50,4 @@ public class Voortgang {
 	public void setStarttijd(String starttijd) {
 		this.starttijd = starttijd;
 	}
-	
-	
-	
 }

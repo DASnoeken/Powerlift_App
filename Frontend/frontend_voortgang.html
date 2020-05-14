@@ -7,11 +7,15 @@
             var oefening = document.getElementById("ipoefening").value;
 			var oefeningtijd = document.getElementById("ipoefeningtijd").value;
             var liftaantal = document.getElementById("ipliftaantal").value;
+            var gewicht = document.getElementById("ipgewicht").value;
+            var starttijd = document.getElementById("ipstarttijd").value;
             
 			var voortgangObject = {};
 			voortgangObject.oefening = oefening;
 			voortgangObject.oefeningtijd = oefeningtijd;
             voortgangObject.liftaantal = liftaantal;
+            voortgangObject.gebruiktegewicht = gewicht;
+            voortgangObject.starttijd = starttijd;
 
 			var objJSON = JSON.stringify(voortgangObject);
 			var xhr = new XMLHttpRequest();
@@ -23,25 +27,48 @@
 			xhr.open("POST", "http://localhost:8082/vulVoortgang", true);
 			xhr.setRequestHeader("Content-Type", "application/json");
 			xhr.send(objJSON);
+
+            document.getElementById("oefeninginvullen").hidden = true;
+            document.getElementById("vragenlijstinvullen").hidden = false;
+            openVragenlijst();
+        }
+
+        function openVragenlijst() {
+            alert('hoi');
         }
     </script>
 
     <body>
-        <p>
+        <div id="oefeninginvullen">
             <b>Wat heb je voor training gedaan?</b>
-        </p>
+            <br>
+            <br>
+            <i>oefening :</i>
+            <br>
+            <input type=text id=ipoefening>
+            <br>
+            <i>totale tijd :</i>
+            <br>
+            <input type=text id=ipoefeningtijd>
+            <br>
+            <i>liftaantal :</i>
+            <br>
+            <input type=text id=ipliftaantal>
+            <br>
+            <i>gewicht :</i>
+            <br>
+            <input type=text id=ipgewicht>
+            <br>
+            <i>starttijd :</i> 
+            <br>
+            <input type=text id=ipstarttijd>
+            <br>
+            <br>
+            <input type=button value="voeg toe" onclick="slaOefeningOp()">
+        </div>
+        <div id="vragenlijstinvullen" hidden>
+            <b>Nog even een korte vragenlijst!</b>
 
-        <p>
-            oefening: <input type=text id=ipoefening>
-            <br>
-            <br>
-            oefeningtijd: <input type=text id=ipoefeningtijd>
-            <br>
-            <br>
-            liftaantal: <input type=text id=ipliftaantal>
-            <br>
-            <br>
-            <input type=button value=maakaan onclick="slaOefeningOp()">
-        </p>
+        </div>
     </body>
 </html>
