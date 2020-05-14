@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import PowerLifters.PowerLiften.controller.CoachService;
+import PowerLifters.PowerLiften.domein.Oefening;
 import PowerLifters.PowerLiften.domein.Voortgang;
 
 @RestController
@@ -26,6 +27,7 @@ public class CoachEndpoint {
 		Optional<Voortgang> Il = cs.bekijkID(id);
 		return Il;
 	}
+	
 }
 
 class Helper{
