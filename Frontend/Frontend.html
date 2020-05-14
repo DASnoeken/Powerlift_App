@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 	</head>
 
 	<script>
@@ -10,7 +11,7 @@
 				if(this.readyState == 4){
 					var rijtjeOefeningen = JSON.parse(this.responseText);
 					console.log(rijtjeOefeningen);
-					var eindtekst = "<table>";
+					var eindtekst = "<table class=\"table\">";
 					for(var x = 0; x<rijtjeOefeningen.length;x++){
 						eindtekst += "<tr><td>" + rijtjeOefeningen[x].uitleg + 
 								 "</td><td>" + rijtjeOefeningen[x].naam + "</td></tr>";  
@@ -24,11 +25,12 @@
 			xhr.send();
 		}
 		function toonOefening(i){
+			document.getElementById("scherm").hidden = false; 
+			document.getElementById("homescreen").hidden = true;
 			var xhr = new XMLHttpRequest();
 			xhr.onreadystatechange = function(){
 				if(this.readyState == 4){
 					var rijtjeOefeningen = JSON.parse(this.responseText);
-					console.log(rijtjeOefeningen);
 					var naam = "<h1>" + rijtjeOefeningen[i].naam + "</h1>" ;
 					var breakie = "<br>";
 					var uitleg = "<p>" + rijtjeOefeningen[i].uitleg + "</p>";
@@ -63,7 +65,7 @@
 		function maakNaam(){
 			var inlognaam = document.getElementById("inlognaam").value;
 			var wachtwoord = document.getElementById("wachtwoord").value;
-
+            var naamBestaatAl = false;
 			var hetObject = {};
 			hetObject.inlognaam = inlognaam;
 			hetObject.wachtwoord = wachtwoord;
@@ -71,13 +73,25 @@
 			var xhr = new XMLHttpRequest();
 			xhr.onreadystatechange = function() {
 				if(this.readyState == 4) {
-					alert(hetObject.inlognaam + " is opgeslagen");
-					
+					var rijtjesSporters = JSON.parse(this.responseText);
+					rijtjesSporters.forEach(element => {
+					if(element.inlognaam == inlognaam){
+						naamBestaatAl = true;
+						document.getElementById("scherm").innerHTML = "<p>Naam bestaat al, begin opnieuw</p>"
+						document.getElementById("homescreen").hidden = true;
+						document.getElementById("scherm").hidden = false;
+					}
+					})
 				}
-			};
-			xhr.open("POST", "http://localhost:8082/registreerdeSporter", true);
-			xhr.setRequestHeader("Content-Type", "application/json");
-			xhr.send(objJSON);
+			};	
+			xhr.open("GET", "http://localhost:8082/allSporters",true);
+			xhr.send();
+			if (!naamBestaatAl){
+				xhr.open("POST", "http://localhost:8082/registreerdeSporter", true);
+			    xhr.setRequestHeader("Content-Type", "application/json");
+				xhr.send(objJSON);
+			}
+			
 		}
 
 		function verstuurNaam(inlognaam){
@@ -89,29 +103,51 @@
 					console.log(rijtjesSporters);
 					rijtjesSporters.forEach(element => {
 						if(element.inlognaam == inlognaam){
+							inLijst = true;
 							document.getElementById("nieuweSporter").hidden = true;
+							document.getElementById("homescreen").hidden = true;
+							document.getElementById("scherm").hidden = false;
 							document.getElementById("registreerdeSporter").hidden = false;
 							document.getElementById("scherm").innerHTML = "<p>Welkom, </p>" + inlognaam;
 						}
 					});	
+					if(!inLijst){
+						document.getElementById("scherm").innerHTML = "<p>U staat niet in het systeem, registreer u eerst</p>"
+						document.getElementById("homescreen").hidden = true;
+						document.getElementById("scherm").hidden = false;
+					}
 				}
 			};
 			xhr.open("GET", "http://localhost:8082/allSporters",true);
 			xhr.send();
 		}
+		function toonPlanning(){
+			document.getElementById("homescreen").hidden = true;
+			var xhr = new XMLHttpRequest();
+			xhr.onreadystatechange = function(){
+				if(this.readyState == 4){
+					var naam = "<h1>" + "PLANNING" + "</h1>" ;
+					var breakie = "<br>";
+					var uitleg = "<p>" + "Hier moeten we een mooi kalendertje neerzetten" + "</p>";
+					document.getElementById("scherm").innerHTML = naam + breakie + uitleg;
+				}
+			};
+
+			xhr.open("GET", "http://localhost:8082/allOefeningen",true);
+			xhr.send();
+
+		}
 
 
 		function toonHomescreen(){
-			var text = "<textarea id=inlognaam></textarea><br>"
-						+ "<textarea id=wachtwoord></textarea><br> "
-			            + "<input type=button value=\"LOG IN\" onclick = \"verstuurNaam(inlognaam.value)\"><br>" 
-						+ "<input type=button value=\"REGISTREER\" onclick = \"maakNaam()\">"
-			document.getElementById("scherm").innerHTML = text;
+			document.getElementById("scherm").hidden = true; 
+			document.getElementById("homescreen").hidden = false;
 		}
 
 	</script>
 
 	<body>
+		<div = class="container-fluid">
 		<div id="invullenOefening" hidden>
 			naam: <input type=text id=ipnaam>
 			uitleg: <input type=text id=ipuitleg>
@@ -120,20 +156,38 @@
 			<br>
 		</div>
 		<div id="nieuweSporter">
-			<input type=button value="HOME" onclick = "toonHomescreen()" >
+			<div class="btn-group">
+			<input type=button value="HOME" onclick ="toonHomescreen()" >
 			<input type=button value="toon deadlift" onclick="toonOefening(0)" >
 			<input type=button value="toon squats" onclick="toonOefening(2)">
 			<input type=button value="toon barble row" onclick="toonOefening(1)">
 			<input type=button value="toon shoulder press" onclick="toonOefening(4)">
 			<input type=button value="toon bench press" onclick="toonOefening(3)">
+			</div>
 	    </div>
 		<div id="registreerdeSporter" hidden>
-			<input type=button value="HOME" onclick = "toonHomescreen()" >
-			<input type=button value="Planning" onclick="" >
-			<input type=button value="Oefeningen bekijken" onclick="">
+			<input type=button value="Planning" onclick="toonPlanning()" >
+			<select id="Oefeningen" onchange="toonOefening(this.value)" >
+				<option>......</option>
+				<option value=0 >Deadlift</option>
+				<option value=1>Barble Row</option>
+				<option value=2>Squats</option>
+				<option value=3>Bench Press</option>
+				<option value=4>Shoulder Press</option>
+			</select>
 			<input type=button value="Oefeningen registreren" onclick="">
 		</div>
+		<div id ="homescreen" hidden>
+			<textarea id=inlognaam></textarea><br>
+			<textarea id=wachtwoord></textarea><br>
+			<input type=button value="LOG IN" onclick = "verstuurNaam(inlognaam.value)"><br>
+			<input type=button value="REGISTREER" onclick = "maakNaam()">
+		</div>
 		<div id="scherm"></div>
+		</div>
+		<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 	</body>
 
 </html>
