@@ -18,6 +18,11 @@ public class VoortgangService {
 		vr.save(v);
 	}
 	
+	public void verwijderVoortgang(Long id) {
+		System.out.println("Voortgang: " + id + " wordt verwijderd");
+		vr.deleteById(id);
+	}
+	
 	public Iterable<Voortgang> vindVoortgang(){
 		Iterable<Voortgang> v = vr.findAll();
 		return v;
