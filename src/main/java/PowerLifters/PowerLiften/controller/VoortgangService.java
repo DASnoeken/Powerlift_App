@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import PowerLifters.PowerLiften.domein.Oefening;
 import PowerLifters.PowerLiften.domein.Voortgang;
 
 @Service
@@ -13,8 +14,13 @@ public class VoortgangService {
 	@Autowired
 	VoortgangRepository vr;
 	
-	public void opslaanVoortgang(Voortgang v) {
+	@Autowired
+	OefeningenRepository or;
+	
+	public void opslaanVoortgang(Voortgang v, long id) {
 		System.out.println("Voortgang: " + v.getLiftaantal() + " wordt opgeslagen");
+		Oefening o = or.findById(id).get();
+		v.setOefening(o);
 		vr.save(v);
 	}
 	
