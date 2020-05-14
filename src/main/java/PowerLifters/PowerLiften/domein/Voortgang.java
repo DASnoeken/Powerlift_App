@@ -1,9 +1,12 @@
 package PowerLifters.PowerLiften.domein;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Voortgang {	
@@ -11,11 +14,12 @@ public class Voortgang {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
 	
-	private String oefening;
-	private String oefeningtijd;
-	private String liftaantal;
-	private String gebruiktegewicht;
-	private String starttijd;
+	@ManyToOne
+	private Oefening oefening;
+	private float oefeningtijd;
+	private int liftaantal;
+	private double gebruiktegewicht;
+	private LocalDateTime starttijd;
 	private String feedback;
 	
 	public String getFeedback() {
@@ -27,37 +31,34 @@ public class Voortgang {
 	public long getId() {
 		return id;
 	}
-	public String getOefening() {
+	public Oefening getOefening() {
 		return oefening;
 	}
-	public void setOefening(String oefening) {
+	public void setOefening(Oefening oefening) {
 		this.oefening = oefening;
 	}
-	public String getOefeningtijd() {
+	public float getOefeningtijd() {
 		return oefeningtijd;
 	}
-	public void setOefeningtijd(String oefeningtijd) {
+	public void setOefeningtijd(float oefeningtijd) {
 		this.oefeningtijd = oefeningtijd;
 	}
-	public String getLiftaantal() {
+	public int getLiftaantal() {
 		return liftaantal;
 	}
-	public void setLiftaantal(String liftaantal) {
+	public void setLiftaantal(int liftaantal) {
 		this.liftaantal = liftaantal;
 	}
-	public String getGebruiktegewicht() {
+	public double getGebruiktegewicht() {
 		return gebruiktegewicht;
 	}
-	public void setGebruiktegewicht(String gebruiktegewicht) {
+	public void setGebruiktegewicht(double gebruiktegewicht) {
 		this.gebruiktegewicht = gebruiktegewicht;
 	}
-	public String getStarttijd() {
+	public LocalDateTime getStarttijd() {
 		return starttijd;
 	}
-	public void setStarttijd(String starttijd) {
+	public void setStarttijd(LocalDateTime starttijd) {
 		this.starttijd = starttijd;
 	}
-	
-	
-	
 }
