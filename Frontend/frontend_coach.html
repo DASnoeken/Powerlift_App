@@ -2,13 +2,13 @@
     <head><title>Coach Scherm</title></head>
     <script>
         function geefFeedback(){
+            var ID       = document.getElementById("ID").value;
             var feedback = document.getElementById("Feedback").value;
             var oefening = document.getElementById("oefening").value;
-            //var id = document.getElementById("id").value;
 
             var voortgangObject = {};
             voortgangObject.oefening = oefening;
-            //voortgangObject.id=id;
+            voortgangObject.id=ID;
             voortgangObject.feedback = feedback;
             var objJSON = JSON.stringify(voortgangObject);
             var xhr = new XMLHttpRequest();
@@ -27,9 +27,10 @@
                 if(this.readyState == 4){
                     var rijtjeVoortgang = JSON.parse(this.responseText);
 					console.log(rijtjeVoortgang);
-					var eindtekst = "<table><tr><td>Oefening</td><td>Tijdsduur</td><td>Aantal reps</td><td>Gegeven feedback</td><td></tr>";
+					var eindtekst = "<table><tr><td>ID</td><td>Oefening</td><td>Tijdsduur</td><td>Aantal reps</td><td>Gegeven feedback</td><td></tr>";
 					for(var x = 0; x<rijtjeVoortgang.length;x++){
-						eindtekst += "<tr><td>" + rijtjeVoortgang[x].oefening + 
+						eindtekst += "<tr><td>" + rijtjeVoortgang[x].id + 
+                                 "</td><td>" + rijtjeVoortgang[x].oefening + 
                                  "</td><td>" + rijtjeVoortgang[x].oefeningtijd + 
 								 "</td><td>" + rijtjeVoortgang[x].liftaantal + 
                                  "</td><td>"+ rijtjeVoortgang[x].feedback +"</td></tr>";  
@@ -44,6 +45,7 @@
     </script>
     <body>
         Geef feedback aan de student.<br>
+        Oefening ID: <input type="text" id="ID"><br>
         Oefening naam: <input type="text" id="oefening"><br>
         Feedback: <input type="text" id="Feedback"><br>
         <input type="button" value="Verstuur" onclick="geefFeedback()">

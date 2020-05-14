@@ -10,7 +10,7 @@ public class CoachService {
 	@Autowired
 	VoortgangRepository vr;
 	
-	public void geefFeedback(String feedback,String oefening){
-		vr.setFeedback(feedback,oefening);
+	public void geefFeedback(String feedback,String oefening,long id){
+		vr.setFeedback(feedback,oefening,id);
 	}
 }
