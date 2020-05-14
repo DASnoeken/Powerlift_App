@@ -16,7 +16,7 @@ public class Voortgang {
 	
 	private String oefening;
 	private String oefeningtijd;
-	private String liftaantal;
+	private int liftaantal;
 	private String gebruiktegewicht;
 	private String starttijd;
 	
@@ -32,10 +32,10 @@ public class Voortgang {
 	public void setOefeningtijd(String oefeningtijd) {
 		this.oefeningtijd = oefeningtijd;
 	}
-	public String getLiftaantal() {
+	public int getLiftaantal() {
 		return liftaantal;
 	}
-	public void setLiftaantal(String liftaantal) {
+	public void setLiftaantal(int liftaantal) {
 		this.liftaantal = liftaantal;
 	}
 	public String getGebruiktegewicht() {

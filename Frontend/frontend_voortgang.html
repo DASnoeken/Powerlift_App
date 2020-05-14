@@ -18,6 +18,7 @@
             voortgangObject.starttijd = starttijd;
 
 			var objJSON = JSON.stringify(voortgangObject);
+            console.log(objJSON);
 			var xhr = new XMLHttpRequest();
 			xhr.onreadystatechange = function() {
 				if(this.readyState == 4) {
@@ -43,13 +44,13 @@
             <b>Wat heb je voor training gedaan?</b>
             <br>
             <br>
-            <i>oefening :</i>
+            <i>OEFENING :</i>
             <br>
-            <input type=text id=ipoefening>
+            <input type="datetime-local" id=ipoefening>
             <br>
             <i>totale tijd :</i>
             <br>
-            <input type=text id=ipoefeningtijd>
+            <input type="number" id=ipoefeningtijd>
             <br>
             <i>liftaantal :</i>
             <br>
