@@ -1,11 +1,16 @@
 package PowerLifters.PowerLiften.api;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import PowerLifters.PowerLiften.controller.CoachService;
+import PowerLifters.PowerLiften.domein.Voortgang;
 
 @RestController
 public class CoachEndpoint {
@@ -14,13 +19,18 @@ public class CoachEndpoint {
 	
 	@PostMapping("/geefFeedback")
 	public void geefFeedback(@RequestBody Helper h){
-		cs.geefFeedback(h.getFeedback(), h.getOefening(),h.getId());
+		cs.geefFeedback(h.getFeedback(), h.getId());
+	}
+	
+	@GetMapping("/checkID")
+	public Optional<Voortgang> checkID(Long id){
+		Optional<Voortgang> Il = cs.bekijkID(id);
+		return Il;
 	}
 }
 
 class Helper{
 	private String feedback;
-	private String oefening;
 	private long id;
 	
 	public long getId() {
@@ -34,12 +44,5 @@ class Helper{
 	}
 	public void setFeedback(String feedback) {
 		this.feedback = feedback;
-	}
-	public String getOefening() {
-		return oefening;
-	}
-	public void setOefening(String oefening) {
-		this.oefening = oefening;
-	}
-	
+	}	
 }
