@@ -9,6 +9,7 @@ import javax.persistence.Id;
 public class Oefening {
 	private String uitleg;
 	private String naam;
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
@@ -31,7 +32,13 @@ public class Oefening {
 	public void setId(long id) {
 		this.id = id;
 	}
-	
-	
+}
+
+enum OefeningSoort {
+	benchpress,
+	deadliften,
+	barblerow,
+	squats,
+	shoulderpress
 }
 

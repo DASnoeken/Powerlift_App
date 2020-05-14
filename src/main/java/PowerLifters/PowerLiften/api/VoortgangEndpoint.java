@@ -2,6 +2,7 @@ package PowerLifters.PowerLiften.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,11 +23,12 @@ public class VoortgangEndpoint {
 		return iv;
 	}
 	
-	@PostMapping("/vulVoortgang")
-	public void maakVoortgang(@RequestBody Voortgang voortgang)
+	@PostMapping("/vulVoortgang/{id}")
+	public void maakVoortgang(@RequestBody Voortgang voortgang, @PathVariable long id)
 	{
+	
 		System.out.println("Voortgang: " + voortgang.getLiftaantal() + " is toegevoegd!");
-		vs.opslaanVoortgang(voortgang);
+		vs.opslaanVoortgang(voortgang, id);
 	}
 	
 	@PostMapping("/verwijderOefening")
