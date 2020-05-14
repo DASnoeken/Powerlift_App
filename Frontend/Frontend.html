@@ -27,6 +27,7 @@
 		function toonOefening(i){
 			document.getElementById("scherm").hidden = false; 
 			document.getElementById("homescreen").hidden = true;
+			document.getElementById("oefening invullen").hidden = true;
 			var xhr = new XMLHttpRequest();
 			xhr.onreadystatechange = function(){
 				if(this.readyState == 4){
@@ -42,6 +43,35 @@
 			xhr.send();
 
 		}
+        function toonVoortgang(){
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if(this.readyState == 4){
+                    var rijtjeVoortgang = JSON.parse(this.responseText);
+					console.log(rijtjeVoortgang);
+					var eindtekst = "<table class =\"table\">"
+									+ "<thead class =\"thead-dark\"><tr>"
+									+ "<th scope = \"col\">ID</th>"
+									+ "<th scope = \"col\">Oefening</th>"
+									+ "<th scope = \"col\">Tijdsduur</th>"
+									+ "<th scope = \"col\">Aantal reps</th>"
+									+ "<th scope = \"col\">Gegeven feedback</th></tr></thead><tbody>";
+					for(var x = 0; x<rijtjeVoortgang.length;x++){
+						eindtekst += "<tr><td>" + rijtjeVoortgang[x].id + 
+                                 "</td><td>" + rijtjeVoortgang[x].oefening + 
+                                 "</td><td>" + rijtjeVoortgang[x].oefeningtijd + 
+								 "</td><td>" + rijtjeVoortgang[x].liftaantal + 
+                                 "</td><td>"+ rijtjeVoortgang[x].feedback +"</td></tr>";  
+					}
+					eindtekst += "</tbody></table>";
+                    document.getElementById("scherm").innerHTML = eindtekst;
+					document.getElementById("scherm").hidden = false;
+                }
+            };
+            xhr.open("GET","http://localhost:8082/allVoortgang",true);
+            xhr.send();
+        }
+
 		function verstuurOefening(){
 			var naam = document.getElementById("ipnaam").value;
 			var uitleg = document.getElementById("ipuitleg").value;
@@ -61,7 +91,7 @@
 			xhr.setRequestHeader("Content-Type", "application/json");
 			xhr.send(objJSON);
 		}
-
+        
 		function maakNaam(){
 			var inlognaam = document.getElementById("inlognaam").value;
 			var wachtwoord = document.getElementById("wachtwoord").value;
@@ -79,19 +109,31 @@
 						naamBestaatAl = true;
 						document.getElementById("scherm").innerHTML = "<p>Naam bestaat al, begin opnieuw</p>"
 						document.getElementById("homescreen").hidden = true;
-						document.getElementById("scherm").hidden = false;
+						document.getElementById("scherm").hidden = false;           
 					}
 					})
+				
+				if (!naamBestaatAl){                                                   
+					xhr.open("POST", "http://localhost:8082/registreerdeSporter", true);
+			    	xhr.setRequestHeader("Content-Type", "application/json");
+					xhr.send(objJSON);
 				}
-			};	
-			xhr.open("GET", "http://localhost:8082/allSporters",true);
-			xhr.send();
-			if (!naamBestaatAl){
-				xhr.open("POST", "http://localhost:8082/registreerdeSporter", true);
-			    xhr.setRequestHeader("Content-Type", "application/json");
-				xhr.send(objJSON);
 			}
+			};	
+			xhr.open("GET", "http://localhost:8082/allSporters",true);              
+			xhr.send();                                                             
 			
+			
+		}
+		function verwijderOefening(){
+			var ID = document.getElementById("ipID").value;
+			var xhr = new XMLHttpRequest();
+			xhr.onreadystatechange = function(){
+				document.getElementById("scherm").innerHTML = ID + " is verwijderd uit de lijst, zie de nieuwe voortgang"
+			};
+			xhr.open("POST", "http://localhost:8082/verwijderOefening", true);
+			xhr.setRequestHeader("Content-Type", "application/json");
+			xhr.send(ID);
 		}
 
 		function verstuurNaam(inlognaam){
@@ -122,7 +164,8 @@
 			xhr.send();
 		}
 		function toonPlanning(){
-			document.getElementById("homescreen").hidden = true;
+			document.getElementById("scherm").hidden = false;
+			document.getElementById("oefening invullen").hidden = true;
 			var xhr = new XMLHttpRequest();
 			xhr.onreadystatechange = function(){
 				if(this.readyState == 4){
@@ -137,24 +180,61 @@
 			xhr.send();
 
 		}
+		
 
 
 		function toonHomescreen(){
 			document.getElementById("scherm").hidden = true; 
 			document.getElementById("homescreen").hidden = false;
 		}
+		function slaOefeningOp() {
+            var oefening = document.getElementById("ipoefening").value;
+			var oefeningtijd = document.getElementById("ipoefeningtijd").value;
+            var liftaantal = document.getElementById("ipliftaantal").value;
+            
+			var voortgangObject = {};
+			voortgangObject.oefening = oefening;
+			voortgangObject.oefeningtijd = oefeningtijd;
+            voortgangObject.liftaantal = liftaantal;
+
+			var objJSON = JSON.stringify(voortgangObject);
+			var xhr = new XMLHttpRequest();
+			xhr.onreadystatechange = function() {
+				if(this.readyState == 4) {
+					alert(voortgangObject.oefening + " is opgeslagen");
+				}
+			};
+			xhr.open("POST", "http://localhost:8082/vulVoortgang", true);
+			xhr.setRequestHeader("Content-Type", "application/json");
+			xhr.send(objJSON);
+        }
+
+		function oefeningRegistreren(){
+			document.getElementById("oefening invullen").hidden = false;
+			document.getElementById("scherm").hidden = true;
+
+		}
+
+		function verwijderModus(){
+			var checkbox = document.getElementById("checkbox");
+			if(checkbox.checked){
+			    document.getElementById("ipoefening").disabled = true;
+				document.getElementById("ipoefeningtijd").disabled = true;
+				document.getElementById("ipliftaantal").disabled = true;
+				document.getElementById("ipID").disabled = false;
+			} else {
+				document.getElementById("ipoefening").disabled = false;
+				document.getElementById("ipoefeningtijd").disabled = false;
+				document.getElementById("ipliftaantal").disabled = false;
+				document.getElementById("ipID").disabled = true;
+			}
+
+		}
 
 	</script>
 
 	<body>
-		<div = class="container-fluid">
-		<div id="invullenOefening" hidden>
-			naam: <input type=text id=ipnaam>
-			uitleg: <input type=text id=ipuitleg>
-			<input type="button" value="Maak aan" onclick="verstuurOefening()">
-			<br>
-			<br>
-		</div>
+		<div class="container-xl">
 		<div id="nieuweSporter">
 			<div class="btn-group">
 			<input type=button value="HOME" onclick ="toonHomescreen()" >
@@ -175,16 +255,59 @@
 				<option value=3>Bench Press</option>
 				<option value=4>Shoulder Press</option>
 			</select>
-			<input type=button value="Oefeningen registreren" onclick="">
+			<input type=button value="Oefeningen registreren" onclick="oefeningRegistreren()">
 		</div>
+		
 		<div id ="homescreen" hidden>
-			<textarea id=inlognaam></textarea><br>
-			<textarea id=wachtwoord></textarea><br>
-			<input type=button value="LOG IN" onclick = "verstuurNaam(inlognaam.value)"><br>
-			<input type=button value="REGISTREER" onclick = "maakNaam()">
+			<form>
+				<div class = "form-group">
+					<label class="col-sm-2 col-form-label">Username</label>
+					<input type="gebruikersnaam" class = "form-control" id="exampleGebruikersnaam" aria-describedby="gebruikersnaamHelp">
+					<small id="gebruikersnaamHelp" class="form-text text-muted">Dit is volkomen privé</small>
+				</div>
+				<div class = "form-group">
+					<label class="col-sm-2 col-form-label">Wachtwoord</label>
+					<input type="wachtwoord" class = "form-control" id="exampleWachtwoord" aria-describedby="wachtwoordHelp">
+					<small id="wachtwoordHelp" class="form-text text-muted">Dit is volkomen privé</small>	
+				</div>
+				<input type=button value="Sign in" class="btn btn-primary" onclick = "verstuurNaam(exampleGebruikersnaam.value)"><br>
+				<input type=button value="Register" class="btn btn-primary" onclick = "maakNaam()">
+			</form>
 		</div>
+
+		<div id="oefening invullen" hidden>
+			<form>
+				<div class="form-group">
+					<label>Wat heb je voor training gedaan?</label>
+				</div>
+				<div class="form-group">
+					<label>Oefening </label>
+					<input type=text id=ipoefening>
+				</div>
+				<div class="form-group">
+					<label>Oefeningstijd </label>
+					<input type=text id=ipoefeningtijd>
+				</div>
+				<div class="form-group">
+					<label>Liftaantal </label>
+					<input type=text id=ipliftaantal>
+				</div>
+				<div class="form-group">
+					<label>ID</label>
+					<input type=text id=ipID disabled>
+					<input type="checkbox" id ="checkbox" onclick="verwijderModus()">
+					<small class="form-text text-muted">Vul ID in voor verwijdering</small>
+				</div>
+				<input type=button value=maakaan onclick="slaOefeningOp()">
+				<input type=button value=ZieOefeningen onclick="toonVoortgang()">
+				<input type=button value=verwijderOefening onclick="verwijderOefening()" >
+			</form>
+		</div>
+
+		
 		<div id="scherm"></div>
 		</div>
+
 		<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
