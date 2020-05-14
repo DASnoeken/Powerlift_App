@@ -35,7 +35,8 @@
         }
 
         function openVragenlijst() {
-            alert('hoi');
+            var xhr = new XMLHttpRequest();
+			xhr.onreadystatechange = function(){
         }
     </script>
 
@@ -46,15 +47,15 @@
             <br>
             <i>OEFENING :</i>
             <br>
-            <input type="datetime-local" id=ipoefening>
+            <input type=text id=ipoefening>
             <br>
             <i>totale tijd :</i>
             <br>
-            <input type="number" id=ipoefeningtijd>
+            <input type=number id=ipoefeningtijd>
             <br>
             <i>liftaantal :</i>
             <br>
-            <input type=text id=ipliftaantal>
+            <input type=number id=ipliftaantal>
             <br>
             <i>gewicht :</i>
             <br>
@@ -62,7 +63,7 @@
             <br>
             <i>starttijd :</i> 
             <br>
-            <input type=text id=ipstarttijd>
+            <input type=datetime-local id=ipstarttijd>
             <br>
             <br>
             <input type=button value="voeg toe" onclick="slaOefeningOp()">
