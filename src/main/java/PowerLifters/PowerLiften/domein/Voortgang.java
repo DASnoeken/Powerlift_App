@@ -6,10 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Voortgang {
-
-	String feedback = "Hier komt de feedback van de coach";
-	
+public class Voortgang {	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
@@ -19,7 +16,17 @@ public class Voortgang {
 	private int liftaantal;
 	private String gebruiktegewicht;
 	private String starttijd;
+	private String feedback;
 	
+	public String getFeedback() {
+		return feedback;
+	}
+	public void setFeedback(String feedback) {
+		this.feedback = feedback;
+	}
+	public long getId() {
+		return id;
+	}
 	public String getOefening() {
 		return oefening;
 	}
