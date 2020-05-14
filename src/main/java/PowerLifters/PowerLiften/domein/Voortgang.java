@@ -24,6 +24,9 @@ public class Voortgang {
 	public void setFeedback(String feedback) {
 		this.feedback = feedback;
 	}
+	public long getId() {
+		return id;
+	}
 	public String getOefening() {
 		return oefening;
 	}

@@ -14,15 +14,21 @@ public class CoachEndpoint {
 	
 	@PostMapping("/geefFeedback")
 	public void geefFeedback(@RequestBody Helper h){
-		
-		cs.geefFeedback(h.getFeedback(), h.getOefening());
+		cs.geefFeedback(h.getFeedback(), h.getOefening(),h.getId());
 	}
 }
 
 class Helper{
 	private String feedback;
 	private String oefening;
+	private long id;
 	
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
+	}
 	public String getFeedback() {
 		return feedback;
 	}
