@@ -2,6 +2,7 @@ package PowerLifters.PowerLiften.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,9 +32,9 @@ public class VragenlijstEndpoint {
 	}
 	
 	
-	@PostMapping("/save/antwoord")
-	public void slaAntwoordOp(@RequestBody Vragenlijst vragenlijst) {
+	@PostMapping("/save/antwoord/{id}")
+	public void slaAntwoordOp(@RequestBody Vragenlijst vragenlijst, @PathVariable long id) {
 		System.out.println("Antwoord: " + vragenlijst.getAntwoorden() + " is opgeslagen!");
-		vs.opslaanAntwoorden(vragenlijst);
+		vs.opslaanAntwoorden(vragenlijst, id);
 	}
 }
