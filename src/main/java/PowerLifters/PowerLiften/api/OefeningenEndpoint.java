@@ -25,7 +25,6 @@ public class OefeningenEndpoint {
 		System.out.println("Oefening: " + oefening.getNaam() + " is toegevoegd!");
 		os.opslaanOefening(oefening);
 	}
-	
 	@PostMapping("/leegOefeningen")
 	public void leegOefeningen(){
 		os.leegOefeningen();
@@ -42,5 +41,4 @@ public class OefeningenEndpoint {
 			os.opslaanOefening(oefening);
 		}
 	}
-	
 }

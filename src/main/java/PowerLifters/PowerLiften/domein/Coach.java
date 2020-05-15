@@ -1,5 +1,8 @@
 package PowerLifters.PowerLiften.domein;
 
-public class Coach {
 
-}
+
+
+public class Coach {
+	
+	}
