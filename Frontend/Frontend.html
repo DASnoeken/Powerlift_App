@@ -93,8 +93,8 @@
 		}
         
 		function maakNaam(){
-			var inlognaam = document.getElementById("inlognaam").value;
-			var wachtwoord = document.getElementById("wachtwoord").value;
+			var inlognaam = document.getElementById("exampleGebruikersnaam").value;
+			var wachtwoord = document.getElementById("exampleWachtwoord").value;
             var naamBestaatAl = false;
 			var hetObject = {};
 			hetObject.inlognaam = inlognaam;
@@ -105,20 +105,20 @@
 				if(this.readyState == 4) {
 					var rijtjesSporters = JSON.parse(this.responseText);
 					rijtjesSporters.forEach(element => {
-					if(element.inlognaam == inlognaam){
-						naamBestaatAl = true;
-						document.getElementById("scherm").innerHTML = "<p>Naam bestaat al, begin opnieuw</p>"
-						document.getElementById("homescreen").hidden = true;
-						document.getElementById("scherm").hidden = false;           
-					}
+						if(element.inlognaam == inlognaam){
+							naamBestaatAl = true;
+							document.getElementById("scherm").innerHTML = "<p>Naam bestaat al, begin opnieuw</p>"
+							document.getElementById("homescreen").hidden = true;
+							document.getElementById("scherm").hidden = false;           
+						}
 					})
 				
-				if (!naamBestaatAl){                                                   
-					xhr.open("POST", "http://localhost:8082/registreerdeSporter", true);
-			    	xhr.setRequestHeader("Content-Type", "application/json");
-					xhr.send(objJSON);
+					if (!naamBestaatAl){                                                   
+						xhr.open("POST", "http://localhost:8082/registreerdeSporter", true);
+			    		xhr.setRequestHeader("Content-Type", "application/json");
+						xhr.send(objJSON);
+					}
 				}
-			}
 			};	
 			xhr.open("GET", "http://localhost:8082/allSporters",true);              
 			xhr.send();                                                             

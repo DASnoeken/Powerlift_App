@@ -1,0 +1,1 @@
+INSERT INTO `oefening`(`id`, `naam`, `uitleg`) VALUES ('4','Shoulder press','uitleg'),('3','Benchpress','uitleg'),('2','Squat','uitleg'),('1','Barble row','uitleg'),('0','Deadlift','uitleg')
