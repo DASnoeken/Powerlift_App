@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import PowerLifters.PowerLiften.domein.Oefening;
-import PowerLifters.PowerLiften.domein.Voortgang;
 
 @Service
 @Transactional
@@ -22,5 +21,9 @@ public class OefeningenService {
 	public Iterable<Oefening> vindOefening(){
 		Iterable<Oefening> oefeningen = or.findAll();
 		return oefeningen;
+	}
+	
+	public void leegOefeningen(){
+		or.clearOefeningen();
 	}
 }
