@@ -25,4 +25,20 @@ public class OefeningenEndpoint {
 		System.out.println("Oefening: " + oefening.getNaam() + " is toegevoegd!");
 		os.opslaanOefening(oefening);
 	}
+	@PostMapping("/leegOefeningen")
+	public void leegOefeningen(){
+		os.leegOefeningen();
+	}
+	
+	@PostMapping("/vulAlleOefeningen")
+	public void maakAlleOefeningen(){
+		Oefening oefening = new Oefening();
+		String[] namen = {"Deadlift","Squat","Benchpress","Barble row","Overhead press"};
+		for(int i = 0; i<namen.length;i++){
+			oefening.setNaam(namen[i]);
+			oefening.setId(i);
+			oefening.setUitleg("uitleg");
+			os.opslaanOefening(oefening);
+		}
+	}
 }
