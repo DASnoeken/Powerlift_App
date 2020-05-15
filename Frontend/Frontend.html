@@ -101,7 +101,7 @@
 			var wachtwoord = document.getElementById("exampleWachtwoord").value;
             var naamBestaatAl = false;
 			var hetObject = {};
-			hetObject.inlognaam = inlognaam;
+			hetObject.naam = inlognaam;
 			hetObject.wachtwoord = wachtwoord;
 			var objJSON = JSON.stringify(hetObject);
 			var xhr = new XMLHttpRequest();
@@ -109,7 +109,7 @@
 				if(this.readyState == 4) {
 					var rijtjesSporters = JSON.parse(this.responseText);
 					rijtjesSporters.forEach(element => {
-						if(element.inlognaam == inlognaam){
+						if(element.naam == inlognaam){
 							naamBestaatAl = true;
 							document.getElementById("scherm").innerHTML = "<p>Naam bestaat al, begin opnieuw</p>"
 							document.getElementById("homescreen").hidden = true;
@@ -148,7 +148,7 @@
 					var rijtjesSporters = JSON.parse(this.responseText);
 					console.log(rijtjesSporters);
 					rijtjesSporters.forEach(element => {
-						if(element.inlognaam == inlognaam){
+						if(element.naam == inlognaam){
 							inLijst = true;
 							document.getElementById("nieuweSporter").hidden = true;
 							document.getElementById("homescreen").hidden = true;
@@ -256,9 +256,9 @@
 			xhr.onreadystatechange = function(){
                 if(this.readyState == 4)
                 {
-                    var vraag = JSON.parse(this.responseText);
-                    console.log(vraag);
-                    document.getElementById("vraag").innerHTML = vraag.vragen;
+                    var object = JSON.parse(this.responseText);
+                    console.log(object);
+                    document.getElementById("vraag").innerHTML = object.vragen;
                     // var allevragen = "";
                     // vragen.forEach(element => {
                     // allevragen += element + "<br>";
@@ -290,7 +290,7 @@
                     
                 }
             };
-            xhr.open("POST", "http://localhost:8082/save/antwoord", true);
+            xhr.open("POST", "http://localhost:8082/save/antwoord" + "/" + 2, true);
 			xhr.setRequestHeader("Content-Type", "application/json");
 			xhr.send(objJSON);
 			document.getElementById("oefening invullen").hidden = false;
@@ -301,12 +301,13 @@
             var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function(){
                 if(this.readyState == 4) {
-                    console.log(this.responseText);
+                    //console.log(this.responseText);
                     var vragenlijsten = JSON.parse(this.responseText);
                     var antwoorden = "";
+					console.log(vragenlijsten);
                     for(i = 0; i < vragenlijsten.length; i++)
                     {
-                        antwoorden += vragenlijsten[i].antwoorden + "<br>";
+                        antwoorden += vragenlijsten[i].antwoorden + ": " + vragenlijsten[i].sporter.naam +  "<br>";
                         document.getElementById("output").innerHTML = antwoorden;
                     }
                 }
