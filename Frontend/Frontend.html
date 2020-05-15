@@ -193,7 +193,6 @@
             var liftaantal = document.getElementById("ipliftaantal").value;
             
 			var voortgangObject = {};
-			voortgangObject.oefening = oefening;
 			voortgangObject.oefeningtijd = oefeningtijd;
             voortgangObject.liftaantal = liftaantal;
 
@@ -204,7 +203,7 @@
 					alert(voortgangObject.oefening + " is opgeslagen");
 				}
 			};
-			xhr.open("POST", "http://localhost:8082/vulVoortgang", true);
+			xhr.open("POST", "http://localhost:8082/vulVoortgang" + "/" + oefening, true);
 			xhr.setRequestHeader("Content-Type", "application/json");
 			xhr.send(objJSON);
         }
