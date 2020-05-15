@@ -31,7 +31,7 @@ public class OefeningenEndpoint {
 	}
 	
 	@PostMapping("/vulAlleOefeningen")
-	public void maakAlleOefeningen(){ //Dit geeft ons een vaste volgorde van oefeningen
+	public void maakAlleOefeningen(){ //Dit geeft ons een vaste volgorde van oefeningen. Beetje boekhouding is wel handig, want het liep niet zo lekker samen met de frontend
 		String[] namen = {"Deadlift","Squat","Benchpress","Barble row","Overhead press"};
 		for(int i = 0; i<namen.length;i++){
 			Oefening oefening = new Oefening();
