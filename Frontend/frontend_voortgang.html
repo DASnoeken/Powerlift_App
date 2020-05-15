@@ -22,7 +22,7 @@
 			xhr.onreadystatechange = function() {
                 
 				if(this.readyState == 4) {
-					alert(voortgangObject.oefening + " is opgeslagen");
+					//alert(voortgangObject.oefening + " is opgeslagen");
 				}
 			};
 			xhr.open("POST", "http://localhost:8082/vulVoortgang" + "/" + oefening, true);
@@ -39,16 +39,62 @@
 			xhr.onreadystatechange = function(){
                 if(this.readyState == 4)
                 {
-                    var vragen = JSON.parse(this.responseText);
-                    console.log(vragen);
-                    var allevragen = "";
-                    vragen.forEach(element => {
-                    allevragen += element + "<br>";
-                    })
+                    var vraag = JSON.parse(this.responseText);
+                    console.log(vraag);
+                    document.getElementById("vraag").innerHTML = vraag.vragen;
+                    // var allevragen = "";
+                    // vragen.forEach(element => {
+                    // allevragen += element + "<br>";
+                    // })
+                    
                 }
-                document.getElementById("vragenlijstinvullen").innerHTML = allevragen;
             }
             xhr.open("GET","http://localhost:8082/vulVragenlijst",true);
+            xhr.send();
+
+            document.getElementById("allevragenlijsten").hidden = false;
+        }
+
+        function slaAntwoordOp(i) {
+            var xhr = new XMLHttpRequest();
+            var vragenlijsten = {};
+
+            if(i == 0) {
+                vragenlijsten.antwoorden = "goed";
+            }
+            else if(i == 1) {
+                vragenlijsten.antwoorden = "matig";
+            }
+            else {
+                vragenlijsten.antwoorden = "slecht";
+            }
+            var objJSON = JSON.stringify(vragenlijsten);
+
+			xhr.onreadystatechange = function(){
+                if(this.readyState == 4) {
+                    
+                }
+            };
+            xhr.open("POST", "http://localhost:8082/save/antwoord", true);
+			xhr.setRequestHeader("Content-Type", "application/json");
+			xhr.send(objJSON);
+        }
+
+        function verkrijgAlleVragenlijsten() {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function(){
+                if(this.readyState == 4) {
+                    console.log(this.responseText);
+                    var vragenlijsten = JSON.parse(this.responseText);
+                    var antwoorden = "";
+                    for(i = 0; i < vragenlijsten.length; i++)
+                    {
+                        antwoorden += vragenlijsten[i].antwoorden + "<br>";
+                        document.getElementById("output").innerHTML = antwoorden;
+                    }
+                }
+            };
+            xhr.open("GET","http://localhost:8082/verkrijgVragenlijst",true);
             xhr.send();
         }
     </script>
@@ -60,19 +106,19 @@
             <br>
             <i>OEFENING :</i>
             <br>
-            <input type=text id=ipoefening>
+            <input type=text id=ipoefening value=14>
             <br>
             <i>totale tijd :</i>
             <br>
-            <input type=number id=ipoefeningtijd>
+            <input type=number id=ipoefeningtijd value=20>
             <br>
             <i>liftaantal :</i>
             <br>
-            <input type=number id=ipliftaantal>
+            <input type=number id=ipliftaantal value=17>
             <br>
             <i>gewicht :</i>
             <br>
-            <input type=text id=ipgewicht>
+            <input type=text id=ipgewicht value=19>
             <br>
             <i>starttijd :</i> 
             <br>
@@ -83,7 +129,19 @@
         </div>
         <div id="vragenlijstinvullen" hidden>
             <b>Nog even een korte vragenlijst!</b>
-
+            <br>
+            <br>
+            <div id="vraag">Hier komt de vraag!</div>
+            <br>
+            <br>
+            <input type=button value="goed" onclick="slaAntwoordOp(0)">
+            <input type=button value="matig" onclick="slaAntwoordOp(1)">
+            <input type=button value="slecht" onclick="slaAntwoordOp(2)">
+        </div>
+        <div id="allevragenlijsten" hidden>
+            <b>Hier komen alle vragen</b>
+            <input type=button value="voeg toe" onclick="verkrijgAlleVragenlijsten()">
+            <div id=output>blabla</div>
         </div>
     </body>
 </html>

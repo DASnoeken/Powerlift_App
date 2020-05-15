@@ -12,19 +12,19 @@ public class Vragenlijst {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
 	
-	private String[] vragen = {"Hoe voel je je na het sporten?", "Vond je het zwaar?"};
-	private String[] antwoorden;
+	private String vragen = "Hoe voel je je na het sporten?";
+	private String antwoorden;
 	
-	public String[] getVragen() {
+	public String getVragen() {
 		return vragen;
 	}
-	public void setVragen(String[] vragen) {
+	public void setVragen(String vragen) {
 		this.vragen = vragen;
 	}
-	public String[] getAntwoorden() {
+	public String getAntwoorden() {
 		return antwoorden;
 	}
-	public void setAntwoorden(String[] antwoorden) {
+	public void setAntwoorden(String antwoorden) {
 		this.antwoorden = antwoorden;
 	}
 }
