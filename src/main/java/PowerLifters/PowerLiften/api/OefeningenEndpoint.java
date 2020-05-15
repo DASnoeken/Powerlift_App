@@ -25,6 +25,4 @@ public class OefeningenEndpoint {
 		System.out.println("Oefening: " + oefening.getNaam() + " is toegevoegd!");
 		os.opslaanOefening(oefening);
 	}
-	
-	
 }
