@@ -1,5 +1,14 @@
 package PowerLifters.PowerLiften.domein;
 
-public class GeregistreerdeSporter {
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
+@Entity
+public class GeregistreerdeSporter {
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private long id;
+	String voornaam;
 }
