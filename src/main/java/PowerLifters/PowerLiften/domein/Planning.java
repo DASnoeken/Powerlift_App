@@ -17,12 +17,9 @@ public class Planning {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
-	
 	private LocalDateTime tijd;
 	@OneToMany
-	private List<Oefening> oefening;
-	private int aantalReps;
-	private int gewicht;
+	private List<GegevenTraining> training;
 	@ManyToOne
 	private GeregistreerdeSporter geregistreerdeSporter;
 	
@@ -42,27 +39,20 @@ public class Planning {
 	public LocalDateTime getTijd() {
 		return tijd;
 	}
+	public List<GegevenTraining> getTraining() {
+		return training;
+	}
+	public void setTraining(List<GegevenTraining> training) {
+		this.training = training;
+	}
+	public void addTraining(GegevenTraining gt) {
+		training.add(gt);
+	}
+	
 	public void setTijd(LocalDateTime tijd) {
 		this.tijd = tijd;
 	}
-	public List<Oefening> getOefening() {
-		return oefening;
-	}
-	public void setOefening(List<Oefening> oefening) {
-		this.oefening = oefening;
-	}
-	public int getAantalReps() {
-		return aantalReps;
-	}
-	public void setAantalReps(int aantalReps) {
-		this.aantalReps = aantalReps;
-	}
-	public int getGewicht() {
-		return gewicht;
-	}
-	public void setGewicht(int gewicht) {
-		this.gewicht = gewicht;
-	}
+	
 	
 	
 	

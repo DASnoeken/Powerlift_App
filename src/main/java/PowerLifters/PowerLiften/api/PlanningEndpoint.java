@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import PowerLifters.PowerLiften.controller.PlanningService;
@@ -21,12 +22,25 @@ public class PlanningEndpoint {
 		Iterable<Planning> ip = ps.vindPlanning();
 		return ip;
 	}
-	
 	@PostMapping("/vulPlanning")
 	public void maakPlanning(@RequestBody Planning p)
 	{
 		System.out.println("Planning: " + p.getId() + " is toegevoegd!");
 		ps.opslaanPlanning(p);
+	}
+	
+	@PostMapping("/vulPlanningSporter/{id1}")
+	public void maakPlanningSporter(@RequestBody Planning p, @PathVariable long id)
+	{
+		System.out.println("Planning: " + p.getId() + " is toegevoegd!");
+		ps.opslaanSporter(p, id);
+	}
+	
+	@PostMapping("/vulPlanningOefening/{id1}")
+	public void maakPlanningOefening(@RequestBody Planning p, @PathVariable long id)
+	{
+		System.out.println("Planning: " + p.getId() + " is toegevoegd!");
+		ps.opslaanSporter(p, id);
 	}
 	
 	@PostMapping("/verwijderPlanning")
