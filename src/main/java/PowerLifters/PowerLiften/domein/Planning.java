@@ -45,6 +45,10 @@ public class Planning {
 	public void setTraining(List<GegevenTraining> training) {
 		this.training = training;
 	}
+	public void addTraining(GegevenTraining gt) {
+		training.add(gt);
+	}
+	
 	public void setTijd(LocalDateTime tijd) {
 		this.tijd = tijd;
 	}
