@@ -10,7 +10,9 @@ public class GeregistreerdeSporter {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
-	String voornaam;
+	
+	private String naam;
+	private String wachtwoord;
 	
 	public long getId() {
 		return id;
@@ -18,10 +20,17 @@ public class GeregistreerdeSporter {
 	public void setId(long id) {
 		this.id = id;
 	}
-	public String getVoornaam() {
-		return voornaam;
+	
+	public String getNaam() {
+		return naam;
 	}
-	public void setVoornaam(String voornaam) {
-		this.voornaam = voornaam;
+	public void setNaam(String naam) {
+		this.naam = naam;
+	}
+	public String getWachtwoord() {
+		return wachtwoord;
+	}
+	public void setWachtwoord(String wachtwoord) {
+		this.wachtwoord = wachtwoord;
 	}
 }
