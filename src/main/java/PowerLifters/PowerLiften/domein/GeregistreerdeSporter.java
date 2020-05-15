@@ -11,4 +11,17 @@ public class GeregistreerdeSporter {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
 	String voornaam;
+	
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
+	}
+	public String getVoornaam() {
+		return voornaam;
+	}
+	public void setVoornaam(String voornaam) {
+		this.voornaam = voornaam;
+	}
 }

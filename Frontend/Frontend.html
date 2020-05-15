@@ -290,7 +290,7 @@
                     
                 }
             };
-            xhr.open("POST", "http://localhost:8082/save/antwoord", true);
+            xhr.open("POST", "http://localhost:8082/save/antwoord" + "/" + 1, true);
 			xhr.setRequestHeader("Content-Type", "application/json");
 			xhr.send(objJSON);
 			document.getElementById("oefening invullen").hidden = false;
@@ -301,12 +301,13 @@
             var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function(){
                 if(this.readyState == 4) {
-                    console.log(this.responseText);
+                    //console.log(this.responseText);
                     var vragenlijsten = JSON.parse(this.responseText);
                     var antwoorden = "";
+					console.log(vragenlijsten);
                     for(i = 0; i < vragenlijsten.length; i++)
                     {
-                        antwoorden += vragenlijsten[i].antwoorden + "<br>";
+                        antwoorden += vragenlijsten[i].antwoorden + ": " + vragenlijsten[i].sporter.voornaam +  "<br>";
                         document.getElementById("output").innerHTML = antwoorden;
                     }
                 }
