@@ -110,7 +110,7 @@
 		var objJSON = JSON.stringify(hetObject);
 		var xhr = new XMLHttpRequest();
 		xhr.onreadystatechange = function () {
-			if (this.readyState == 4) {
+			if (this.readyState == 4 && this.responseText != null) {
 				var rijtjesSporters = JSON.parse(this.responseText);
 				rijtjesSporters.forEach(element => {
 					if (element.naam == naam) {
@@ -158,7 +158,7 @@
 						document.getElementById("homescreen").hidden = true;
 						document.getElementById("scherm").hidden = false;
 						document.getElementById("registreerdeSporter").hidden = false;
-						document.getElementById("scherm").innerHTML = "<p>Welkom, </p>" + inlognaam;
+						document.getElementById("scherm").innerHTML = "<p>Welkom, </p>" + naam;
 					}
 				});
 				if (!inLijst) {
@@ -509,7 +509,7 @@
 						hetObject.geregistreerdeSporter.id = sporter.id;
 						hetObject.geregistreerdeSporter.wachtwoord = sporter.wachtwoord;
 						hetObject.geregistreerdeSporter.naam = sporter.naam;
-						hetObject.id = document.getElementById("planningID").value++;
+						//hetObject.id = document.getElementById("planningID").value++;
 						var objJSON = JSON.stringify(hetObject);
 						console.log(hetObject);
 						console.log(objJSON);
@@ -600,19 +600,19 @@
 			<form id="planning3" hidden>
 				<div class="form-group">
 					<label>Datum </label>
-					<input type=datetime-local id="planningDatum" value=14>
+					<input type="datetime-local" id="planningDatum">
 				</div>
 				<div class="form-group">
 					<label>Oefening </label>
-					<input type=number id="planningOefening" value=14>
+					<input type=number id="planningOefening">
 				</div>
 				<div class="form-group">
 					<label>aantal reps </label>
-					<input type=number id="planningAantalReps" value=20>
+					<input type=number id="planningAantalReps">
 				</div>
 				<div class="form-group">
 					<label>gewicht </label>
-					<input type=number id="planningGewicht" value=20>
+					<input type=number id="planningGewicht">
 				</div>
 				<div class="form-group">
 					<input type=button value="Voeg training toe" onclick="voegOefeningToeVoorPersoon()">
