@@ -45,7 +45,7 @@ public class OefeningenEndpoint {
 		for(int i = 0; i<namen.length;i++){
 			Oefening oefening = new Oefening();
 			oefening.setNaam(namen[i]);
-			oefening.setUitleg("uitleg");
+			oefening.setUitleg();
 			os.opslaanOefening(oefening);
 		}
 	}
