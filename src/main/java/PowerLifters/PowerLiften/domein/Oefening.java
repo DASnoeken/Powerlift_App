@@ -39,15 +39,16 @@ public class Oefening {
 
 enum OefeningSoort {
 	benchpress,
-	deadliften,
+	deadlift,
 	barblerow,
-	squats,
-	shoulderpress
+	squat,
+	overheadpress
 }
 
 class UitlegLezer{
 	private String uitleg;
 	UitlegLezer(String naam){
+		pwd();
 		naam = naam.toLowerCase();
 		uitleg = "";
 		BufferedReader br=null;
@@ -75,6 +76,18 @@ class UitlegLezer{
 				}
 			}
 		}
+	}
+	
+	public void pwd() {
+		File currentDirFile = new File(".");
+		String helper = currentDirFile.getAbsolutePath();
+		String currentDir = new String("");
+		try {
+			currentDir += helper.substring(0, helper.length() - currentDirFile.getCanonicalPath().length());
+		}catch(IOException ioe) {
+			
+		}
+		System.out.println("current dir: "+currentDir);
 	}
 	
 	public String getUitleg() {
