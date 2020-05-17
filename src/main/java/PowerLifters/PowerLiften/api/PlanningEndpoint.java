@@ -23,24 +23,25 @@ public class PlanningEndpoint {
 		return ip;
 	}
 	@PostMapping("/vulPlanning")
-	public void maakPlanning(@RequestBody Planning p)
+	public long maakPlanning(@RequestBody Planning p)
 	{
 		System.out.println("Planning: " + p.getId() + " is toegevoegd!");
 		ps.opslaanPlanning(p);
+		return p.getId();
 	}
 	
-	@PostMapping("/vulPlanningSporter/{id1}")
+	@PostMapping("/vulPlanningSporter/{id}")
 	public void maakPlanningSporter(@RequestBody Planning p, @PathVariable long id)
 	{
-		System.out.println("Planning: " + p.getId() + " is toegevoegd!");
+		System.out.println("Planning is toegevoegd!");
 		ps.opslaanSporter(p, id);
 	}
 	
-	@PostMapping("/vulPlanningOefening/{id1}")
+	@PostMapping("/vulPlanningOefening/{id}")
 	public void maakPlanningOefening(@RequestBody Planning p, @PathVariable long id)
 	{
-		System.out.println("Planning: " + p.getId() + " is toegevoegd!");
-		ps.opslaanSporter(p, id);
+		System.out.println("Planning:  is toegevoegd!");
+		ps.opslaanOefening(p, id);
 	}
 	
 	@PostMapping("/verwijderPlanning")

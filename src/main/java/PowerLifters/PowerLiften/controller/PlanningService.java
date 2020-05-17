@@ -1,5 +1,10 @@
 package PowerLifters.PowerLiften.controller;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,10 +32,11 @@ public class PlanningService {
 	}
 	
 	public void opslaanOefening(Planning p, long id) {
-		GegevenTraining gt = gtr.findById(id).get();
-		p.addTraining(gt);
+		Optional<GegevenTraining> gt = gtr.findById(id);
+		System.out.println(gt);
+		p.addTraining(gt.get());
 		ps.save(p);
-	    
+		
 	}
 	
 	public Iterable<Planning> vindPlanning(){
