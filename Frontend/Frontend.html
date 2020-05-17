@@ -31,9 +31,11 @@
 		document.getElementById("homescreen").hidden = true;
 		document.getElementById("oefening invullen").hidden = true;
 		var xhr = new XMLHttpRequest();
+		i--;
 		xhr.onreadystatechange = function () {
 			if (this.readyState == 4) {
 				var rijtjeOefeningen = JSON.parse(this.responseText);
+				console.log(rijtjeOefeningen[i]);
 				var naam = "<h1>" + rijtjeOefeningen[i].naam + "</h1>";
 				var breakie = "<br>";
 				var uitleg = "<p>" + rijtjeOefeningen[i].uitleg + "</p>";
@@ -316,21 +318,21 @@
 			<div class="btn-group">
 				<input type=button value="HOME" onclick="toonHomescreen()">
 				<input type=button value="toon deadlift" onclick="toonOefening(1)">
-				<input type=button value="toon squats" onclick="toonOefening(2)">
-				<input type=button value="toon barble row" onclick="toonOefening(3)">
-				<input type=button value="toon shoulder press" onclick="toonOefening(4)">
-				<input type=button value="toon bench press" onclick="toonOefening(5)">
+				<input type=button value="toon squat" onclick="toonOefening(2)">
+				<input type=button value="toon bench press" onclick="toonOefening(3)">
+				<input type=button value="toon barble row" onclick="toonOefening(4)">
+				<input type=button value="toon overhead press" onclick="toonOefening(5)">
 			</div>
 		</div>
 		<div id="registreerdeSporter" hidden>
 			<input type=button value="Planning" onclick="toonPlanning()">
 			<select id="Oefeningen" onchange="toonOefening(this.value)">
 				<option>......</option>
-				<option value=0>Deadlift</option>
-				<option value=1>Barble Row</option>
-				<option value=2>Squats</option>
+				<option value=1>Deadlift</option>
+				<option value=2>Squat</option>
 				<option value=3>Bench Press</option>
-				<option value=4>Shoulder Press</option>
+				<option value=4>Barble Row</option>
+				<option value=5>Overhead Press</option>
 			</select>
 			<input type=button value="Oefeningen registreren" onclick="oefeningRegistreren()">
 		</div>
@@ -618,9 +620,8 @@
 					<input type=button value="Zie de planning voor deze sporter" onclick="ziePlanning()">
 				</div>
 			</form>
-			<div id="scherm"></div>
 		</div>
-
+		<div id="scherm"></div>
 
 
 
