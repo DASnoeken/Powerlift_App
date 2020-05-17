@@ -64,12 +64,13 @@
 					+ "<th scope = \"col\">Gegeven feedback</th></tr></thead><tbody>";
 				for (var x = 0; x < rijtjeVoortgang.length; x++) {
 					eindtekst += "<tr><td>" + rijtjeVoortgang[x].id +
-						"</td><td>" + rijtjeVoortgang[x].oefening +
+						"</td><td>" + rijtjeVoortgang[x].oefening.naam +
 						"</td><td>" + rijtjeVoortgang[x].gebruiktegewicht +
 						"</td><td>" + rijtjeVoortgang[x].starttijd +
 						"</td><td>" + rijtjeVoortgang[x].oefeningtijd +
 						"</td><td>" + rijtjeVoortgang[x].liftaantal +
 						"</td><td>" + rijtjeVoortgang[x].feedback + "</td></tr>";
+						console.log(rijtjeVoortgang[x].oefening);
 				}
 				eindtekst += "</tbody></table>";
 				document.getElementById("scherm").innerHTML = eindtekst;
@@ -364,19 +365,19 @@
 				</div>
 				<div class="form-group">
 					<label>Oefening </label>
-					<input type=text id=ipoefening value=14>
+					<input type=text id=ipoefening>
 				</div>
 				<div class="form-group">
 					<label>Oefeningstijd </label>
-					<input type=number id=ipoefeningtijd value=20>
+					<input type=number id=ipoefeningtijd>
 				</div>
 				<div class="form-group">
-					<label>Liftaantal </label>
-					<input type=number id=ipliftaantal value=17>
+					<label>Aantal reps </label>
+					<input type=number id=ipliftaantal>
 				</div>
 				<div class="form-group">
 					<label>Gewicht</label>
-					<input type=text id=ipgewicht value=19>
+					<input type=text id=ipgewicht>
 				</div>
 				<div class="form-group">
 					<label>Starttijd</label>
@@ -403,9 +404,9 @@
 			<input type=button value="goed" onclick="slaAntwoordOp(0)">
 			<input type=button value="matig" onclick="slaAntwoordOp(1)">
 			<input type=button value="slecht" onclick="slaAntwoordOp(2)">
-			<b>Hier komen alle vragen</b>
+			<b></b>
 			<input type=button value="voeg toe" onclick="verkrijgAlleVragenlijsten()">
-			<div id=output>blabla</div>
+			<div id=output></div>
 		</div>
 
 		<script>
