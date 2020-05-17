@@ -1,5 +1,6 @@
 package PowerLifters.PowerLiften.domein;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -18,8 +19,17 @@ public class GegevenTraining {
 	
 	@OneToOne
 	private Oefening oefening;
+	private LocalDateTime tijd;
 	private int aantalReps;
 	private int gewicht;
+	
+	public LocalDateTime getTijd() {
+		return tijd;
+	}
+	public void setTijd(LocalDateTime tijd) {
+		this.tijd = tijd;
+	}
+	
 	public long getId() {
 		return id;
 	}

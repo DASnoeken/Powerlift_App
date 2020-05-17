@@ -1,6 +1,7 @@
 package PowerLifters.PowerLiften.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,8 +20,13 @@ public class GeregistreerdeSporterService {
 		
 	}
 
-	public Iterable<GeregistreerdeSporter> vindOefening() {
-		Iterable<GeregistreerdeSporter> oefeningen = gsr.findAll();
-		return oefeningen;
+	public Iterable<GeregistreerdeSporter> vindSporters() {
+		Iterable<GeregistreerdeSporter> sporters = gsr.findAll();
+		return sporters;
+	}
+
+	public GeregistreerdeSporter vindSporterByID(long id) {
+		GeregistreerdeSporter gs = gsr.findById(id).get();
+		return gs;
 	}
 }

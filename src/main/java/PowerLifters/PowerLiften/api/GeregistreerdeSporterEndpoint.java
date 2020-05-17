@@ -2,6 +2,7 @@ package PowerLifters.PowerLiften.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,8 +24,14 @@ public class GeregistreerdeSporterEndpoint {
 	
 	@GetMapping("/allSporters")
 	public Iterable<GeregistreerdeSporter> getSporters(){
-		Iterable<GeregistreerdeSporter> oefeningen = gss.vindOefening();
-		return oefeningen; 
+		Iterable<GeregistreerdeSporter> sporters = gss.vindSporters();
+		return sporters; 
+	}
+	
+	@GetMapping("/getSporter/{id}")
+	public GeregistreerdeSporter getSporterByID(@PathVariable long id) {
+		GeregistreerdeSporter gs = gss.vindSporterByID(id);
+		return gs;
 	}
 	
 }

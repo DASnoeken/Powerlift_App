@@ -1,5 +1,7 @@
 package PowerLifters.PowerLiften.controller;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
@@ -25,5 +27,11 @@ public class OefeningenService {
 	
 	public void leegOefeningen(){
 		or.clearOefeningen();
+	}
+
+	public Optional<Oefening> getOefeningById(long id) {
+		Optional<Oefening> oefening = or.findById(id);
+		return oefening;
+		
 	}
 }
