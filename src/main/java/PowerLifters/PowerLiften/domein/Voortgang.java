@@ -21,7 +21,14 @@ public class Voortgang {
 	private double gebruiktegewicht;
 	private LocalDateTime starttijd;
 	private String feedback;
+	private String antwoorden;
 	
+	public String getAntwoorden() {
+		return antwoorden;
+	}
+	public void setAntwoorden(String antwoorden) {
+		this.antwoorden = antwoorden;
+	}
 	public String getFeedback() {
 		return feedback;
 	}

@@ -4,7 +4,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Vragenlijst {
@@ -15,6 +17,9 @@ public class Vragenlijst {
 	
 	@ManyToOne
 	private GeregistreerdeSporter sporter;
+	
+	@ManyToOne
+	private Voortgang voortgang;
 	
 	private String vragen = "Hoe voel je je na het sporten?";
 	private String antwoorden;
@@ -36,5 +41,14 @@ public class Vragenlijst {
 	}
 	public void setAntwoorden(String antwoorden) {
 		this.antwoorden = antwoorden;
+	}
+	public long getId() {
+		return id;
+	}
+	public Voortgang getVoortgang() {
+		return voortgang;
+	}
+	public void setVoortgang(Voortgang voortgang) {
+		this.voortgang = voortgang;
 	}
 }

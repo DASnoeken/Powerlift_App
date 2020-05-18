@@ -1,5 +1,7 @@
 package PowerLifters.PowerLiften.api;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,7 +22,6 @@ public class VragenlijstEndpoint {
 	@GetMapping("/vulVragenlijst")
 	public Vragenlijst getAllVragen() {
 		Vragenlijst vr = new Vragenlijst();
-		String vragenlijst = vr.getVragen();
 		return vr; 
 	}
 	
@@ -30,7 +31,11 @@ public class VragenlijstEndpoint {
 		Iterable<Vragenlijst> vragenlijsten = vs.getAllVragenlijsten();
 		return vragenlijsten;
 	}
-	
+	@GetMapping("/getVragenlijstByID/{id}")
+	public Optional<Vragenlijst> getVragenlijstById(@PathVariable long id){
+		Optional<Vragenlijst> antwoord = vs.getVragenlijstById(id);
+		return antwoord;
+	}
 	
 	@PostMapping("/save/antwoord/{id}")
 	public void slaAntwoordOp(@RequestBody Vragenlijst vragenlijst, @PathVariable long id) {
