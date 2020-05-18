@@ -30,23 +30,29 @@ public class PlanningEndpoint {
 		return p.getId();
 	}
 	
-	@PostMapping("/vulPlanningSporter/{id}")
-	public void maakPlanningSporter(@RequestBody Planning p, @PathVariable long id)
+	@PostMapping("/vulPlanningSporter/{planningID}/{sporterID} ")
+	public void maakPlanningSporter(@PathVariable long planningID, @PathVariable long sporterID)
 	{
 		System.out.println("Planning is toegevoegd!");
-		ps.opslaanSporter(p, id);
+		ps.opslaanSporter(planningID, sporterID);
 	}
 	
-	@PostMapping("/vulPlanningOefening/{id}")
-	public void maakPlanningOefening(@RequestBody Planning p, @PathVariable long id)
+	@PostMapping("/vulPlanningOefening/{planningID}/{trainingID}")
+	public void maakPlanningOefening(@PathVariable long planningID, @PathVariable long trainingID)
 	{
 		System.out.println("Planning:  is toegevoegd!");
-		ps.opslaanOefening(p, id);
+		ps.opslaanOefening(planningID, trainingID);
 	}
 	
 	@PostMapping("/verwijderPlanning")
-	public void verwijderOefening(@RequestBody Long id) {
+	public void verwijderOefening(@RequestBody long id) {
 		System.out.println("Planning: " + id + " is verwijderd!");
 		ps.verwijderPlanning(id);
+	}
+	
+	@PostMapping("/trialFelix/{planningID}/{trainingID}")
+	public void testFelix(@PathVariable long planningID, @PathVariable long trainingID) {
+		System.out.println("HOI" + planningID + "Doei" + trainingID );
+		ps.testingFelix(planningID,trainingID);
 	}
 }

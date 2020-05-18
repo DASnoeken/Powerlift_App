@@ -70,7 +70,7 @@
 						"</td><td>" + rijtjeVoortgang[x].oefeningtijd +
 						"</td><td>" + rijtjeVoortgang[x].liftaantal +
 						"</td><td>" + rijtjeVoortgang[x].feedback + "</td></tr>";
-						console.log(rijtjeVoortgang[x].oefening);
+					console.log(rijtjeVoortgang[x].oefening);
 				}
 				eindtekst += "</tbody></table>";
 				document.getElementById("scherm").innerHTML = eindtekst;
@@ -415,8 +415,6 @@
 				document.getElementById("planning2").hidden = false;
 				document.getElementById("planning1").hidden = true;
 				zieSporters();
-				var hetObject = {};
-				var objJSON = JSON.stringify(hetObject);
 				var xhr = new XMLHttpRequest();
 				xhr.onreadystatechange = function () {
 					if (this.readyState == 4) {
@@ -425,23 +423,20 @@
 				};
 				xhr.open("POST", "http://localhost:8082/vulPlanning/", true);
 				xhr.setRequestHeader("Content-Type", "application/json");
-				xhr.send(objJSON);
+				xhr.send();
 
 			}
 			function maakPlanningVoorPersoon() {
 				document.getElementById("planning2").hidden = true;
 				document.getElementById("planning3").hidden = false;
-				var sporter = document.getElementById("planningWie").value;
-				console.log(sporter);
-				var hetObject = {};
-				hetObject.id = document.getElementById("planningID").value;
-				var objJSON = JSON.stringify(hetObject);
+				var sporterID = document.getElementById("planningWie").value;
+				var planningID = document.getElementById("planningID").value;
 				var xhr = new XMLHttpRequest();
 				xhr.onreadystatechange = function () {
 					if (this.readyState == 4) {
 					}
 				};
-				xhr.open("POST", "http://localhost:8082/vulPlanningSporter/" + sporter, true);
+				xhr.open("POST", "http://localhost:8082/vulPlanningSporter/" + planningID + "/" + sporterID, true);
 				xhr.setRequestHeader("Content-Type", "application/json");
 				xhr.send(objJSON);
 
@@ -467,71 +462,41 @@
 
 			function voegOefeningToeVoorPersoon() {
 				var datum = document.getElementById("planningDatum").value;
-				var Oefening = document.getElementById("planningOefening").value;
+				var oefeningID = document.getElementById("planningOefening").value;
 				var aantalReps = document.getElementById("planningAantalReps").value;
 				var gewicht = document.getElementById("planningGewicht").value;
 				var hetObject = {};
-				var xhr = new XMLHttpRequest();
-				xhr.onreadystatechange = function () {
+				var objOefening = JSON.parse(this.responseText);
+				hetObject.tijd = datum;
+				hetObject.aantalReps = aantalReps;
+				hetObject.gewicht = gewicht;
+				var objJSON = JSON.stringify(hetObject);
+				yhr = new XMLHttpRequest();
+				yhr.onreadystatechange = function () {
 					if (this.readyState == 4) {
-						var objOefening = JSON.parse(this.responseText);
-						hetObject.oefening = {};
-						hetObject.oefening.uitleg = objOefening.uitleg;
-						hetObject.oefening.naam = objOefening.naam;
-						hetObject.oefening.id = objOefening.id;
-						hetObject.tijd = datum;
-						hetObject.aantalReps = aantalReps;
-						hetObject.gewicht = gewicht;
-						var objJSON = JSON.stringify(hetObject);
-						yhr = new XMLHttpRequest();
-						yhr.onreadystatechange = function () {
-							if (this.readyState == 4) {
-								slaTrainingOp(this.responseText);
-							}
-						}
-						yhr.open("POST", "http://localhost:8082/voegTrainingToe/", true);
-						yhr.setRequestHeader("Content-Type", "application/json");
-						yhr.send(objJSON);
-
+						slaTrainingOp(this.responseText);
 					}
 				}
-				xhr.open("GET", "http://localhost:8082/getOefening/" + Oefening, true)
-				xhr.setRequestHeader("Content-Type", "application/json");
-				xhr.send();
+				yhr.open("POST", "http://localhost:8082/voegTrainingToe/" + oefeningID, true);
+				yhr.setRequestHeader("Content-Type", "application/json");
+				yhr.send(objJSON);
+
+
 
 			}
 			function slaTrainingOp(id) {
+				trainingID = id;
+				planningID = document.getElementById("planningID").value;
 				var xhr = new XMLHttpRequest();
 				xhr.onreadystatechange = function () {
 					if (this.readyState == 4) {
-						var hetObject = {}
-						var sporter = JSON.parse(this.responseText);
-						hetObject.geregistreerdeSporter = {};
-						hetObject.geregistreerdeSporter.id = sporter.id;
-						hetObject.geregistreerdeSporter.wachtwoord = sporter.wachtwoord;
-						hetObject.geregistreerdeSporter.naam = sporter.naam;
-						//hetObject.id = document.getElementById("planningID").value++;
-						var objJSON = JSON.stringify(hetObject);
-						console.log(hetObject);
-						console.log(objJSON);
-						var zhr = new XMLHttpRequest();
-						zhr.onreadystatechange = function () {
-							if (this.readyState == 4) {
-							}
-						}
-						zhr.open("POST", "http://localhost:8082/vulPlanningOefening/" + id, true);
-						zhr.setRequestHeader("Content-Type", "application/json");
-						zhr.send(objJSON);
 					}
 				}
-				xhr.open("GET", "http://localhost:8082/getSporter/" + document.getElementById("planningWie").value, true)
+				xhr.open("POST", "http://localhost:8082/vulPlanningOefening/" + id, true);
 				xhr.setRequestHeader("Content-Type", "application/json");
-				xhr.send();
-
-
+				xhr.send(objJSON);
 			}
 			function getSporter() {
-				
 			}
 			function getOefeningObject(Oefening) {
 				var xhr = new XMLHttpRequest();

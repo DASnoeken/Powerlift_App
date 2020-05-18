@@ -1,13 +1,14 @@
 package PowerLifters.PowerLiften.domein;
 
 import java.time.LocalDateTime;
+
 import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 
 
 
@@ -17,7 +18,7 @@ public class GegevenTraining {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
 	
-	@OneToOne
+	@ManyToOne
 	private Oefening oefening;
 	private LocalDateTime tijd;
 	private int aantalReps;
