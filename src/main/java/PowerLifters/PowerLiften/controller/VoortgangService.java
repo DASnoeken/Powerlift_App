@@ -17,10 +17,13 @@ public class VoortgangService {
 	@Autowired
 	OefeningenRepository or;
 	
+	@Autowired VragenlijstRepository vlr;
+	
 	public void opslaanVoortgang(Voortgang v, long id) {
 		System.out.println("Voortgang: " + v.getLiftaantal() + " wordt opgeslagen");
 		Oefening o = or.findById(id).get();
 		v.setOefening(o);
+		//v.setAntwoorden(vlr.findById((long)8).get().getAntwoorden());
 		vr.save(v);
 	}
 	
@@ -32,5 +35,9 @@ public class VoortgangService {
 	public Iterable<Voortgang> vindVoortgang(){
 		Iterable<Voortgang> v = vr.findAll();
 		return v;
+	}
+	
+	public void geefAntwoord(String antwoord,long id) {
+		vr.findById(id).get().setAntwoorden(antwoord);
 	}
 }

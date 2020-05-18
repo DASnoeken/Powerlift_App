@@ -9,12 +9,15 @@ import org.springframework.transaction.annotation.Transactional;
 
 import PowerLifters.PowerLiften.domein.GeregistreerdeSporter;
 import PowerLifters.PowerLiften.domein.Oefening;
+import PowerLifters.PowerLiften.domein.Voortgang;
 import PowerLifters.PowerLiften.domein.Vragenlijst;
 
 @Service
 @Transactional
 public class VragenlijstService {
-
+	@Autowired
+	VoortgangRepository vor;
+	
 	@Autowired
 	VragenlijstRepository vr;
 	
@@ -22,15 +25,21 @@ public class VragenlijstService {
 	GeregistreerdeSporterRepository gsr;
 	
 	public void opslaanAntwoorden(Vragenlijst v, long id) {
-		System.out.println("We got here!");
-		Optional<GeregistreerdeSporter>blabla = gsr.findById(id);
-		GeregistreerdeSporter gs = blabla.get();
+		Optional<GeregistreerdeSporter> sporter = gsr.findById(id);
+		GeregistreerdeSporter gs = sporter.get();
 		v.setSporter(gs);
+		//Voortgang voortgang = vor.findById(id2).get();
+		//v.setVoortgang(voortgang);
 		vr.save(v);
 	}
 	
 	public Iterable<Vragenlijst> getAllVragenlijsten() {
 		Iterable<Vragenlijst> vragenlijsten = vr.findAll();
 		return vragenlijsten;
+	}
+	
+	public Optional<Vragenlijst> getVragenlijstById(long id) {
+		Optional<Vragenlijst> v = vr.findById(id);
+		return v;
 	}
 }
