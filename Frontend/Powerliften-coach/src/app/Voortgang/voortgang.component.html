@@ -1,0 +1,13 @@
+<input type="button" value="Voortgang Tabel Zien" (click)="vulVoortgangen()">
+
+<table *ngFor="let voortgang of voortgangen">
+    <tr><th>Oefening naam</th><th>Oefening id</th><th>Gebruikte gewicht</th><th>Aantal reps</th><th>Gevoel</th><th>Feedback</th></tr>
+    <tr *ngFor="let v of voortgang">
+            <td>{{v.oefening.naam}}</td>
+            <td>{{v.id}}</td>
+            <td>{{v.gebruiktegewicht}}</td>
+            <td>{{v.liftaantal}}</td>
+            <td>{{v.antwoorden}}</td>
+            <td>{{v.feedback}}</td>
+    </tr>
+</table>
