@@ -1,0 +1,11 @@
+Uitvoering presentatie:
+Begin met scrum bord /  product backlog
+rustiger, niet te snel. Publiek meenemen.
+Niet te veel vakjargon.
+Voorstellen en bedanken.
+
+UML gebruiken tijdens de presentatie. Dus ook even nog het klassendiagram laten zien.
+
+Begin dan eerst met een product backlog en een klassendiagram.
+
+Ongeveer een half uur voor de presentatie

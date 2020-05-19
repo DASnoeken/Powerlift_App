@@ -36,4 +36,27 @@ public class VoortgangEndpoint {
 		System.out.println("Voortgang: " + id + " is verwijderd!");
 		vs.verwijderVoortgang(id);
 	}
+	
+	@PostMapping("/voortgangAntwoord")
+	public void voorgangAntwoord(@RequestBody HelperVoortgang h) {
+		vs.geefAntwoord(h.getAntwoord(), h.getId());
+	}
+}
+
+class HelperVoortgang{
+	private String antwoord;
+	private long id;
+	public String getAntwoord() {
+		return antwoord;
+	}
+	public void setAntwoord(String antwoord) {
+		this.antwoord = antwoord;
+	}
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
+	}
+	
 }
