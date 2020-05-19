@@ -20,21 +20,24 @@ public class PlanningService {
 	PlanningRepository ps;
 	
 	@Autowired
-	GeregistreerdeSporterRepository gs;
+	GeregistreerdeSporterRepository gsr;
 	
 	@Autowired
 	GegevenTrainingRepository gtr;
 	
-	public void opslaanSporter(Planning p,long id) {
-		GeregistreerdeSporter ges = gs.findById(id).get();
-		p.setGeregistreerdeSporter(ges);
+	public void opslaanSporter(long planningID, long sporterID) {
+		GeregistreerdeSporter gs = gsr.findById(sporterID).get();
+		Planning p = ps.findById(planningID).get();
+		p.setGeregistreerdeSporter(gs);
 		ps.save(p);
+		
 	}
 	
-	public void opslaanOefening(Planning p, long id) {
-		Optional<GegevenTraining> gt = gtr.findById(id);
-		System.out.println(gt);
-		p.addTraining(gt.get());
+	
+	public void opslaanOefening(long planningID, long trainingID) {
+		GegevenTraining gt = gtr.findById(trainingID).get();
+		Planning p = ps.findById(planningID).get();
+		p.addTraining(gt);
 		ps.save(p);
 		
 	}
@@ -52,5 +55,12 @@ public class PlanningService {
 	public void opslaanPlanning(Planning p) {
 		ps.save(p);
 		
+	}
+
+	public void testingFelix(long planningID, long trainingID) {
+		Planning p = ps.findById(planningID).get();
+		GegevenTraining gt = gtr.findById(trainingID).get();
+		p.getTraining().add(gt);
+		ps.save(p);
 	}
 }
