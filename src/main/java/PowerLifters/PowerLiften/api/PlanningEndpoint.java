@@ -22,6 +22,14 @@ public class PlanningEndpoint {
 		Iterable<Planning> ip = ps.vindPlanning();
 		return ip;
 	}
+	
+	@GetMapping("/vindPlanningSporter/{sporterId}")
+	public Planning vindPlanningSporter(@PathVariable long sporterId) {
+		Planning planning = ps.findPlanningBySporterId(sporterId);
+		return planning;
+	}
+	
+	
 	@PostMapping("/vulPlanning")
 	public long maakPlanning(@RequestBody Planning p)
 	{
