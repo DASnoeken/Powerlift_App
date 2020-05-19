@@ -31,12 +31,13 @@
                 if (this.readyState == 4){
                     var rijtje = JSON.parse(this.responseText);
 					console.log(rijtje);
-                    var eindtekst = "<table><tr><td>ID</td><td>Oefening</td><td>Tijdsduur</td><td>Aantal reps</td><td>Gegeven feedback</td><td></tr>";
+                    var eindtekst = "<table><tr><td>ID</td><td>Oefening</td><td>Tijdsduur</td><td>Aantal reps</td><td>Gegeven feedback</td><td>Gevoel</td></tr>";
 					eindtekst += "<tr><td>" + rijtje.id + 
                                  "</td><td>" + rijtje.oefening.naam + 
                                  "</td><td>" + rijtje.oefeningtijd + 
 								 "</td><td>" + rijtje.liftaantal + 
-                                 "</td><td>"+ rijtje.feedback +"</td></tr>";  
+                                 "</td><td>"+ rijtje.feedback +
+                                 "</td><td>"+ rijtje.antwoorden+"</td></tr>";  
 					eindtekst += "</table>";
 
                     document.getElementById("CheckIDans").innerHTML = eindtekst;
@@ -51,14 +52,15 @@
                 if(this.readyState == 4){
                     var rijtjeVoortgang = JSON.parse(this.responseText);
 					console.log(rijtjeVoortgang);
-					var eindtekst = "<table><tr><td>ID</td><td>Oefening</td><td>Tijdsduur</td><td>Aantal reps</td><td>Gewicht</td><td>Gegeven feedback</td><td></tr>";
+					var eindtekst = "<table><tr><td>ID</td><td>Oefening</td><td>Tijdsduur</td><td>Aantal reps</td><td>Gewicht</td><td>Gegeven feedback</td><td>Gevoel</td></tr>";
 					for(var x = 0; x<rijtjeVoortgang.length;x++){
 						eindtekst += "<tr><td>" + rijtjeVoortgang[x].id + 
                                  "</td><td>" + rijtjeVoortgang[x].oefening.naam + 
                                  "</td><td>" + rijtjeVoortgang[x].oefeningtijd + 
 								 "</td><td>" + rijtjeVoortgang[x].liftaantal + 
                                  "</td><td>" + rijtjeVoortgang[x].gebruiktegewicht +
-                                 "</td><td>"+ rijtjeVoortgang[x].feedback +"</td></tr>";  
+                                 "</td><td>"+ rijtjeVoortgang[x].feedback + 
+                                 "</td><td>" + rijtjeVoortgang[x].antwoorden + "</td></tr>";  
 					}
 					eindtekst += "</table>";
                     document.getElementById("voortgangDiv").innerHTML = eindtekst;
