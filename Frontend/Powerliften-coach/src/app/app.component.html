@@ -1,0 +1,8 @@
+Geef feedback aan de student.<br>
+Oefening ID: <input type="text" id="ID"><input type="button" value="Check ID" (click)="checkID()">
+<div id="CheckIDans"></div><br>
+Feedback: <input type="text" id="Feedback" value="{{feedback}}"><br>
+<input type="button" value="Verstuur" (click)="geefFeedback()">
+<input type="button" value="Laat voortgang zien" (click)="showVoortgang()">
+<div id="checkVerstuur"></div><br>
+<div id="voortgangDiv">{{voortgang}}</div>
