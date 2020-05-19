@@ -33,6 +33,12 @@ public class PlanningService {
 		
 	}
 	
+	public Planning findPlanningBySporterId(long sporterId) {
+		GeregistreerdeSporter gs = gsr.findById(sporterId).get();
+		Planning p = ps.findByGeregistreerdeSporter(gs);
+		return p;
+	}
+	
 	
 	public void opslaanOefening(long planningID, long trainingID) {
 		GegevenTraining gt = gtr.findById(trainingID).get();
