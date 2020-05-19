@@ -6,6 +6,7 @@
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 </head>
 <script>
+	var sporterID = new URL(window.location.href).searchParams.get("inlogID");
     function veranderIets(){
         document.getElementById("displayScherm").innerHTML = "<p>iets</p>";
     }
@@ -27,9 +28,37 @@
         xhr.open("GET", "http://localhost:8082/allOefeningen", true);
 		xhr.send();
     }
-    function showPlanning(){
-        document.getElementById("displayScherm").innerHTML = "<p>Moet nog gebeuren</p>";
-    }
+	function showPlanning() {
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (this.readyState == 4) {
+                var planning = JSON.parse(this.responseText);
+                console.log(planning);
+                var eindtekst = "<table class =\"table\">"
+                    + "<thead class =\"thead-dark\"><tr>"
+                    + "<th scope =\"col\">Tijd</th>"
+                    + "<th scope = \"col\">Oefening</th>"
+                    + "<th scope = \"col\">Aantal Reps </th>"
+                    + "<th scope = \"col\">Gewicht</th></tr></thead><tbody>";
+                    for (var y = 0; y < planning.training.length; y++) {
+                        if (planning.training[y] != null)
+                            eindtekst += "<tr>" +
+                                "<td>" + planning.training[y].tijd +
+                                "</td><td>" + planning.training[y].oefening.naam +
+                                "</td><td>" + planning.training[y].aantalReps +
+                                "</td><td>" + planning.training[y].gewicht + "</td></tr>";
+                    }
+              
+                eindtekst += "</tbody></table>";
+                document.getElementById("displayScherm").innerHTML = eindtekst;
+				
+            }
+        };
+        //HARDCODE 1
+        xhr.open("GET", "http://localhost:8082/toonPlanning/" + sporterID, true);
+        xhr.send();
+
+ 	}
     function oefeningRegistreren(){
         document.getElementById("displayScherm").innerHTML = document.getElementById("oefeningRegistratieScherm").innerHTML
     }
@@ -64,14 +93,12 @@
 		voortgangObject.liftaantal = liftaantal;
 		voortgangObject.gebruiktegewicht = gewicht;
 		voortgangObject.starttijd = starttijd;
-
 		var objJSON = JSON.stringify(voortgangObject);
 		console.log(objJSON);
 		var xhr = new XMLHttpRequest();
 		xhr.onreadystatechange = function () {
-
 			if (this.readyState == 4) {
-				//alert(voortgangObject.oefening + " is opgeslagen");
+				alert(this.responseText);
 			}
 		};
 		xhr.open("POST", "http://localhost:8082/vulVoortgang" + "/" + oefening, true);
@@ -99,10 +126,20 @@
 		xhr.send();
 	}
 
-	function slaAntwoordOp(i) {
+	function slaAntwoordOp() {
+		document.getElementById("scherm").innerHTML = "";
 		var xhr = new XMLHttpRequest();
+		var idVoortgang = document.getElementById("voortgangID").value;
 		var vragenlijsten = {};
-
+		if(document.getElementById("antwoord-goed").checked){
+			vragenlijsten.antwoorden="goed";
+		}else if(document.getElementById("antwoord-matig").checked){
+			vragenlijsten.antwoorden="matig";
+		}else{
+			vragenlijsten.antwoorden="slecht";
+		}
+		
+		/*
 		if (i == 0) {
 			vragenlijsten.antwoorden = "goed";
 		}
@@ -111,20 +148,20 @@
 		}
 		else {
 			vragenlijsten.antwoorden = "slecht";
-		}
+		}*/
 		var objJSON = JSON.stringify(vragenlijsten);
-
+		window.gevoel = vragenlijsten.antwoorden;
 		xhr.onreadystatechange = function () {
 			if (this.readyState == 4) {
-
+				console.log(objJSON);
 			}
 		};
-		//NOG VERANDEREN --> HARDCODE 1
-		xhr.open("POST", "http://localhost:8082/save/antwoord/1", true);
+		xhr.open("POST", "http://localhost:8082/save/antwoord/"+window.inlogID, true);
 		xhr.setRequestHeader("Content-Type", "application/json");
 		xhr.send(objJSON);
-		document.getElementById("displayScherm").innerHTML = document.getElementById("oefeningRegistratieScherm").innerHTML;
-		
+		document.getElementById("oefening invullen").hidden = false;
+		document.getElementById("vragenlijstinvullen").hidden = true;
+		antwoordVoortgang(idVoortgang);
 	}
 	function toonVoortgang() {
 		var xhr = new XMLHttpRequest();
