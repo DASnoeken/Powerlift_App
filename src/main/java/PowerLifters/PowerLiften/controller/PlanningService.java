@@ -33,12 +33,6 @@ public class PlanningService {
 		
 	}
 	
-	public Planning findPlanningBySporterId(long sporterId) {
-		GeregistreerdeSporter gs = gsr.findById(sporterId).get();
-		Planning p = ps.findByGeregistreerdeSporter(gs);
-		return p;
-	}
-	
 	
 	public void opslaanOefening(long planningID, long trainingID) {
 		GegevenTraining gt = gtr.findById(trainingID).get();
@@ -68,5 +62,12 @@ public class PlanningService {
 		GegevenTraining gt = gtr.findById(trainingID).get();
 		p.getTraining().add(gt);
 		ps.save(p);
+	}
+
+
+	public Planning vindPlanningVoorSporter(long sporterID) {
+		GeregistreerdeSporter sporter = gsr.findById(sporterID).get();
+		Planning planning = ps.findByGeregistreerdeSporter(sporter);
+		return planning;
 	}
 }
