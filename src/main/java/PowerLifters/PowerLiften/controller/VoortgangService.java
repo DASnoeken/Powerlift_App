@@ -19,19 +19,11 @@ public class VoortgangService {
 	
 	@Autowired VragenlijstRepository vlr;
 	
-	public double opslaanVoortgang(Voortgang v, long id) {
+	public void opslaanVoortgang(Voortgang v, long id) {
 		System.out.println("Voortgang: " + v.getLiftaantal() + " wordt opgeslagen");
 		Oefening o = or.findById(id).get();
-		String a = Double.toString(v.getGebruiktegewicht());
-		StringBuilder sb = new StringBuilder(a);
-		sb.reverse();
-		a = new String (sb);
-		double b = new Double(a);
-		v.setGebruiktegewicht(b);
 		v.setOefening(o);
-		//v.setAntwoorden(vlr.findById((long)8).get().getAntwoorden());
 		vr.save(v);
-		return b;
 	}
 	
 	public void verwijderVoortgang(Long id) {
