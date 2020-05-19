@@ -1,5 +1,7 @@
 package PowerLifters.PowerLiften.api;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import PowerLifters.PowerLiften.controller.PlanningService;
+import PowerLifters.PowerLiften.domein.GegevenTraining;
 import PowerLifters.PowerLiften.domein.Planning;
 
 
@@ -49,11 +52,16 @@ public class PlanningEndpoint {
 		System.out.println("Planning: " + id + " is verwijderd!");
 		ps.verwijderPlanning(id);
 	}
+
+
 	
-	// @GetMapping("/toonPlanning/{sporterID}")
-	//public Planning toonPlanning(@PathVariable long sporterID){
-		//Iterable<Planning> ip = ps.vindPlanning();
-		//return ip;
-	//}
+	@GetMapping("/toonPlanning/{sporterID}")
+	public Planning toonPlanning(@PathVariable long sporterID){
+		Planning ip = ps.vindPlanningVoorSporter(sporterID);
+		List<GegevenTraining> lgt = ip.getTraining();
+		lgt.sort((a,b) -> a.getTijd().compareTo(b.getTijd()));
+		ip.setTraining(lgt);
+		return ip;
+	}
 	
 }

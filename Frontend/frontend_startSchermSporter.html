@@ -6,8 +6,7 @@
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 </head>
 <script>
-	var inlogID = new URL(window.location.href).searchParams.get("inlogID");
-	alert(inlogID);
+	var sporterID = new URL(window.location.href).searchParams.get("inlogID");
     function veranderIets(){
         document.getElementById("displayScherm").innerHTML = "<p>iets</p>";
     }
@@ -29,9 +28,37 @@
         xhr.open("GET", "http://localhost:8082/allOefeningen", true);
 		xhr.send();
     }
-    function showPlanning(){
-        document.getElementById("displayScherm").innerHTML = "<p>Moet nog gebeuren</p>";
-    }
+	function showPlanning() {
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (this.readyState == 4) {
+                var planning = JSON.parse(this.responseText);
+                console.log(planning);
+                var eindtekst = "<table class =\"table\">"
+                    + "<thead class =\"thead-dark\"><tr>"
+                    + "<th scope =\"col\">Tijd</th>"
+                    + "<th scope = \"col\">Oefening</th>"
+                    + "<th scope = \"col\">Aantal Reps </th>"
+                    + "<th scope = \"col\">Gewicht</th></tr></thead><tbody>";
+                    for (var y = 0; y < planning.training.length; y++) {
+                        if (planning.training[y] != null)
+                            eindtekst += "<tr>" +
+                                "<td>" + planning.training[y].tijd +
+                                "</td><td>" + planning.training[y].oefening.naam +
+                                "</td><td>" + planning.training[y].aantalReps +
+                                "</td><td>" + planning.training[y].gewicht + "</td></tr>";
+                    }
+              
+                eindtekst += "</tbody></table>";
+                document.getElementById("displayScherm").innerHTML = eindtekst;
+				
+            }
+        };
+        //HARDCODE 1
+        xhr.open("GET", "http://localhost:8082/toonPlanning/" + sporterID, true);
+        xhr.send();
+
+ 	}
     function oefeningRegistreren(){
         document.getElementById("displayScherm").innerHTML = document.getElementById("oefeningRegistratieScherm").innerHTML
     }

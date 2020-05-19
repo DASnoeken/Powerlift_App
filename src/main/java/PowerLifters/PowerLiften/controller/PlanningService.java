@@ -65,8 +65,9 @@ public class PlanningService {
 	}
 
 
-	public Iterable<Planning> vindPlanningVoorSporter(long sporterID) {
-		// TODO Auto-generated method stub
-		return null;
+	public Planning vindPlanningVoorSporter(long sporterID) {
+		GeregistreerdeSporter sporter = gsr.findById(sporterID).get();
+		Planning planning = ps.findByGeregistreerdeSporter(sporter);
+		return planning;
 	}
 }
