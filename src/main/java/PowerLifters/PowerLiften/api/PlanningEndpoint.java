@@ -22,14 +22,6 @@ public class PlanningEndpoint {
 		Iterable<Planning> ip = ps.vindPlanning();
 		return ip;
 	}
-	
-	@GetMapping("/vindPlanningSporter/{sporterId}")
-	public Planning vindPlanningSporter(@PathVariable long sporterId) {
-		Planning planning = ps.findPlanningBySporterId(sporterId);
-		return planning;
-	}
-	
-	
 	@PostMapping("/vulPlanning")
 	public long maakPlanning(@RequestBody Planning p)
 	{
@@ -58,9 +50,10 @@ public class PlanningEndpoint {
 		ps.verwijderPlanning(id);
 	}
 	
-	@PostMapping("/trialFelix/{planningID}/{trainingID}")
-	public void testFelix(@PathVariable long planningID, @PathVariable long trainingID) {
-		System.out.println("HOI" + planningID + "Doei" + trainingID );
-		ps.testingFelix(planningID,trainingID);
-	}
+	// @GetMapping("/toonPlanning/{sporterID}")
+	//public Planning toonPlanning(@PathVariable long sporterID){
+		//Iterable<Planning> ip = ps.vindPlanning();
+		//return ip;
+	//}
+	
 }
