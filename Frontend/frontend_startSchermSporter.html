@@ -33,7 +33,9 @@
         xhr.onreadystatechange = function () {
             if (this.readyState == 4) {
                 var planning = JSON.parse(this.responseText);
-                console.log(planning);
+                if(rijtjePlanning = null){
+                    eindtekst = "<button value=\"Maak Planning\" onclick=\"mailVersturenCoach()\">"
+                } else {
                 var eindtekst = "<table class =\"table\">"
                     + "<thead class =\"thead-dark\"><tr>"
                     + "<th scope =\"col\">Tijd</th>"
@@ -50,6 +52,7 @@
                     }
               
                 eindtekst += "</tbody></table>";
+				}
                 document.getElementById("displayScherm").innerHTML = eindtekst;
 				
             }
