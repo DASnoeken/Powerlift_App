@@ -1,3 +1,3 @@
 #!/bin/bash
-./gitL.sh
-git push
+#./gitL.sh
+#git push
