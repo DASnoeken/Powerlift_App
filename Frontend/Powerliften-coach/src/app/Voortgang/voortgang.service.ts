@@ -17,6 +17,11 @@ export class VoortgangService{
         return this.http.get<Voortgang>("http://localhost:8082/allVoortgang");
     }
 
+    //GET
+    bekijkID(id:number):Observable<Voortgang>{
+        return this.http.get<Voortgang>("http://localhost:8082/checkID/"+id);
+    }
+
     //POST
     geefFeedback(feedback:string,id:number) : Observable<Voortgang>{
         var voortgangObject = {voortgangObject};
@@ -24,5 +29,6 @@ export class VoortgangService{
         voortgangObject.feedback = feedback;
         return this.http.post<Voortgang>("http://localhost:8082/geefFeedback",JSON.stringify(voortgangObject),this.httpOptions);
     }
+
     constructor(private http: HttpClient){}
 }

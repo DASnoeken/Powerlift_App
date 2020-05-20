@@ -13,6 +13,7 @@ export class VoortgangComponent{
     voortgangen : Voortgang[] = [];
     feedback : string = '';
     id:number = 0;
+    voortgangenIDCheck : Voortgang[] = [];
     veranderFeedback($event){
         this.feedback = $event.target.value;
     }
@@ -24,10 +25,21 @@ export class VoortgangComponent{
         console.log("constructor VoortgangComponent");
     }
     vulVoortgangen(){
+        this.voortgangen = [];
         this.voortgangService.getAllVoortgang().subscribe(voortgang => this.voortgangen.push(voortgang));
         console.log(this.voortgangen);
     }
     setFeedback(feedback:string,id:number){
         this.voortgangService.geefFeedback(feedback,id).subscribe(feedback => console.log(feedback));
+        this.vulVoortgangen();
+    }
+    checkID(id:number){
+        this.voortgangenIDCheck = [];
+        this.voortgangService.bekijkID(id).subscribe(voortgang => this.voortgangenIDCheck.push(voortgang));
+        console.log(this.voortgangenIDCheck);
+    }
+    schoonScherm(){
+        this.voortgangen=[];
+        this.voortgangenIDCheck=[];
     }
 }

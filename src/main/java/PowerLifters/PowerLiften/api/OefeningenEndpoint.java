@@ -1,5 +1,6 @@
 package PowerLifters.PowerLiften.api;
 
+import java.io.IOException;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,7 +8,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import PowerLifters.PowerLiften.controller.OefeningenService;
 import PowerLifters.PowerLiften.domein.Oefening;
@@ -48,5 +51,13 @@ public class OefeningenEndpoint {
 			oefening.setUitleg();
 			os.opslaanOefening(oefening);
 		}
+	}
+	
+	@PostMapping("/Oefening/{id}/image")
+	public void uploadAfbeelding(@PathVariable Long id, @RequestParam("file") MultipartFile file) throws IOException {
+		System.out.println("public void uploadAfbeelding");
+		Optional<Oefening> oefeningZonderAfbeelding = os.getOefeningById(id);
+		oefeningZonderAfbeelding.get().setFoto(file.getBytes());
+		os.opslaanOefening(oefeningZonderAfbeelding.get());
 	}
 }

@@ -2,6 +2,7 @@ package PowerLifters.PowerLiften.domein;
 
 import java.io.*;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,6 +12,8 @@ import javax.persistence.Id;
 public class Oefening {
 	private String uitleg;
 	private String naam;
+	@Column(columnDefinition = "LONGBLOB")	//maakt automatisch longblob
+	private byte[] foto;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -35,6 +38,13 @@ public class Oefening {
 	public void setId(long id) {
 		this.id = id;
 	}
+	public byte[] getFoto() {
+		return foto;
+	}
+	public void setFoto(byte[] foto) {
+		this.foto = foto;
+	}
+	
 }
 
 enum OefeningSoort {
