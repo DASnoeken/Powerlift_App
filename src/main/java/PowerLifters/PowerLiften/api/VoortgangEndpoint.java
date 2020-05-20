@@ -28,7 +28,7 @@ public class VoortgangEndpoint {
 	{
 	
 		System.out.println("Voortgang: " + voortgang.getLiftaantal() + " is toegevoegd!");
-		double jojo = vs.opslaanVoortgang(voortgang, id);
+		vs.opslaanVoortgang(voortgang, id);
 		return voortgang.getGebruiktegewicht();
 	}
 	
