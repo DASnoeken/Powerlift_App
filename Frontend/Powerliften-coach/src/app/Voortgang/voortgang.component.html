@@ -1,12 +1,29 @@
 <input type="button" value="Voortgang Tabel Zien" (click)="vulVoortgangen()">
+<input type="button" value="Schoon scherm" (click)="schoonScherm()"><br>
 
-<input type="text" id="feedback" [(ngModel)]="feedback" (change)="veranderFeedback($event)">
-<input type="text" id="id" [(ngModel)]="id" (change)="veranderID($event)">
-<input type="button" value="geef feedback" (click)="setFeedback(feedback,id)">
+<table>
+    <tr><td>Feedback:</td> <td><input type="text" id="feedback" [(ngModel)]="feedback" (change)="veranderFeedback($event)"></td></tr>
+    <tr><td>Voortgang ID:</td> <td><input type="text" id="id" [(ngModel)]="id" (change)="veranderID($event)"></td></tr>
+</table>
+<input type="button" value="geef feedback" (click)="setFeedback(feedback,id)"><input type="button" value="Check ID" (click)="checkID(id)"><br>
+
+<div id="DivCheckID">
+    <table id="voortgangTabelIDCheck" *ngFor="let v of voortgangenIDCheck">
+            <tr><th>Oefening naam</th><th>Voortgang id</th><th>Gebruikte gewicht</th><th>Aantal reps</th><th>Gevoel</th><th>Feedback</th></tr>
+            <tr>
+            <td>{{v.oefening.naam}}</td>
+            <td>{{v.id}}</td>
+            <td>{{v.gebruiktegewicht}}</td>
+            <td>{{v.liftaantal}}</td>
+            <td>{{v.antwoorden}}</td>
+            <td>{{v.feedback}}</td>
+            </tr>
+    </table>
+</div>
 
 <div id="DeTabel">
 <table id="voortgangTabel" *ngFor="let voortgang of voortgangen">
-    <tr><th>Oefening naam</th><th>Oefening id</th><th>Gebruikte gewicht</th><th>Aantal reps</th><th>Gevoel</th><th>Feedback</th></tr>
+    <tr><th>Oefening naam</th><th>Voortgang id</th><th>Gebruikte gewicht</th><th>Aantal reps</th><th>Gevoel</th><th>Feedback</th></tr>
     <tr *ngFor="let v of voortgang">
             <td>{{v.oefening.naam}}</td>
             <td>{{v.id}}</td>
