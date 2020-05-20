@@ -28,9 +28,11 @@ public class VragenlijstEndpoint {
 	@GetMapping("/verkrijgVragenlijst")
 	public Iterable<Vragenlijst> getAllVragenlijsten()
 	{
+		System.out.println("hoi");
 		Iterable<Vragenlijst> vragenlijsten = vs.getAllVragenlijsten();
 		return vragenlijsten;
 	}
+	
 	@GetMapping("/getVragenlijstByID/{id}")
 	public Optional<Vragenlijst> getVragenlijstById(@PathVariable long id){
 		Optional<Vragenlijst> antwoord = vs.getVragenlijstById(id);
