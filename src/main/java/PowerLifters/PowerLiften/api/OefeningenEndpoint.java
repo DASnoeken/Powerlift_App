@@ -1,6 +1,7 @@
 package PowerLifters.PowerLiften.api;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,8 +55,7 @@ public class OefeningenEndpoint {
 	}
 	
 	@PostMapping("/Oefening/{id}/image")
-	public void uploadAfbeelding(@PathVariable Long id, @RequestParam("file") MultipartFile file) throws IOException {
-		System.out.println("public void uploadAfbeelding");
+	public void uploadAfbeelding(@PathVariable Long id, @RequestParam("image") MultipartFile file) throws IOException {
 		Optional<Oefening> oefeningZonderAfbeelding = os.getOefeningById(id);
 		oefeningZonderAfbeelding.get().setFoto(file.getBytes());
 		os.opslaanOefening(oefeningZonderAfbeelding.get());
