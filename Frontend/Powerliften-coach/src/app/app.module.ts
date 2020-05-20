@@ -6,11 +6,13 @@ import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { VoortgangComponent } from './Voortgang/voortgang.component';
+import { OefeningComponent } from './Oefening/oefening.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    VoortgangComponent
+    VoortgangComponent,
+    OefeningComponent
   ],
   imports: [
     BrowserModule,
