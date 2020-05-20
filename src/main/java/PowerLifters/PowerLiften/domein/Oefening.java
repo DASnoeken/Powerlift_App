@@ -10,6 +10,7 @@ import javax.persistence.Id;
 
 @Entity
 public class Oefening {
+	@Column(columnDefinition = "TEXT")		//Maakt automatisch text
 	private String uitleg;
 	private String naam;
 	@Column(columnDefinition = "LONGBLOB")	//maakt automatisch longblob
