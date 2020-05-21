@@ -83,7 +83,7 @@ public class PlanningEndpoint {
 	
 	@PostMapping("/stuurMail/{sporterID}")
 	public void sendEmail(@PathVariable long sporterID) {
-		String mail = cs.getCoachEmail();
+		String mail = cs.getCoachEmail((long)1);		//HARDCODE
 		GeregistreerdeSporter gs = gsr.vindSporterByID(sporterID);
 		SimpleMailMessage msg = new SimpleMailMessage();
 		msg.setTo(mail);

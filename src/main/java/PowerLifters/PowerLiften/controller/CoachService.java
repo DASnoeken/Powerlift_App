@@ -28,8 +28,8 @@ public class CoachService {
 		return IV;
 	}
 
-	public String getCoachEmail() {
-		Coach c = cr.findById((long) 1).get();
+	public String getCoachEmail(long id) {
+		Coach c = cr.findById(id).get();
 		return c.getEmail();
 	}
 	
