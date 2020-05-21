@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { Planning } from './planning';
-import { PlanningService } from './planning.service';
+import { Planning } from './Planning';
+import { PlanningService } from './Planning.service';
 import { $ } from 'protractor';
 
 @Component({
