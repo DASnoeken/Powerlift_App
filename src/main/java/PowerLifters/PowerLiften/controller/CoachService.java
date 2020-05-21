@@ -33,4 +33,17 @@ public class CoachService {
 		return c.getEmail();
 	}
 	
+	public void setCoach(String naam, String wachtwoord, String email) {
+		Coach c = new Coach();
+		c.setNaam(naam);
+		c.setWachtwoord(wachtwoord);
+		c.setEmail(email);
+		cr.save(c);
+	}
+	
+	public Iterable<Coach> findCoaches() {
+		Iterable<Coach> ic = cr.findAll();
+		return ic;
+	}
+	
 }
