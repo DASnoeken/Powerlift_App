@@ -33,4 +33,12 @@ public class CoachService {
 		return c.getEmail();
 	}
 	
+	public void setCoach(String inlognaam, String wachtwoord, String email) {
+		Coach c = new Coach();
+		c.setInlognaam(inlognaam);
+		c.setWachtwoord(wachtwoord);
+		c.setEmail(email);
+		cr.save(c);
+	}
+	
 }

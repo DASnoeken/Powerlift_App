@@ -29,6 +29,44 @@ public class CoachEndpoint {
 		return Il;
 	}
 	
+	@PostMapping("/set/coach")
+	public void setInlogCoach(@RequestBody InlogCoachHelper ich) {
+		cs.setCoach(ich.getInlognaam(), ich.getWachtwoord(),ich.getEmail());
+	}
+}
+
+class InlogCoachHelper {
+	
+	private long id;
+	private String inlognaam;
+	private String wachtwoord;
+	private String email;
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
+	}
+	public String getInlognaam() {
+		return inlognaam;
+	}
+	public void setInlognaam(String inlognaam) {
+		this.inlognaam = inlognaam;
+	}
+	public String getWachtwoord() {
+		return wachtwoord;
+	}
+	public void setWachtwoord(String wachtwoord) {
+		this.wachtwoord = wachtwoord;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
+	
 }
 
 class Helper{
