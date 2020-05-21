@@ -26,6 +26,17 @@
 		xhr.open("GET", "http://localhost:8082/allOefeningen", true);
 		xhr.send();
 	}
+	function mailVersturenCoach(){
+		var xhr = new XMLHttpRequest();
+		xhr.onreadystatechange = function () {
+			if (this.readyState == 4) {
+				alert("Mail is verstuurd")
+				document.getElementById("displayScherm").innerHTML = "<p>Wacht op de coach voor de planning</p>"
+			}
+		};
+		xhr.open("POST", "http://localhost:8082/stuurMail/" + sporterID, true);
+		xhr.send();
+	}
 	function showPlanning() {
 		var xhr = new XMLHttpRequest();
 		xhr.onreadystatechange = function () {

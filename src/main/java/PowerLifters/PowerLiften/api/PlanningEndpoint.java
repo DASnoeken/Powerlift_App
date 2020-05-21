@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
+
 import org.springframework.web.bind.annotation.RestController;
 
 import PowerLifters.PowerLiften.controller.CoachService;
@@ -88,7 +88,7 @@ public class PlanningEndpoint {
 		SimpleMailMessage msg = new SimpleMailMessage();
 		msg.setTo(mail);
 		msg.setSubject("Reminder Planning maken");
-		msg.setText("Hallo \n Dit mailtje is een reminder voor het maken van een planning voor " + gs.getNaam());
+		msg.setText("Dit mailtje is een reminder voor het maken van een planning voor " + gs.getNaam());
 		javaMailSender.send(msg);
 	}
 }
