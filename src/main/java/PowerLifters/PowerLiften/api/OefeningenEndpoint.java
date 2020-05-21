@@ -2,6 +2,7 @@ package PowerLifters.PowerLiften.api;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,8 +30,15 @@ public class OefeningenEndpoint {
 	
 	@GetMapping("/getOefening/{id}")
 	public Oefening getOefening(@PathVariable long id) {
-		Oefening oefening = os.getOefeningById(id).get();
-		return oefening;
+		try {
+			Oefening oefening = os.getOefeningById(id).get();
+			return oefening;
+		}catch(NoSuchElementException noee) {
+			System.out.println("ID bestaat niet!");
+			Oefening o = new Oefening();
+			o.setNaam("ONGELDIG ID!");
+			return o;
+		}		
 	}
 	
 	@PostMapping("/vulOefeningen")

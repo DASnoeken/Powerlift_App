@@ -10,5 +10,5 @@ import { $ } from 'protractor';
 })
 
 export class PlanningComponent{
-    
+    constructor(private planningservice:PlanningService){}
 }
