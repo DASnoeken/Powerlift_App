@@ -50,7 +50,7 @@
 				rijtjesSporters.forEach(element => {
 					if (element.naam == naam) {
                         inLijst = true;
-						window.location.href = "frontend_startSchermSporter.html?inlogID=" + element.id;
+						window.location.href = "frontend_startSchermSporter.html?sporterID="+element.id ;
 					}
 				});
 				if (!inLijst) {
@@ -77,7 +77,7 @@
 		xhr.open("GET", "http://localhost:8082/allOefeningen", true);
 		xhr.send();
     }
-
+    
 
 </script>
 

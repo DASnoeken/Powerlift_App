@@ -13,7 +13,9 @@
         xhr.onreadystatechange = function () {
             if (this.readyState == 4) {
                 var rijtjePlanning = JSON.parse(this.responseText);
-                console.log(rijtjePlanning);
+                if(rijtjePlanning = null){
+                    eindtekst = "<button value=\"Maak Planning\" onclick=\"mailVersturenCoach()\">"
+                }
                 var eindtekst = "<table class =\"table\">"
                     + "<thead class =\"thead-dark\"><tr>"
                     + "<th scope =\"col\">Tijd</th>"
