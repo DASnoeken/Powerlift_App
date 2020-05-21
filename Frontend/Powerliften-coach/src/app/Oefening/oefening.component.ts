@@ -11,8 +11,13 @@ import { $ } from 'protractor';
 export class OefeningComponent{
     deFoto : File;
     id:number;
-    constructor(private oefeningService : OefeningService){
-
+    oefeningen:Oefening[] = [];
+    getOefeningClicked:Boolean=false;
+    constructor(private oefeningService : OefeningService){}
+    getOefeningById(){
+        this.oefeningen=[];
+        this.oefeningService.getOefeningByID(this.id).subscribe(oefening => this.oefeningen.push(oefening));
+        this.getOefeningClicked=true;
     }
     onFileSelected($event){
         console.log($event);
