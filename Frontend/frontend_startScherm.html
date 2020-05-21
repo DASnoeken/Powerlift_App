@@ -50,7 +50,11 @@
 				rijtjesSporters.forEach(element => {
 					if (element.naam == naam) {
                         inLijst = true;
-						window.location.href = "frontend_startSchermSporter.html?inlogID=" + element.id;
+                        if(document.getElementById("ifiscoach").checked) {
+                            window.location.href = "http://localhost:4200";
+                        } else {
+                            window.location.href = "frontend_startSchermSporter.html?inlogID=" + element.id;
+                        }
 					}
 				});
 				if (!inLijst) {
@@ -120,6 +124,9 @@
                 <label class="col-sm-2 col-form-label">Wachtwoord</label>
                 <input type="wachtwoord" class="form-control" id="exampleWachtwoord" aria-describedby="wachtwoordHelp">
                 <small id="wachtwoordHelp" class="form-text text-muted">Dit is volkomen privé</small>
+                <br><br>
+                <label for="coachcheck">Ben jij coach?</label>
+                <input type="checkbox" id="ifiscoach" name="coachcheck">
             </div>
             <input type=button value="Sign in" class="btn btn-primary"
                 onclick="verstuurNaam(exampleGebruikersnaam.value)">
