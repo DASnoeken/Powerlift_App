@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import PowerLifters.PowerLiften.controller.CoachService;
+import PowerLifters.PowerLiften.domein.Coach;
 import PowerLifters.PowerLiften.domein.Voortgang;
 
 @RestController
@@ -31,14 +32,20 @@ public class CoachEndpoint {
 	
 	@PostMapping("/set/coach")
 	public void setInlogCoach(@RequestBody InlogCoachHelper ich) {
-		cs.setCoach(ich.getInlognaam(), ich.getWachtwoord(),ich.getEmail());
+		cs.setCoach(ich.getNaam(), ich.getWachtwoord(),ich.getEmail());
+	}
+	
+	@GetMapping("/get/allCoaches")
+	public Iterable<Coach> getCoaches() {
+		Iterable<Coach> ic = cs.findCoaches();
+		return ic;
 	}
 }
 
 class InlogCoachHelper {
 	
 	private long id;
-	private String inlognaam;
+	private String naam;
 	private String wachtwoord;
 	private String email;
 	public long getId() {
@@ -47,11 +54,11 @@ class InlogCoachHelper {
 	public void setId(long id) {
 		this.id = id;
 	}
-	public String getInlognaam() {
-		return inlognaam;
+	public String getNaam() {
+		return naam;
 	}
-	public void setInlognaam(String inlognaam) {
-		this.inlognaam = inlognaam;
+	public void setNaam(String naam) {
+		this.naam = naam;
 	}
 	public String getWachtwoord() {
 		return wachtwoord;

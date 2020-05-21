@@ -11,7 +11,7 @@ public class Coach {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
 	
-	private String inlognaam;
+	private String naam;
 	private String wachtwoord;
 	
 	private String email;
@@ -22,11 +22,11 @@ public class Coach {
 	public void setId(long id) {
 		this.id = id;
 	}
-	public String getInlognaam() {
-		return inlognaam;
+	public String getNaam() {
+		return naam;
 	}
-	public void setInlognaam(String inlognaam) {
-		this.inlognaam = inlognaam;
+	public void setNaam(String naam) {
+		this.naam = naam;
 	}
 	public String getWachtwoord() {
 		return wachtwoord;

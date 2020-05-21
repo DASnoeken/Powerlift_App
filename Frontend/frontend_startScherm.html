@@ -11,60 +11,111 @@
         ;
     }
     function maakNaam() {
-        var naam = document.getElementById("exampleGebruikersnaam").value;
-        var wachtwoord = document.getElementById("exampleWachtwoord").value;
-        var naamBestaatAl = false;
-        var hetObject = {};
-        hetObject.naam = naam;
-        hetObject.wachtwoord = wachtwoord;
-        var objJSON = JSON.stringify(hetObject);
-        var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function () {
-            if (this.readyState == 4 && this.responseText != null) {
-                var rijtjesSporters = JSON.parse(this.responseText);
-                rijtjesSporters.forEach(element => {
-                    if (element.naam == naam) {
-                        naamBestaatAl = true;
-                        alert("Naam bestaat al in het systeem, voer een nieuwe naam in");
+        if(!document.getElementById("ifiscoach").checked) {
+            var naam = document.getElementById("exampleGebruikersnaam").value;
+            var wachtwoord = document.getElementById("exampleWachtwoord").value;
+            var naamBestaatAl = false;
+            var hetObject = {};
+            hetObject.naam = naam;
+            hetObject.wachtwoord = wachtwoord;
+            var objJSON = JSON.stringify(hetObject);
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (this.readyState == 4 && this.responseText != null) {
+                    var rijtjesSporters = JSON.parse(this.responseText);
+                    rijtjesSporters.forEach(element => {
+                        if (element.naam == naam) {
+                            naamBestaatAl = true;
+                            alert("Naam bestaat al in het systeem, voer een nieuwe naam in");
                         
+                        }
+                    })
+                    if (!naamBestaatAl) {
+                        xhr.open("POST", "http://localhost:8082/registreerdeSporter", true);
+                        xhr.setRequestHeader("Content-Type", "application/json");
+                        xhr.send(objJSON);
                     }
-                })
-
-                if (!naamBestaatAl) {
-                    xhr.open("POST", "http://localhost:8082/registreerdeSporter", true);
-                    xhr.setRequestHeader("Content-Type", "application/json");
-                    xhr.send(objJSON);
                 }
-            }
-        };
+            };
         xhr.open("GET", "http://localhost:8082/allSporters", true);
         xhr.send();
+        }
+        else {
+            var naam = document.getElementById("exampleGebruikersnaam").value;
+            var wachtwoord = document.getElementById("exampleWachtwoord").value;
+            var email = "";
+            var naamBestaatAl = false;
+            var hetObject = {};
+            hetObject.naam = naam;
+            hetObject.wachtwoord = wachtwoord;
+            hetObject.email = email;
+            var objJSON = JSON.stringify(hetObject);
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (this.readyState == 4 && this.responseText != null) {
+                    var rijtjesCoaches = JSON.parse(this.responseText);
+                    rijtjesCoaches.forEach(element => {
+                        if (element.naam == naam) {
+                            naamBestaatAl = true;
+                            alert("Naam bestaat al in het systeem, voer een nieuwe naam in");
+                        }
+                    })
+                    if (!naamBestaatAl) {
+                        xhr.open("POST", "http://localhost:8082/set/coach", true);
+                        xhr.setRequestHeader("Content-Type", "application/json");
+                        xhr.send(objJSON);
+                    }
+                }
+            };
+        xhr.open("GET", "http://localhost:8082/get/allCoaches", true);
+        xhr.send();
+        }
     }
     function verstuurNaam(naam) {
-        var inLijst = false;
-		var xhr = new XMLHttpRequest();
-		xhr.onreadystatechange = function () {
+        if(!document.getElementById("ifiscoach").checked) {
+            var inLijst = false;
+		    var xhr = new XMLHttpRequest();
+		    xhr.onreadystatechange = function () {
 			if (this.readyState == 4) {
 				var rijtjesSporters = JSON.parse(this.responseText);
 				console.log(rijtjesSporters);
 				rijtjesSporters.forEach(element => {
 					if (element.naam == naam) {
                         inLijst = true;
-                        if(document.getElementById("ifiscoach").checked) {
-                            window.location.href = "http://localhost:4200";
-                        } else {
-                            window.location.href = "frontend_startSchermSporter.html?inlogID=" + element.id;
-                        }
+                        window.location.href = "frontend_startSchermSporter.html?inlogID=" + element.id;
 					}
 				});
 				if (!inLijst) {
 					alert("U staat helaas niet in het systeem of u heeft een verkeerde naam ingevoerd")
-				}
-			}
-		};
-		xhr.open("GET", "http://localhost:8082/allSporters", true);
-		xhr.send();
+				    }
+			    }
+		    };
+		    xhr.open("GET", "http://localhost:8082/allSporters", true);
+		    xhr.send();
+        }
+        else {
+            var inLijst = false;
+		    var xhr = new XMLHttpRequest();
+		    xhr.onreadystatechange = function () {
+			if (this.readyState == 4) {
+				var rijtjesCoaches = JSON.parse(this.responseText);
+				console.log(rijtjesCoaches);
+			    rijtjesCoaches.forEach(element => {
+				 	if (element.naam == naam) {
+                         inLijst = true;
+                         window.location.href = "http://localhost:4200";
+				 	}
+				});
+				if (!inLijst) {
+					alert("U staat helaas niet in het systeem of u heeft een verkeerde naam ingevoerd")
+				    }
+			    }
+		    };
+		    xhr.open("GET", "http://localhost:8082/get/allCoaches", true);
+		    xhr.send();
+        }
 	}
+    
     function showOefening(i){
         i--;
         var xhr = new XMLHttpRequest();
