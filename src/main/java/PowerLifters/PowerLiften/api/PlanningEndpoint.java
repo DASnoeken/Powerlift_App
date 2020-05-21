@@ -57,11 +57,17 @@ public class PlanningEndpoint {
 	
 	@GetMapping("/toonPlanning/{sporterID}")
 	public Planning toonPlanning(@PathVariable long sporterID){
-		Planning ip = ps.vindPlanningVoorSporter(sporterID);
-		List<GegevenTraining> lgt = ip.getTraining();
-		lgt.sort((a,b) -> a.getTijd().compareTo(b.getTijd()));
-		ip.setTraining(lgt);
-		return ip;
+		try {
+			Planning ip = ps.vindPlanningVoorSporter(sporterID);
+			System.out.println(ip);
+			List<GegevenTraining> lgt = ip.getTraining();
+			lgt.sort((a,b) -> a.getTijd().compareTo(b.getTijd()));
+			ip.setTraining(lgt);
+			return ip;
+		} catch (Exception e) {
+			return null;
+		}
+		
 	}
 	
 }
