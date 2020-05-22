@@ -18,11 +18,12 @@ export class CoachComponent{
           this.idParam = params.id;
           console.log('Gevonden Coach ID = '+this.idParam);
           if(this.idParam!=null){
-            this.coachService.getCoach(this.idParam).subscribe(naam => console.log(naam));
+              this.getCoachNaam();
+            
           }
         });                 //Zo krijg je request parameters
     }
     getCoachNaam(){
-        
+        this.coachService.getCoach(this.idParam).subscribe(coach => this.coachNaam=coach.naam);
     }
 }

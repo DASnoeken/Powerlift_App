@@ -9,6 +9,7 @@ export class CoachService{
 
     //GET
     getCoach(id:number) : Observable<Coach>{
-        return this.http.get<Coach>("http://localhost:8082/getCoachNaam/"+id);
+        console.log(id);
+        return this.http.get<Coach>("http://localhost:8082/getCoach/"+id);
     }
 }
