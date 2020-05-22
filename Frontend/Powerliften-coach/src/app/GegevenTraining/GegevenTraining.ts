@@ -1,9 +1,11 @@
 import { Oefening } from '../Oefening/oefening';
-import { Time } from '@angular/common';
+
 
 export class GegevenTraining{
     id? : number;
     oefening: Oefening;
+    oefeningen: Oefening[];
     aantalReps: number;
     gewicht: number;
+    tijd: Date;
 }

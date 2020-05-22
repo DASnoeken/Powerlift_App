@@ -7,8 +7,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { VoortgangComponent } from './Voortgang/voortgang.component';
 import { OefeningComponent } from './Oefening/oefening.component';
-import { GegevenTrainingComponent} from './GegevenTraining/GegevenTraining.component';
+import { GegevenTrainingComponent} from './GegevenTraining/GegevenTraining.component'
 import { PlanningComponent } from './Planning/Planning.component';
+import { SporterComponent } from './Sporter/Sporter.component';
 import { CoachComponent } from './Coach/coach.component';
 
 @NgModule({
@@ -16,8 +17,9 @@ import { CoachComponent } from './Coach/coach.component';
     AppComponent,
     VoortgangComponent,
     OefeningComponent,
-    GegevenTrainingComponent,
     PlanningComponent,
+    SporterComponent,
+    GegevenTrainingComponent,
     CoachComponent
   ],
   imports: [
