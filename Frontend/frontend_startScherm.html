@@ -107,6 +107,11 @@
 				console.log(rijtjesCoaches);
 			    rijtjesCoaches.forEach(element => {
 				 	if (element.naam == naam) {
+<<<<<<< HEAD
+                         inLijst = true;
+                         var coachID = element.id;
+                         window.location.href = "http://localhost:4200/?coachID="+coachID;
+=======
                         inLijst = true;
                         if(element.wachtwoord == ww) {
                             window.location.href = "http://localhost:4200";
@@ -114,6 +119,7 @@
                         else {
                             alert("Je wachtwoord klopt niet!");
                         }
+>>>>>>> master
 				 	}
 				});
 				if (!inLijst) {

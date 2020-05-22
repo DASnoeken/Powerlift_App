@@ -24,9 +24,7 @@ public class VoortgangEndpoint {
 	}
 	
 	@PostMapping("/vulVoortgang/{id}")
-	public double maakVoortgang(@RequestBody Voortgang voortgang, @PathVariable long id)
-	{
-	
+	public double maakVoortgang(@RequestBody Voortgang voortgang, @PathVariable long id){
 		System.out.println("Voortgang: " + voortgang.getLiftaantal() + " is toegevoegd!");
 		vs.opslaanVoortgang(voortgang, id);
 		return voortgang.getGebruiktegewicht();

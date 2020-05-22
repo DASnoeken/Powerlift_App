@@ -41,6 +41,10 @@ public class CoachService {
 		cr.save(c);
 	}
 	
+	public Optional<Coach> findById(long id){
+		return cr.findById(id);
+	}
+	
 	public Iterable<Coach> findCoaches() {
 		Iterable<Coach> ic = cr.findAll();
 		return ic;
