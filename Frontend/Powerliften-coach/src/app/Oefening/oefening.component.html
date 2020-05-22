@@ -30,7 +30,7 @@
 input[type="file"] {
     display: none;
 }
-.button1:hover {
+.button:hover {
   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
   background-color: #008CBA;
   color: white;
@@ -92,6 +92,8 @@ input[type="file"] {
         </tr>
     </table>
 </div>
+
+<input type="button" class="button" value="Upload" (click)="onUpload()">
 
 </body>
 </html>
