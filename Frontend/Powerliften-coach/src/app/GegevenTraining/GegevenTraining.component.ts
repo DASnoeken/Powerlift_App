@@ -12,18 +12,19 @@ import { Data } from '@angular/router';
 })
 
 export class GegevenTrainingComponent {
-    id: number;
-    oefeningen: Oefening[];
+    training: GegevenTraining = new GegevenTraining();
+    oefeningen: Oefening[] = [];
     oefening: Oefening;
     tijd: Date;
     aantalReps: number;
     gewicht: number;
     constructor(private gegevenTrainingService: GegevenTrainingService) {
-        this.gegevenTrainingService.getOefeningen().subscribe(x => this.oefeningen.push(x))
+        this.gegevenTrainingService.getOefeningen().subscribe(x => {x.forEach(element => this.oefeningen.push(element))});
+        console.log(this.oefeningen);
     }
 
     setOefening($event) {
-        this.gegevenTrainingService.getOefeningByID($event.target.value).subscribe(oefening => this.oefening = oefening);
+        this.gegevenTrainingService.getOefeningByID($event.target.value).subscribe(oefening => {this.oefening = oefening;});
     }
     setTijd($event) {
         this.tijd = $event.target.value;
@@ -34,4 +35,12 @@ export class GegevenTrainingComponent {
     setGewicht($event){
         this.gewicht = $event.target.value;
     }
+    saveTraining(){
+        this.training.oefening = this.oefening;
+        this.training.tijd = this.tijd;
+        this.training.aantalReps = this.aantalReps;
+        this.training.gewicht = this.gewicht
+    }
+    
+    
 }

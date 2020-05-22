@@ -16,12 +16,12 @@ export class GegevenTrainingService{
         })
     }
 
-    getOefeningByID(id: number) {
+    getOefeningByID(id: number):Observable<Oefening> {
         return this.http.get<Oefening>("http://localhost:8082/getOefening/" + id);
     }
 
-    getOefeningen() {
-        return this.http.get<Oefening>("http://localhost:8082/allOefeningen")
+    getOefeningen():Observable<Oefening[]>{
+        return this.http.get<Oefening[]>("http://localhost:8082/allOefeningen")
     }
 
     

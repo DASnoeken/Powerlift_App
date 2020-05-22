@@ -9,6 +9,7 @@ import { VoortgangComponent } from './Voortgang/voortgang.component';
 import { OefeningComponent } from './Oefening/oefening.component';
 import { GegevenTrainingComponent} from './GegevenTraining/GegevenTraining.component'
 import { PlanningComponent } from './Planning/Planning.component';
+import { SporterComponent } from './Sporter/Sporter.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { PlanningComponent } from './Planning/Planning.component';
     VoortgangComponent,
     OefeningComponent,
     PlanningComponent,
+    SporterComponent,
     GegevenTrainingComponent
     
   ],

@@ -37,11 +37,10 @@ public class PlanningEndpoint {
 		return ip;
 	}
 	@PostMapping("/vulPlanning")
-	public long maakPlanning(@RequestBody Planning p)
+	public void maakPlanning(@RequestBody Planning p)
 	{
-		System.out.println("Planning: " + p.getId() + " is toegevoegd!");
+		System.out.println("Planning is toegevoegd!");
 		ps.opslaanPlanning(p);
-		return p.getId();
 	}
 	
 	@PostMapping("/vulPlanningSporter/{planningID}/{sporterID} ")
