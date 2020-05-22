@@ -43,7 +43,6 @@ public class CoachEndpoint {
 	
 	@GetMapping("/getCoach/{id}")
 	public Coach getCoach(@PathVariable long id){
-		System.out.println("getCoach("+id+")");
 		return cs.findById(id).get();
 	}
 }
