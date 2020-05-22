@@ -5,6 +5,17 @@
             background-color: rgb(120, 20, 20);
             color: rgb(255, 255, 255);
         }
+        .column {
+            float: left;
+            width: 33.33%;
+        }
+
+/* Clear floats after the columns */
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
     </style>
     <head>
         <title>Coach Scherm</title>
@@ -16,13 +27,23 @@
       </head>
       <body>
 <div class="jumbotron text-center">
-    
-    <h1>
-        Coach
-    </h1>
-    <p>
-        Jij bent de coach!<br>Help de sporters!
-    </p>
+    <div class="container">
+        <div class="row">
+            <div class="column"><img src="https://krachttraining.net/wp-content/uploads/2016/11/shutterstock_425575663.jpg" width="100%"></div>
+            <div class="column"><h1>
+                Coach
+            </h1>
+            <p>
+                Jij bent de coach!<br>Help de sporters!
+            </p>
+        </div>
+            <div class="column" style="font-size: large;">
+                <h2>
+                    Welkom Coachnaam!
+                </h2>
+            </div>
+          </div> 
+    </div>
 </div><br>
 
 <div class="container">
