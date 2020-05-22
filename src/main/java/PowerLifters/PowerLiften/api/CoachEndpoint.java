@@ -40,6 +40,11 @@ public class CoachEndpoint {
 		Iterable<Coach> ic = cs.findCoaches();
 		return ic;
 	}
+	
+	@GetMapping("/getCoach/{id}")
+	public Coach getCoach(@PathVariable long id){
+		return cs.findById(id).get();
+	}
 }
 
 class InlogCoachHelper {
