@@ -6,7 +6,7 @@
 		integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 </head>
 <script>
-	var sporterID = new URL(window.location.href).searchParams.get("sporterID");
+	var sporterID = new URL(window.location.href).searchParams.get("inlogID");
 	function veranderIets() {
 		document.getElementById("displayScherm").innerHTML = "<p>iets</p>";
 	}
@@ -26,6 +26,25 @@
 		xhr.open("GET", "http://localhost:8082/allOefeningen", true);
 		xhr.send();
 	}
+	
+	function showOefening(i){
+        i--;
+        var xhr = new XMLHttpRequest();
+		xhr.onreadystatechange = function () {
+			if (this.readyState == 4) {
+				var rijtjeOefeningen = JSON.parse(this.responseText);
+                console.log(rijtjeOefeningen);
+				var naam = "<h1>" + rijtjeOefeningen[i].naam + "</h1>";
+				var breakie = "<br>";
+				var uitleg = "<p>" + rijtjeOefeningen[i].uitleg + "</p>";
+				document.getElementById("displayScherm").innerHTML = naam + breakie + uitleg;
+			}
+		};
+		xhr.open("GET", "http://localhost:8082/allOefeningen", true);
+		xhr.send();
+    }
+    
+
 	function mailVersturenCoach(){
 		var xhr = new XMLHttpRequest();
 		xhr.onreadystatechange = function () {
