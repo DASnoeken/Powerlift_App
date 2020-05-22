@@ -15,11 +15,10 @@ export class CoachComponent{
     constructor(private route : ActivatedRoute, private coachService : CoachService){
         this.route.queryParams
         .subscribe(params => {
-          this.idParam = params.id;
+          this.idParam = params.coachID;
           console.log('Gevonden Coach ID = '+this.idParam);
           if(this.idParam!=null){
               this.getCoachNaam();
-            
           }
         });                 //Zo krijg je request parameters
     }
