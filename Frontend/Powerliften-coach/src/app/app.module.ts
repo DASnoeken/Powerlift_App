@@ -7,8 +7,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { VoortgangComponent } from './Voortgang/voortgang.component';
 import { OefeningComponent } from './Oefening/oefening.component';
-import { GegevenTrainingComponent} from './GegevenTraining/GegevenTraining.component'
-import { PlanningComponent } from './Planning/Planning.component'
+import { GegevenTrainingComponent} from './GegevenTraining/GegevenTraining.component';
+import { PlanningComponent } from './Planning/Planning.component';
+import { CoachComponent } from './Coach/coach.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { PlanningComponent } from './Planning/Planning.component'
     VoortgangComponent,
     OefeningComponent,
     GegevenTrainingComponent,
-    PlanningComponent
+    PlanningComponent,
+    CoachComponent
   ],
   imports: [
     BrowserModule,

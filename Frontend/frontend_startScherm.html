@@ -103,7 +103,8 @@
 			    rijtjesCoaches.forEach(element => {
 				 	if (element.naam == naam) {
                          inLijst = true;
-                         window.location.href = "http://localhost:4200";
+                         var coachID = element.id;
+                         window.location.href = "http://localhost:4200/?coachID="+coachID;
 				 	}
 				});
 				if (!inLijst) {
