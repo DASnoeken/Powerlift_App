@@ -10,6 +10,7 @@ import { OefeningComponent } from './Oefening/oefening.component';
 import { GegevenTrainingComponent} from './GegevenTraining/GegevenTraining.component'
 import { PlanningComponent } from './Planning/Planning.component';
 import { SporterComponent } from './Sporter/Sporter.component';
+import { CoachComponent } from './Coach/coach.component';
 
 @NgModule({
   declarations: [
@@ -18,8 +19,8 @@ import { SporterComponent } from './Sporter/Sporter.component';
     OefeningComponent,
     PlanningComponent,
     SporterComponent,
-    GegevenTrainingComponent
-    
+    GegevenTrainingComponent,
+    CoachComponent
   ],
   imports: [
     BrowserModule,

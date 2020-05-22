@@ -17,6 +17,11 @@ export class OefeningService{
         return this.http.get<Oefening>("http://localhost:8082/getOefening/"+id);
     }
 
+    //GET
+    getAllOefeningen():Observable<Oefening[]>{
+        return this.http.get<Oefening[]>("http://localhost:8082/allOefeningen");
+    }
+
     //POST
     verstuurFoto(id:number,deFoto:File) : Observable<Oefening>{
         console.log("verstuurFoto()");

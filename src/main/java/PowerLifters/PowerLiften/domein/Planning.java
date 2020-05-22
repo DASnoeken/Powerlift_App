@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 
 
@@ -23,7 +24,7 @@ public class Planning {
 	private long id;
 	@ManyToMany
 	private List<GegevenTraining> training = new ArrayList<GegevenTraining>();
-	@ManyToOne
+	@OneToOne
 	private GeregistreerdeSporter geregistreerdeSporter;
 	
 	public long getId() {
