@@ -12,6 +12,10 @@ export class OefeningService{
             'Content-Type': 'application/json'
         })
     }
+    //GET
+    getOefeningByID(id:number) : Observable<Oefening>{
+        return this.http.get<Oefening>("http://localhost:8082/getOefening/"+id);
+    }
 
     //POST
     verstuurFoto(id:number,deFoto:File) : Observable<Oefening>{

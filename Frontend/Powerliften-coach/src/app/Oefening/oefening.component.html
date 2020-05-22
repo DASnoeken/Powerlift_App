@@ -1,3 +1,63 @@
-<input type="file" (change)="onFileSelected($event)"><br>
-<input type="text" (change)="setOefeningID($event)"> id = {{id}}<br>
-<input type="button" value="Upload" (click)="onUpload()">
+<html>
+<style>
+    .button {
+        background-color: white; 
+        color: black; 
+        border: 2px solid #008CBA;
+        padding: 1px 8px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        -webkit-transition-duration: 0.4s; /* Safari */
+        transition-duration: 0.4s;
+        width: 40%;
+}
+input[type="file"] {
+    display: none;
+}
+.button1:hover {
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+  background-color: #008CBA;
+  color: white;
+  border-radius: 12px;
+}
+.custom-file-upload {
+    background-color: white; 
+    color: black; 
+    border: 2px solid rgb(186, 0, 0);
+    padding: 1px 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    font-weight: lighter;
+    width: 50%;
+}
+
+.custom-file-upload:hover{
+    box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.37),0 17px 50px 0 rgba(0, 0, 0, 0.26);
+    background-color: rgb(186, 0, 0);
+    color: white;
+}
+</style>
+<body>
+    <label class="custom-file-upload">
+        <input type="file" (change)="onFileSelected($event)"/>
+        Selecteer een foto...
+    </label>
+<!--<input type="file" (change)="onFileSelected($event)">--><br>
+<input type="text" (change)="setOefeningID($event)"><input type="button" class="button button1" value="Check ID" (click)="getOefeningById()"><br>
+<div id="ID Check" *ngFor="let o of oefeningen">
+    {{o.naam}}
+</div>
+
+<input type="button" class="button button1" value="Upload" (click)="onUpload()">
+</body>
+</html>
