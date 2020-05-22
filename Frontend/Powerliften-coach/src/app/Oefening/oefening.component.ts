@@ -15,6 +15,7 @@ export class OefeningComponent{
     oefeningPH:Oefening = new Oefening();
     oefeningen:Oefening[] = [];
     getOefeningClicked:Boolean=false;
+    fileSelected:Boolean=false;
     constructor(private oefeningService : OefeningService){}
     isNumber(value: string | number): boolean{
        return ((value != null) &&
@@ -35,13 +36,15 @@ export class OefeningComponent{
         
     }
     onFileSelected($event){
-        console.log($event);
         this.deFoto = <File>$event.target.files[0];
+        this.fileSelected=true;
+        console.log(this.deFoto);
     }
     onUpload(){
         console.log("onUpload");
         console.log(this.deFoto.name);
         this.oefeningService.verstuurFoto(this.id,this.deFoto).subscribe(oefening => console.log(oefening));
+        alert(''+this.deFoto.name+' is toegevoegd!')
     }
     setOefeningID($event){
         this.id = $event.target.value;
