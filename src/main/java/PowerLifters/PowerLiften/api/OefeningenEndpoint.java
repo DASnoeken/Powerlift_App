@@ -34,7 +34,6 @@ public class OefeningenEndpoint {
 			Oefening oefening = os.getOefeningById(id).get();
 			return oefening;
 		}catch(NoSuchElementException noee) {
-			System.out.println("ID bestaat niet!");
 			Oefening o = new Oefening();
 			o.setNaam("ONGELDIG ID!");
 			return o;
@@ -64,7 +63,6 @@ public class OefeningenEndpoint {
 	
 	@PostMapping("/Oefening/{id}/image")
 	public void uploadAfbeelding(@PathVariable Long id, @RequestParam("image") MultipartFile file) throws IOException {
-		
 		Optional<Oefening> oefeningZonderAfbeelding = os.getOefeningById(id);
 		oefeningZonderAfbeelding.get().setFoto(file.getBytes());
 		os.opslaanOefening(oefeningZonderAfbeelding.get());
