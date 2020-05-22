@@ -71,7 +71,7 @@
         xhr.send();
         }
     }
-    function verstuurNaam(naam) {
+    function verstuurNaam(naam, ww) {
         if(!document.getElementById("ifiscoach").checked) {
             var inLijst = false;
 		    var xhr = new XMLHttpRequest();
@@ -82,7 +82,12 @@
 				rijtjesSporters.forEach(element => {
 					if (element.naam == naam) {
                         inLijst = true;
-                        window.location.href = "frontend_startSchermSporter.html?inlogID=" + element.id;
+                        if(element.wachtwoord == ww) {
+                            window.location.href = "frontend_startSchermSporter.html?inlogID=" + element.id;
+                        }
+                        else {
+                            alert("Je wachtwoord klopt niet!");
+                        }
 					}
 				});
 				if (!inLijst) {
@@ -102,8 +107,13 @@
 				console.log(rijtjesCoaches);
 			    rijtjesCoaches.forEach(element => {
 				 	if (element.naam == naam) {
-                         inLijst = true;
-                         window.location.href = "http://localhost:4200";
+                        inLijst = true;
+                        if(element.wachtwoord == ww) {
+                            window.location.href = "http://localhost:4200";
+                        }
+                        else {
+                            alert("Je wachtwoord klopt niet!");
+                        }
 				 	}
 				});
 				if (!inLijst) {
@@ -139,22 +149,22 @@
 <body>
     <ul class="nav nav-pills">
         <li class="nav-item">
-          <a class="nav-link"  data-toggle = "tab" onclick = "showInlogScreen()">INLOGGEN</a>
+          <a class="nav-link"  data-toggle = "tab" role=button onclick = "showInlogScreen()">INLOGGEN</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-toggle = "tab" onclick = "showOefening(1)">SQUATS</a>
+            <a class="nav-link" data-toggle = "tab" role=button onclick = "showOefening(1)">SQUATS</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-toggle = "tab" onclick = "showOefening(2)">DEADLIFT</a>
+            <a class="nav-link" data-toggle = "tab" role=button onclick = "showOefening(2)">DEADLIFT</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-toggle = "tab" onclick = "showOefening(3)">SHOULDER PRESS</a>
+            <a class="nav-link" data-toggle = "tab" role=button onclick = "showOefening(3)">SHOULDER PRESS</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-toggle = "tab" onclick = "showOefening(4)">BENCH PRESS</a>
+            <a class="nav-link" data-toggle = "tab" role=button onclick = "showOefening(4)">BENCH PRESS</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-toggle = "tab" onclick = "showOefening(5)">BARBLE ROW</a>
+            <a class="nav-link" data-toggle = "tab" role=button onclick = "showOefening(5)">BARBLE ROW</a>
         </li>
     </ul>
 
@@ -180,7 +190,7 @@
                 <input type="checkbox" id="ifiscoach" name="coachcheck">
             </div>
             <input type=button value="Sign in" class="btn btn-primary"
-                onclick="verstuurNaam(exampleGebruikersnaam.value)">
+                onclick="verstuurNaam(exampleGebruikersnaam.value, exampleWachtwoord.value)">
             <br><br>
             <input type=button value="Register" class="btn btn-primary" onclick="maakNaam()">
         </form>
