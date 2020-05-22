@@ -41,9 +41,9 @@ public class CoachEndpoint {
 		return ic;
 	}
 	
-	@GetMapping("getCoachNaam/{id}")
-	public String getCoachNaam(@PathVariable long id){
-		return cs.findById(id).get().getNaam();
+	@GetMapping("/getCoach/{id}")
+	public Coach getCoachNaam(@PathVariable long id){
+		return cs.findById(id).get();
 	}
 }
 

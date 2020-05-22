@@ -11,12 +11,18 @@ import { ActivatedRoute } from '@angular/router';
 
 export class CoachComponent{
     idParam : number;
-    constructor(private coachService : CoachService, private route : ActivatedRoute){
+    coachNaam : string = 'PlaceHolderNaam';
+    constructor(private route : ActivatedRoute, private coachService : CoachService){
         this.route.queryParams
         .subscribe(params => {
           this.idParam = params.id;
           console.log('Gevonden Coach ID = '+this.idParam);
+          if(this.idParam!=null){
+            this.coachService.getCoach(this.idParam).subscribe(naam => console.log(naam));
+          }
         });                 //Zo krijg je request parameters
     }
-
+    getCoachNaam(){
+        
+    }
 }
