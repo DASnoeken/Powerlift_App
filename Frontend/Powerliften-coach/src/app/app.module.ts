@@ -8,13 +8,16 @@ import { AppComponent } from './app.component';
 import { VoortgangComponent } from './Voortgang/voortgang.component';
 import { OefeningComponent } from './Oefening/oefening.component';
 import { GegevenTrainingComponent} from './GegevenTraining/GegevenTraining.component'
+import { PlanningComponent } from './Planning/Planning.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     VoortgangComponent,
     OefeningComponent,
+    PlanningComponent,
     GegevenTrainingComponent
+    
   ],
   imports: [
     BrowserModule,

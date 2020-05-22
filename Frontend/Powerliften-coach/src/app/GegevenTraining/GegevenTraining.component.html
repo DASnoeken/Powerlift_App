@@ -1,1 +1,13 @@
-HALLO
+<h1>Training</h1>
+<label>Oefening</label>
+<select >
+    <option ng-repeat = "x in oefeningen">{{x}}</option>
+</select> <br>
+<type="number" (change)="setOefening($event)"><br>
+<label>Datum</label>
+<input type="datetime-local" (change)="setTijd($event)"> <br>
+<label>Aantal Reps</label>
+<input type="number" (change)="setAantalReps($event)"><br>
+<label>Gewicht</label>
+<input type="number" (change) = "setGewicht($event)">
+

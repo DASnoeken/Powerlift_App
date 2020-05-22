@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { Planning } from './planning';
-import { PlanningService } from './planning.service';
+import { Planning } from './Planning';
+import { PlanningService } from './Planning.service';
 import { $ } from 'protractor';
+import { Oefening } from '../Oefening/oefening';
 
 @Component({
     selector: 'de-planning',
@@ -10,5 +11,9 @@ import { $ } from 'protractor';
 })
 
 export class PlanningComponent{
-    
+    id:number;
+    oefening:Oefening;
+    constructor(private planningService : PlanningService){   
+
+    }
 }
