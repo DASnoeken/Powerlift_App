@@ -149,28 +149,28 @@
 <body>
     <ul class="nav nav-pills">
         <li class="nav-item">
-          <a class="nav-link"  data-toggle = "tab" role=button onclick = "showInlogScreen()">INLOGGEN</a>
+          <button type="button" class="btn btn-outline-primary" onclick = "showInlogScreen()">INLOGGEN</button>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-toggle = "tab" role=button onclick = "showOefening(1)">SQUATS</a>
+            <button type="button" class="btn btn-outline-primary" onclick = "showOefening(1)">SQUATS</button>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-toggle = "tab" role=button onclick = "showOefening(2)">DEADLIFT</a>
+            <button type="button" class="btn btn-outline-primary" onclick = "showOefening(2)">DEADLIFT</button>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-toggle = "tab" role=button onclick = "showOefening(3)">SHOULDER PRESS</a>
+            <button type="button" class="btn btn-outline-primary" onclick = "showOefening(3)">SHOULDER PRESS</button>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-toggle = "tab" role=button onclick = "showOefening(4)">BENCH PRESS</a>
+            <button type="button" class="btn btn-outline-primary" onclick = "showOefening(4)">BENCH PRESS</button>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-toggle = "tab" role=button onclick = "showOefening(5)">BARBLE ROW</a>
+            <button type="button" class="btn btn-outline-primary" onclick = "showOefening(5)">BARBLE ROW</button>
         </li>
     </ul>
 
     <! -- DIT IS HET DISPLAY SCHERM>
     <div id=displayScherm>
-        <h1 class="display-5">WELKOM BIJ DE POWERLIFTING APP</h1>
+        <h1 class="jumbotron text-center">WELKOM BIJ DE POWERLIFTING APP</h1>
     </div>
 
     <! -- DIT IS DE INNERHTML DAT MOET WORDEN WEERGEGEVEN WANNEER IEMAND WIL INLOGGEN>
@@ -189,10 +189,10 @@
                 <label for="coachcheck">Ben jij coach?</label>
                 <input type="checkbox" id="ifiscoach" name="coachcheck">
             </div>
-            <input type=button value="Sign in" class="btn btn-primary"
+            <input type=button value="Sign in" class="btn btn-outline-primary"
                 onclick="verstuurNaam(exampleGebruikersnaam.value, exampleWachtwoord.value)">
             <br><br>
-            <input type=button value="Register" class="btn btn-primary" onclick="maakNaam()">
+            <input type=button value="Register" class="btn btn-outline-primary" onclick="maakNaam()">
         </form>
     </div>
 </body>
