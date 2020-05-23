@@ -16,6 +16,7 @@ export class OefeningComponent{
     oefeningen:Oefening[] = [];
     getOefeningClicked:Boolean=false;
     fileSelected:Boolean=false;
+    oefeningNaam:string;
     constructor(private oefeningService : OefeningService){}
     isNumber(value: string | number): boolean{
        return ((value != null) &&
@@ -34,6 +35,10 @@ export class OefeningComponent{
             this.getOefeningClicked=true;
         }
         
+    }
+    getOefeningByNaam(){
+        this.oefeningen=[];
+        this.oefeningService.getOefeningByNaam(this.oefeningNaam).subscribe(oefening => this.oefeningen.push(oefening))
     }
     onFileSelected($event){
         this.deFoto = <File>$event.target.files[0];
