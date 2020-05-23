@@ -43,7 +43,8 @@
           </div> 
     </div>
 </div>
-<ul class="nav nav-pills">
+
+<ul class="nav nav-pills justify-content-center">
     <li class="nav-item">
       <button type="button" class="btn btn-outline-primary" (click) = "showScherm(1)">Planning maken</button>
     </li>
@@ -54,18 +55,15 @@
         <button type="button" class="btn btn-outline-primary" (click) = "showScherm(3)">Voortgangen bekijken</button>
     </li>
 </ul>
-<div class="container" hidden>
-    <div class="row">
-        <div class="col-lg-4">
-            <de-voortgang></de-voortgang>
-        </div>  
-        <div class="col-lg-4">
-            <de-planning></de-planning>
-        </div>
-        <div class="col-lg-4">
-            <de-oefening></de-oefening>
-        </div>
-    </div>
+<div id="planning" class = "text-center" hidden >
+    <de-planning></de-planning>
+</div>
+<div id="oefening" class = "text-center" hidden >
+    <de-oefening></de-oefening>
+</div>
+<div id="voortgang" class = "text-center" hidden >
+    <de-voortgang></de-voortgang>
+</div>
 </body>
 </html>
 
