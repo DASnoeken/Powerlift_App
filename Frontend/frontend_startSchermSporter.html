@@ -261,6 +261,9 @@
 		xhr.open("GET", "http://localhost:8082/allVoortgang", true);
 		xhr.send();
 	}
+	function Logout(){
+		window.location.href = "frontend_startScherm.html";
+	}
 </script>
 
 <body>
@@ -280,6 +283,7 @@
 		<li class="nav-item">
 			<button type="button" class="btn btn-outline-primary" onclick="oefeningRegistreren()">Oefening registreren</a>
 			<button type="button" class="btn btn-outline-primary" onclick="toonVoortgang()">Voortgang</button>
+			<button type="button" class="btn btn-outline-primary" onclick="Logout()">Uitloggen</button>
 		</li>
 	</ul>
 	<! -- DIT IS HET DISPLAY SCHERM -->
