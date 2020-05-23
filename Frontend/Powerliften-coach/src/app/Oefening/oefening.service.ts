@@ -22,6 +22,11 @@ export class OefeningService{
         return this.http.get<Oefening[]>("http://localhost:8082/allOefeningen");
     }
 
+    //GET
+    getOefeningByNaam(naam:string):Observable<Oefening>{
+        return this.http.get<Oefening>("http://localhost:8082/Oefening/"+naam);
+    }
+
     //POST
     verstuurFoto(id:number,deFoto:File) : Observable<Oefening>{
         console.log("verstuurFoto()");
