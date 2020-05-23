@@ -6,5 +6,4 @@ export class Planning {
     id? : number;
     training: GegevenTraining;
     sporter: Sporter;
-    
 }

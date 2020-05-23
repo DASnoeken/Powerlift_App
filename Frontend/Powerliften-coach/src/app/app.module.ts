@@ -11,6 +11,8 @@ import { GegevenTrainingComponent} from './GegevenTraining/GegevenTraining.compo
 import { PlanningComponent } from './Planning/Planning.component';
 import { SporterComponent } from './Sporter/Sporter.component';
 import { CoachComponent } from './Coach/coach.component';
+import { AppBootstrapModule } from './app-bootstrap.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,8 @@ import { CoachComponent } from './Coach/coach.component';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
+    AppBootstrapModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule

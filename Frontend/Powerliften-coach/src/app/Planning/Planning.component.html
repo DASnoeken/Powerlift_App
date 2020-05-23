@@ -1,9 +1,6 @@
 
-<div id="displayScherm">
-    <input type="button" value="+" (click)=maakPlanning()>
-</div>
 
-<div id="sporterScherm" hidden>
+<div id="sporterScherm" >
 
     <label>Sporter </label>
     <select (change)="setSporter($event)">
@@ -28,6 +25,7 @@
     <input type="button" value="Voeg training toe" (click)="saveTraining()">
     <input type="button" value="Verwijder training" (click)="verwijderTraining()">
     <input type="button" value="Sla de planning op" (click)="slaPlanningOp()">
+    <input type="button" value="Maak Planning voor andere sporter" (click) = "maakPlanning()">
 </div>
 <div id="verwijderScherm" hidden>
     <input type=number [(ngModel)]=verwijderID>
