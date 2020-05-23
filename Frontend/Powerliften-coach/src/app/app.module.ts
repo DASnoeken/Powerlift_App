@@ -23,7 +23,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     SporterComponent,
     GegevenTrainingComponent,
     CoachComponent
-
   ],
   imports: [
     BrowserModule,
