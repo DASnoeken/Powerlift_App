@@ -61,6 +61,7 @@ export class PlanningComponent {
         this.trainingen.push(this.training);
     }
     maakPlanning() {
+        this.trainingen = [];
         document.getElementById("sporterScherm").hidden = false;
         document.getElementById("trainingScherm").hidden = true;
         document.getElementById("verwijderScherm").hidden = true;

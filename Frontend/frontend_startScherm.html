@@ -147,7 +147,7 @@
 </script>
 
 <body>
-    <ul class="nav nav-pills">
+    <ul class="nav nav-pills justify-content-center">
         <li class="nav-item">
           <button type="button" class="btn btn-outline-primary" onclick = "showInlogScreen()">INLOGGEN</button>
         </li>
@@ -169,21 +169,21 @@
     </ul>
 
     <! -- DIT IS HET DISPLAY SCHERM>
-    <div id=displayScherm>
+    <div id=displayScherm >
         <h1 class="jumbotron text-center">WELKOM BIJ DE POWERLIFTING APP</h1>
     </div>
 
     <! -- DIT IS DE INNERHTML DAT MOET WORDEN WEERGEGEVEN WANNEER IEMAND WIL INLOGGEN>
-    <div id="inlogScherm" hidden>
-        <form>
-            <div class="form-group">
+    <div id="inlogScherm" class = "text-center" hidden>
+        <form class ="text-center "> 
+            <div class="form-group col-xs-2">
                 <label class="col-sm-2 col-form-label">Username</label>
-                <input type="gebruikersnaam" class="form-control" id="exampleGebruikersnaam"
-                    aria-describedby="gebruikersnaamHelp">
+                <input type="text" class="form-control" id="exampleGebruikersnaam"
+                    aria-describedby="gebruikersnaamHelp" maxlength="10" size="4"> 
             </div>
             <div class="form-group">
                 <label class="col-sm-2 col-form-label">Wachtwoord</label>
-                <input type="wachtwoord" class="form-control" id="exampleWachtwoord" aria-describedby="wachtwoordHelp">
+                <input type="text" class="form-control" id="exampleWachtwoord" aria-describedby="wachtwoordHelp" maxlength="2">
                 <small id="wachtwoordHelp" class="form-text text-muted">Dit is volkomen privé</small>
                 <br><br>
                 <label for="coachcheck">Ben jij coach?</label>
