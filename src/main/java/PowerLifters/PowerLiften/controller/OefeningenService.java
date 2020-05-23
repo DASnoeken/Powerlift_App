@@ -34,4 +34,7 @@ public class OefeningenService {
 		return oefening;
 		
 	}
+	public Optional<Oefening> getOefeningByNaam(String naam){
+		return or.findByNaam(naam);
+	}
 }

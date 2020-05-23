@@ -67,4 +67,9 @@ public class OefeningenEndpoint {
 		oefeningZonderAfbeelding.get().setFoto(file.getBytes());
 		os.opslaanOefening(oefeningZonderAfbeelding.get());
 	}
+	
+	@GetMapping("/Oefening/{naam}")
+	public Oefening getOefeningByNaam(@PathVariable String naam) {
+		return os.getOefeningByNaam(naam).get();
+	}
 }
