@@ -42,22 +42,27 @@
             </div>
           </div> 
     </div>
-</div><br>
-
-<div class="container">
-    <div class="row">
-        <div class="col-lg-4" hidden>
-            <de-voortgang></de-voortgang>
-        </div>  
-        <div class="col-lg-4">
-            <de-planning></de-planning>
-        </div>
-        <div class="col-lg-4" hidden>
-            <de-oefening></de-oefening>
-        </div>
-    </div>
 </div>
-
+<ul class="nav nav-pills">
+    <li class="nav-item">
+      <button type="button" class="btn btn-outline-primary" (click) = "showScherm(1)">Planning maken</button>
+    </li>
+    <li class="nav-item">
+        <button type="button" class="btn btn-outline-primary" (click) = "showScherm(2)">Oefening maken</button>
+    </li>
+    <li class="nav-item">
+        <button type="button" class="btn btn-outline-primary" (click) = "showScherm(3)">Voortgangen bekijken</button>
+    </li>
+</ul>
+<div id="planning" hidden>
+    <de-planning></de-planning>
+</div>
+<div id="oefening" hidden>
+    <de-oefening></de-oefening>
+</div>
+<div id="voortgang" hidden>
+    <de-voortgang></de-voortgang>
+</div>
 </body>
 </html>
 

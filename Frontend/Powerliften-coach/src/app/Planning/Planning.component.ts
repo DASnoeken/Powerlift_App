@@ -61,14 +61,12 @@ export class PlanningComponent {
         this.trainingen.push(this.training);
     }
     maakPlanning() {
-        document.getElementById("displayScherm").hidden = true;
         document.getElementById("sporterScherm").hidden = false;
         document.getElementById("trainingScherm").hidden = true;
         document.getElementById("verwijderScherm").hidden = true;
     }
 
     verwijderTraining() {
-        document.getElementById("displayScherm").hidden = true;
         document.getElementById("sporterScherm").hidden = true;
         document.getElementById("trainingScherm").hidden = true;
         document.getElementById("verwijderScherm").hidden = false;
@@ -81,7 +79,6 @@ export class PlanningComponent {
     }
 
     maakPlanningSporter() {
-        document.getElementById("displayScherm").hidden = true;
         document.getElementById("sporterScherm").hidden = true;
         document.getElementById("trainingScherm").hidden = false;
         document.getElementById("verwijderScherm").hidden = true;
