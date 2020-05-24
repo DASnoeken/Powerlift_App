@@ -67,7 +67,9 @@ public class PlanningService {
 
 	public Planning vindPlanningVoorSporter(long sporterID) {
 		GeregistreerdeSporter sporter = gsr.findById(sporterID).get();
+		System.out.println(sporter.getNaam());
 		Planning planning = ps.findByGeregistreerdeSporter(sporter);
+		System.out.println(planning);
 		return planning;
 	}
 }
