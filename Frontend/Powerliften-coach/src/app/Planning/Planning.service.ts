@@ -41,6 +41,10 @@ export class PlanningService{
         return a
     }
 
+    getOefeningByNaam(naam:string):Observable<Oefening>{
+        return this.http.get<Oefening>("http://localhost:8082/Oefening/"+naam);
+    }
+
     getOefeningen():Observable<Oefening[]>{
         return this.http.get<Oefening[]>("http://localhost:8082/allOefeningen")
     }
@@ -52,13 +56,21 @@ export class PlanningService{
     }
     saveTrainingen(trainingen: GegevenTraining[]){
         return this.http.post<GegevenTraining[]>("http://localhost:8082/voegTrainingenToe",JSON.stringify(trainingen),this.httpOptions);
+
     }
     maakPlanning() {
         return this.http.get<number>("http://localhost:8082/maakPlanning")
     }
 
 
+    voegTrainingToe(training:GegevenTraining):Observable<GegevenTraining>{
+        console.log(training);
+        return this.http.post<GegevenTraining>("http://localhost:8082/voegTrainingToe",JSON.stringify(training),this.httpOptions);
+    }
 
-
-    
+    maakPlanningOefening(training:GegevenTraining,planning:Planning):Observable<GegevenTraining>{
+        console.log(training);
+        console.log(planning);
+        return this.http.post<null>("http://localhost:8082/vulPlanningOefening/"+46+"/"+41,this.httpOptions);
+    }
 }

@@ -61,6 +61,7 @@
 		var xhr = new XMLHttpRequest();
 		xhr.onreadystatechange = function () {
 			if (this.readyState == 4) {
+				console.log(this.responseText);
 				if (this.responseText) {
 					var planning = JSON.parse(this.responseText);
 					var eindtekst = "<table class =\"table\">"

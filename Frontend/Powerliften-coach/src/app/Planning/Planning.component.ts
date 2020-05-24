@@ -32,6 +32,7 @@ export class PlanningComponent {
         this.planningService.getSporters().subscribe(x => { x.forEach(element => this.sporters.push(element)) });
         this.planningService.getOefeningen().subscribe(x => { x.forEach(element => this.oefeningen.push(element)) });
         this.planningService.getOefeningByID(1).subscribe(oefening => this.oefening = oefening);
+        this.sporters.push(new Sporter());
         console.log(this.oefeningen);
         this.trainingen = [];
         this.oefeningen = [];
@@ -40,7 +41,7 @@ export class PlanningComponent {
 
     setOefening($event) {
         console.log($event.target.value);
-        this.planningService.getOefeningByID($event.target.value).subscribe(oefening => this.oefening = oefening);
+        this.planningService.getOefeningByNaam($event.target.value).subscribe(oefening => this.oefening = oefening);
     }
     setTijd($event) {
         this.tijd = $event.target.value;
@@ -59,6 +60,7 @@ export class PlanningComponent {
         this.training.gewicht = this.gewicht
         this.trainingen.push(this.training);
         console.log(JSON.stringify(this.trainingen));
+
     }
     maakPlanning() {
         
@@ -97,6 +99,7 @@ export class PlanningComponent {
         if (confirm('Are you sure you want to save this thing into the database?')) {
             console.log(this.trainingen);
             this.planning.sporter = this.sporter;
+
             this.planningService.saveTrainingen(this.trainingen).subscribe();
             this.trainingen.forEach(training => {
                 this.planningService.vulPlanningTraining(this.planning.id, training).subscribe();

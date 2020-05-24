@@ -9,3 +9,21 @@ UML gebruiken tijdens de presentatie. Dus ook even nog het klassendiagram laten 
 Begin dan eerst met een product backlog en een klassendiagram.
 
 Ongeveer een half uur voor de presentatie
+
+Niet met schermen switchen
+
+Intro.			--Marijn
+-voorstellen
+-Applicatie beschrijven (document op drive)
+Beschrijving van de vorige sprint.
+-Product backlog	--Marijn
+Deze sprint
+-wireframes		--Joeri
+-Klassendiagram		--Joeri
+-Per user story laten zien wat we gemaakt hebben	--Iedereen zijn eigen, Daan begint
+-Vergelijking met vorige sprint.			--Daan
+Volgende korte sprint					--Joeri
+-bugfixen
+-deployen, online zetten
+-Voorbereiden echte presentatie
+Bedankje						--Joeri

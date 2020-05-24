@@ -51,7 +51,7 @@ public class PlanningEndpoint {
 	@PostMapping("/vulPlanningSporter/{planningID}/{sporterID} ")
 	public void maakPlanningSporter(@PathVariable long planningID, @PathVariable long sporterID)
 	{
-		System.out.println("Planning is toegevoegd!");
+		System.out.println("Planning is toegevoegd! "+planningID+" "+sporterID+" maakPlanningSporter(@PathVariable long planningID, @PathVariable long sporterID)");
 		ps.opslaanSporter(planningID, sporterID);
 	}
 	
@@ -76,6 +76,7 @@ public class PlanningEndpoint {
 	@GetMapping("/toonPlanning/{sporterID}")
 	public Planning toonPlanning(@PathVariable long sporterID){
 		try {
+			System.out.println(sporterID);
 			Planning ip = ps.vindPlanningVoorSporter(sporterID);
 			System.out.println(ip);
 			List<GegevenTraining> lgt = ip.getTraining();
@@ -83,6 +84,7 @@ public class PlanningEndpoint {
 			ip.setTraining(lgt);
 			return ip;
 		} catch (Exception e) {
+			e.printStackTrace();
 			return null;
 		}
 		
