@@ -36,24 +36,26 @@ public class PlanningEndpoint {
 		Iterable<Planning> ip = ps.vindPlanning();
 		return ip;
 	}
-	@PostMapping("/vulPlanning")
-	public void maakPlanning(@RequestBody Planning p)
+	@PostMapping("/vulPlanning/{sporterID}")
+	public void maakPlanning(@RequestBody Planning p,@PathVariable long sporterID)
 	{
-		System.out.println("Planning is toegevoegd!");
+		System.out.println("Planning is toegevoegd! maakPlanning(@RequestBody Planning p) "+p.getId());
+		GeregistreerdeSporter g = gsr.vindSporterByID(sporterID);
+		p.setGeregistreerdeSporter(g);
 		ps.opslaanPlanning(p);
 	}
 	
 	@PostMapping("/vulPlanningSporter/{planningID}/{sporterID} ")
 	public void maakPlanningSporter(@PathVariable long planningID, @PathVariable long sporterID)
 	{
-		System.out.println("Planning is toegevoegd!");
+		System.out.println("Planning is toegevoegd! "+planningID+" "+sporterID+" maakPlanningSporter(@PathVariable long planningID, @PathVariable long sporterID)");
 		ps.opslaanSporter(planningID, sporterID);
 	}
 	
 	@PostMapping("/vulPlanningOefening/{planningID}/{trainingID}")
 	public void maakPlanningOefening(@PathVariable long planningID, @PathVariable long trainingID)
 	{
-		System.out.println("Planning:  is toegevoegd!");
+		System.out.println("Planning: "+planningID+" "+trainingID+" is toegevoegd!");
 		ps.opslaanOefening(planningID, trainingID);
 	}
 	
@@ -68,6 +70,7 @@ public class PlanningEndpoint {
 	@GetMapping("/toonPlanning/{sporterID}")
 	public Planning toonPlanning(@PathVariable long sporterID){
 		try {
+			System.out.println(sporterID);
 			Planning ip = ps.vindPlanningVoorSporter(sporterID);
 			System.out.println(ip);
 			List<GegevenTraining> lgt = ip.getTraining();
@@ -75,6 +78,7 @@ public class PlanningEndpoint {
 			ip.setTraining(lgt);
 			return ip;
 		} catch (Exception e) {
+			e.printStackTrace();
 			return null;
 		}
 		

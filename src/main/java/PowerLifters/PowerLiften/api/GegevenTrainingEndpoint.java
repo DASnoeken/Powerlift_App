@@ -16,12 +16,9 @@ public class GegevenTrainingEndpoint {
 	GegevenTrainingService gts;
 	
 	@PostMapping("/voegTrainingToe")
-	public long voegTrainingToe(@RequestBody GegevenTraining gt) {
+	public GegevenTraining voegTrainingToe(@RequestBody GegevenTraining gt) {
+		System.out.println("Training wordt toegevoegd");
 		gts.opslaanTraining(gt);
-		return gt.getId();
+		return gt;
 	}
-	
-	
-	
-
 }

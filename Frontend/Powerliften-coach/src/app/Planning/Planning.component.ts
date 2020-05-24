@@ -32,13 +32,14 @@ export class PlanningComponent {
         this.planningService.getSporters().subscribe(x => { x.forEach(element => this.sporters.push(element)) });
         this.planningService.getOefeningen().subscribe(x => { x.forEach(element => this.oefeningen.push(element)) });
         this.planningService.getOefeningByID(1).subscribe(oefening => this.oefening = oefening);
+        this.sporters.push(new Sporter());
         console.log(this.oefeningen);
     }
 
 
     setOefening($event) {
         console.log($event.target.value);
-        this.planningService.getOefeningByID($event.target.value).subscribe(oefening => this.oefening = oefening);
+        this.planningService.getOefeningByNaam($event.target.value).subscribe(oefening => this.oefening = oefening);
     }
     setTijd($event) {
         this.tijd = $event.target.value;
@@ -52,13 +53,14 @@ export class PlanningComponent {
     saveTraining() {
         this.training = new GegevenTraining();
         console.log(this.id);
-        this.training.id = this.id++;
+        //this.training.id = this.id++;
         console.log(this.id);
         this.training.oefening = this.oefening;
         this.training.tijd = this.tijd;
         this.training.aantalReps = this.aantalReps;
         this.training.gewicht = this.gewicht
         this.trainingen.push(this.training);
+        this.planningService.voegTrainingToe(this.training).subscribe(train=>console.log(train));
         console.log(this.trainingen);
     }
     maakPlanning() {
@@ -93,7 +95,8 @@ export class PlanningComponent {
         if (confirm('Are you sure you want to save this thing into the database?')) {
             this.planning.trainingen = this.trainingen;
             this.planning.sporter = this.sporter;
-            this.planningService.vulPlanning(this.planning);
+            this.planningService.vulPlanning(this.planning,this.sporter.id).subscribe(planning =>console.log(planning));
+            this.planningService.maakPlanningOefening(this.trainingen[0],this.planning).subscribe(training=>console.log(training));
             console.log('Thing was saved to the database.');
         } else {
             console.log('Thing was not saved to the database.');
