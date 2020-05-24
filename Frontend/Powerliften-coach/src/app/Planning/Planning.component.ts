@@ -14,7 +14,7 @@ import { ITS_JUST_ANGULAR } from '@angular/core/src/r3_symbols';
 })
 
 export class PlanningComponent {
-    planning: Planning;
+    planning: Planning = new Planning();
     id: number = 0;
     sporters: Sporter[] = [];
     sporter: Sporter;
@@ -59,6 +59,7 @@ export class PlanningComponent {
         this.training.aantalReps = this.aantalReps;
         this.training.gewicht = this.gewicht
         this.trainingen.push(this.training);
+        console.log(this.trainingen);
     }
     maakPlanning() {
         this.trainingen = [];
@@ -76,7 +77,10 @@ export class PlanningComponent {
     }
     setSporter($event) {
         console.log($event.target.value);
-        this.planningService.getSporterByID($event.target.value).subscribe(x => this.sporter = x)
+        this.planningService.getSporterByID($event.target.value).subscribe(x => {
+            console.log(x);
+            this.sporter = x;})
+        
     }
 
     maakPlanningSporter() {
@@ -87,6 +91,8 @@ export class PlanningComponent {
     }
     slaPlanningOp() {
         if (confirm('Are you sure you want to save this thing into the database?')) {
+            this.planning.trainingen = this.trainingen;
+            this.planning.sporter = this.sporter;
             this.planningService.vulPlanning(this.planning);
             console.log('Thing was saved to the database.');
         } else {
