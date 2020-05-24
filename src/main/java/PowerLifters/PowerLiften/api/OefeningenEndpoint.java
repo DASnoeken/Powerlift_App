@@ -61,9 +61,9 @@ public class OefeningenEndpoint {
 		}
 	}
 	
-	@PostMapping("/Oefening/{id}/image")
-	public void uploadAfbeelding(@PathVariable Long id, @RequestParam("image") MultipartFile file) throws IOException {
-		Optional<Oefening> oefeningZonderAfbeelding = os.getOefeningById(id);
+	@PostMapping("/Oefening/{naam}/image")
+	public void uploadAfbeelding(@PathVariable String naam, @RequestParam("image") MultipartFile file) throws IOException {
+		Optional<Oefening> oefeningZonderAfbeelding = os.getOefeningByNaam(naam);
 		oefeningZonderAfbeelding.get().setFoto(file.getBytes());
 		os.opslaanOefening(oefeningZonderAfbeelding.get());
 	}

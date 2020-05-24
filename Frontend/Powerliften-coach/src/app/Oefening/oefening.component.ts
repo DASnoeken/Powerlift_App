@@ -48,7 +48,7 @@ export class OefeningComponent{
     onUpload(){
         console.log("onUpload");
         console.log(this.deFoto.name);
-        this.oefeningService.verstuurFoto(this.id,this.deFoto).subscribe(oefening => console.log(oefening));
+        this.oefeningService.verstuurFoto(this.oefeningNaam,this.deFoto).subscribe(oefening => console.log(oefening));
         alert(''+this.deFoto.name+' is toegevoegd!')
     }
     setOefeningID($event){
