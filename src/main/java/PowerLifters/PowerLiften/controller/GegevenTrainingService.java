@@ -16,4 +16,9 @@ public class GegevenTrainingService {
 		gtr.save(gt);
 	}
 
+	public long findTrainingID(GegevenTraining gt) {
+		GegevenTraining a = gtr.findByTijd(gt.getTijd());
+		return a.getId();
+	}
+
 }

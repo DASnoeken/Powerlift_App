@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import PowerLifters.PowerLiften.controller.CoachService;
+import PowerLifters.PowerLiften.controller.GegevenTrainingService;
 import PowerLifters.PowerLiften.controller.GeregistreerdeSporterService;
 import PowerLifters.PowerLiften.controller.PlanningService;
 import PowerLifters.PowerLiften.domein.GegevenTraining;
@@ -29,6 +30,8 @@ public class PlanningEndpoint {
 	@Autowired
 	CoachService cs;
 	@Autowired
+	GegevenTrainingService gts;
+	@Autowired
 	private JavaMailSender javaMailSender;
 	
 	@GetMapping("/allPlanning")
@@ -36,11 +39,13 @@ public class PlanningEndpoint {
 		Iterable<Planning> ip = ps.vindPlanning();
 		return ip;
 	}
-	@PostMapping("/vulPlanning")
-	public void maakPlanning(@RequestBody Planning p)
-	{
+	@GetMapping("/maakPlanning")
+	public long maakPlanning()
+	{	
+		Planning p = new Planning();
 		System.out.println("Planning is toegevoegd!");
 		ps.opslaanPlanning(p);
+		return p.getId();
 	}
 	
 	@PostMapping("/vulPlanningSporter/{planningID}/{sporterID} ")
@@ -50,11 +55,14 @@ public class PlanningEndpoint {
 		ps.opslaanSporter(planningID, sporterID);
 	}
 	
-	@PostMapping("/vulPlanningOefening/{planningID}/{trainingID}")
-	public void maakPlanningOefening(@PathVariable long planningID, @PathVariable long trainingID)
+	@PostMapping("/vulPlanningOefening/{planningID}")
+	public void maakPlanningOefening(@PathVariable long planningID,@RequestBody GegevenTraining gt)
 	{
+		System.out.println(gt.getTijd());
+		long trainingID = gts.findTrainingID(gt);
+		Planning p = ps.getPlanningByID(planningID);
 		System.out.println("Planning:  is toegevoegd!");
-		ps.opslaanOefening(planningID, trainingID);
+		ps.opslaanOefening(p, trainingID);
 	}
 	
 	@PostMapping("/verwijderPlanning")

@@ -34,12 +34,14 @@ public class PlanningService {
 	}
 	
 	
-	public void opslaanOefening(long planningID, long trainingID) {
+	public void opslaanOefening(Planning p, long trainingID) {
 		GegevenTraining gt = gtr.findById(trainingID).get();
-		Planning p = ps.findById(planningID).get();
 		p.addTraining(gt);
 		ps.save(p);
 		
+	}
+	public Planning getPlanningByID(long planningID) {
+		return ps.findById(planningID).get();
 	}
 	
 	public Iterable<Planning> vindPlanning(){
@@ -57,8 +59,7 @@ public class PlanningService {
 		
 	}
 
-	public void testingFelix(long planningID, long trainingID) {
-		Planning p = ps.findById(planningID).get();
+	public void testingFelix(Planning p, long trainingID) {
 		GegevenTraining gt = gtr.findById(trainingID).get();
 		p.getTraining().add(gt);
 		ps.save(p);

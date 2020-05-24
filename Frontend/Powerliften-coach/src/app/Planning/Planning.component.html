@@ -1,7 +1,6 @@
 
 
 <div id="sporterScherm" >
-
     <label>Sporter </label>
     <select (change)="setSporter($event)">
         <option  *ngFor="let x of sporters" value={{x.id}}>{{x.naam}}</option>
@@ -36,7 +35,6 @@
     <table class="table">
         <thead class="thead-dark">
             <tr>
-                <th scope="col">Training ID</th>
                 <th scope="col">Tijd</th>
                 <th scope="col">Oefening</th>
                 <th scope="col">Aantal Reps </th>
@@ -45,7 +43,6 @@
         </thead>
         <tbody *ngFor = "let x of trainingen">
             <tr>
-                <td>{{x.id}}</td>
                 <td>{{x.tijd}}</td>
                 <td>{{x.oefening.naam}}</td>
                 <td>{{x.aantalReps}}</td>
