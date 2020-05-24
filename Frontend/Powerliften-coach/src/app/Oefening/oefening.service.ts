@@ -28,10 +28,10 @@ export class OefeningService{
     }
 
     //POST
-    verstuurFoto(id:number,deFoto:File) : Observable<Oefening>{
+    verstuurFoto(naam:string,deFoto:File) : Observable<Oefening>{
         console.log("verstuurFoto()");
         const fd = new FormData();
         fd.append('image',deFoto,deFoto.name);
-        return this.http.post<Oefening>("http://localhost:8082/Oefening/"+id+"/image",fd);
+        return this.http.post<Oefening>("http://localhost:8082/Oefening/"+naam+"/image",fd);
     }
 }
