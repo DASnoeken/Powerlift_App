@@ -112,12 +112,7 @@ export class PlanningComponent {
     }
     verwijderTrainingByID() {
         this.trainingen.splice(this.verwijderID, 1);
-        this.trainingen.forEach(e => {
-            if (e.id > this.verwijderID) {
-                e.id--
-            }
-        })
-        this.id--;
+        
     }
     slaPlanningOpHelper() {
 
