@@ -4,6 +4,6 @@ import { Sporter } from '../Sporter/Sporter';
 
 export class Planning {
     id? : number;
-    training: GegevenTraining;
+    trainingen: GegevenTraining[];
     sporter: Sporter;
 }
