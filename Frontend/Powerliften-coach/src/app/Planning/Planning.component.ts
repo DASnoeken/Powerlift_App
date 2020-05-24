@@ -19,8 +19,8 @@ export class PlanningComponent {
     sporters: Sporter[] = [];
     sporter: Sporter;
     training: GegevenTraining;
-    trainingen: GegevenTraining[] = [];
-    oefeningen: Oefening[] = [];
+    trainingen: GegevenTraining[];
+    oefeningen: Oefening[];
     oefening: Oefening;
     tijd: Date;
     aantalReps: number;
@@ -34,6 +34,8 @@ export class PlanningComponent {
         this.planningService.getOefeningByID(1).subscribe(oefening => this.oefening = oefening);
         this.sporters.push(new Sporter());
         console.log(this.oefeningen);
+        this.trainingen = [];
+        this.oefeningen = [];
     }
 
 
@@ -52,22 +54,21 @@ export class PlanningComponent {
     }
     saveTraining() {
         this.training = new GegevenTraining();
-        console.log(this.id);
-        //this.training.id = this.id++;
-        console.log(this.id);
         this.training.oefening = this.oefening;
         this.training.tijd = this.tijd;
         this.training.aantalReps = this.aantalReps;
         this.training.gewicht = this.gewicht
         this.trainingen.push(this.training);
-        this.planningService.voegTrainingToe(this.training).subscribe(train=>console.log(train));
-        console.log(this.trainingen);
+        console.log(JSON.stringify(this.trainingen));
+
     }
     maakPlanning() {
-        this.trainingen = [];
+        
+        console.log("test");
         document.getElementById("sporterScherm").hidden = false;
         document.getElementById("trainingScherm").hidden = true;
         document.getElementById("verwijderScherm").hidden = true;
+        
     }
 
     verwijderTraining() {
@@ -81,8 +82,9 @@ export class PlanningComponent {
         console.log($event.target.value);
         this.planningService.getSporterByID($event.target.value).subscribe(x => {
             console.log(x);
-            this.sporter = x;})
-        
+            this.sporter = x;
+        })
+
     }
 
     maakPlanningSporter() {
@@ -90,13 +92,18 @@ export class PlanningComponent {
         document.getElementById("trainingScherm").hidden = false;
         document.getElementById("verwijderScherm").hidden = true;
         document.getElementById("trainingenBekijken").hidden = false;
+        this.trainingen = [];
+        this.planningService.maakPlanning().subscribe(e => this.planning.id = e);
     }
     slaPlanningOp() {
         if (confirm('Are you sure you want to save this thing into the database?')) {
-            this.planning.trainingen = this.trainingen;
+            console.log(this.trainingen);
             this.planning.sporter = this.sporter;
-            this.planningService.vulPlanning(this.planning,this.sporter.id).subscribe(planning =>console.log(planning));
-            this.planningService.maakPlanningOefening(this.trainingen[0],this.planning).subscribe(training=>console.log(training));
+
+            this.planningService.saveTrainingen(this.trainingen).subscribe();
+            this.trainingen.forEach(training => {
+                this.planningService.vulPlanningTraining(this.planning.id, training).subscribe();
+            })
             console.log('Thing was saved to the database.');
         } else {
             console.log('Thing was not saved to the database.');
@@ -111,7 +118,8 @@ export class PlanningComponent {
             }
         })
         this.id--;
-
+    }
+    slaPlanningOpHelper() {
 
     }
 

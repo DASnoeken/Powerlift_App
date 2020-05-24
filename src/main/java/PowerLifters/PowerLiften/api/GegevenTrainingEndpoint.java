@@ -2,6 +2,7 @@ package PowerLifters.PowerLiften.api;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,9 +17,21 @@ public class GegevenTrainingEndpoint {
 	GegevenTrainingService gts;
 	
 	@PostMapping("/voegTrainingToe")
-	public GegevenTraining voegTrainingToe(@RequestBody GegevenTraining gt) {
-		System.out.println("Training wordt toegevoegd");
+	public void voegTrainingToe(@RequestBody GegevenTraining gt) {
 		gts.opslaanTraining(gt);
-		return gt;
 	}
+	@PostMapping("/voegTrainingenToe")
+	public void voegTrainingToe(@RequestBody GegevenTraining[] gt) {
+		for(GegevenTraining g : gt )
+		gts.opslaanTraining(g);
+	}
+	
+	@GetMapping("/getTrainingID")
+	public long getTrainingID(@RequestBody GegevenTraining gt) {
+		return gts.findTrainingID(gt);
+	}
+	
+	
+
+
 }

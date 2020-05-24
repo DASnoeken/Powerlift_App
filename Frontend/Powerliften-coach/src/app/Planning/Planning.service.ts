@@ -8,6 +8,10 @@ import { GegevenTraining } from '../GegevenTraining/GegevenTraining';
 
 @Injectable()
 export class PlanningService{
+    saveTraining() {
+        throw new Error("Method not implemented.");
+    }
+    
     
     
     
@@ -45,10 +49,19 @@ export class PlanningService{
         return this.http.get<Oefening[]>("http://localhost:8082/allOefeningen")
     }
 
-    vulPlanning(planning: Planning,sporterID:number) : Observable<Planning> {
-        console.log(planning);
-        return this.http.post<Planning>("http://localhost:8082/vulPlanning/"+sporterID,JSON.stringify(planning),this.httpOptions);
+    vulPlanningTraining(planningID: number, training : GegevenTraining) {
+        console.log(training);
+        console.log(training.tijd);
+        return this.http.post<Planning>("http://localhost:8082/vulPlanningOefening/" + planningID, JSON.stringify(training), this.httpOptions);
     }
+    saveTrainingen(trainingen: GegevenTraining[]){
+        return this.http.post<GegevenTraining[]>("http://localhost:8082/voegTrainingenToe",JSON.stringify(trainingen),this.httpOptions);
+
+    }
+    maakPlanning() {
+        return this.http.get<number>("http://localhost:8082/maakPlanning")
+    }
+
 
     voegTrainingToe(training:GegevenTraining):Observable<GegevenTraining>{
         console.log(training);
