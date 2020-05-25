@@ -64,19 +64,20 @@
 				console.log(this.responseText);
 				if (this.responseText) {
 					var planning = JSON.parse(this.responseText);
+					console.log(planning);
 					var eindtekst = "<table class =\"table\">"
 						+ "<thead class =\"thead-dark\"><tr>"
 						+ "<th scope =\"col\">Tijd</th>"
 						+ "<th scope = \"col\">Oefening</th>"
 						+ "<th scope = \"col\">Aantal Reps </th>"
 						+ "<th scope = \"col\">Gewicht</th></tr></thead><tbody>";
-					for (var y = 0; y < planning.training.length; y++) {
-						if (planning.training[y])
+					for (var y = 0; y < planning.trainingen.length; y++) {
+						if (planning.trainingen[y])
 							eindtekst += "<tr>" +
-								"<td>" + planning.training[y].tijd +
-								"</td><td>" + planning.training[y].oefening.naam +
-								"</td><td>" + planning.training[y].aantalReps +
-								"</td><td>" + planning.training[y].gewicht + "</td></tr>";
+								"<td>" + planning.trainingen[y].tijd +
+								"</td><td>" + planning.trainingen[y].oefening.naam +
+								"</td><td>" + planning.trainingen[y].aantalReps +
+								"</td><td>" + planning.trainingen[y].gewicht + "</td></tr>";
 					}
 					eindtekst += "</tbody></table>";
 				} else {
