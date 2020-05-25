@@ -33,19 +33,19 @@ public class Planning {
 	public void setId(long id) {
 		this.id = id;
 	}
-	public List<GegevenTraining> getTraining() {
+	public List<GegevenTraining> getTrainingen() {
 		return training;
 	}
-	public void setTraining(List<GegevenTraining> training) {
+	public void setTrainingen(List<GegevenTraining> training) {
 		this.training = training;
 	}
-	public GeregistreerdeSporter getGeregistreerdeSporter() {
+	public GeregistreerdeSporter getSporter() {
 		return geregistreerdeSporter;
 	}
-	public void setGeregistreerdeSporter(GeregistreerdeSporter geregistreerdeSporter) {
+	public void setSporter(GeregistreerdeSporter geregistreerdeSporter) {
 		this.geregistreerdeSporter = geregistreerdeSporter;
 	}
-	public void addTraining(GegevenTraining gt) {
+	public void addTrainingen(GegevenTraining gt) {
 		training.add(gt);
 	}
 	

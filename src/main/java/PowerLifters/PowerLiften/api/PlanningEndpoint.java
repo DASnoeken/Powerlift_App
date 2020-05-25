@@ -65,6 +65,18 @@ public class PlanningEndpoint {
 		ps.opslaanOefening(p, trainingID);
 	}
 	
+	@PostMapping("/vulPlanningOefening2")
+	public void maakPlanningOefening2(@RequestBody Planning p)
+	{
+		System.out.println(p);
+		ps.opslaanPlanning(p);
+		//System.out.println(gt.getTijd());
+		//long trainingID = gts.findTrainingID(gt);
+		//Planning p = ps.getPlanningByID(planningID);
+		//System.out.println("Planning:  is toegevoegd!");
+		//ps.opslaanOefening(p, trainingID);
+	}
+	
 	@PostMapping("/verwijderPlanning")
 	public void verwijderOefening(@RequestBody long id) {
 		System.out.println("Planning: " + id + " is verwijderd!");
@@ -79,9 +91,9 @@ public class PlanningEndpoint {
 			System.out.println(sporterID);
 			Planning ip = ps.vindPlanningVoorSporter(sporterID);
 			System.out.println(ip);
-			List<GegevenTraining> lgt = ip.getTraining();
+			List<GegevenTraining> lgt = ip.getTrainingen();
 			lgt.sort((a,b) -> a.getTijd().compareTo(b.getTijd()));
-			ip.setTraining(lgt);
+			ip.setTrainingen(lgt);
 			return ip;
 		} catch (Exception e) {
 			e.printStackTrace();
