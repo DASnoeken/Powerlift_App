@@ -28,7 +28,7 @@ public class PlanningService {
 	public void opslaanSporter(long planningID, long sporterID) {
 		GeregistreerdeSporter gs = gsr.findById(sporterID).get();
 		Planning p = ps.findById(planningID).get();
-		p.setGeregistreerdeSporter(gs);
+		p.setSporter(gs);
 		ps.save(p);
 		
 	}
@@ -36,7 +36,7 @@ public class PlanningService {
 	
 	public void opslaanOefening(Planning p, long trainingID) {
 		GegevenTraining gt = gtr.findById(trainingID).get();
-		p.addTraining(gt);
+		p.addTrainingen(gt);
 		ps.save(p);
 		
 	}
@@ -55,15 +55,17 @@ public class PlanningService {
 	}
 
 	public void opslaanPlanning(Planning p) {
+		List<GegevenTraining> nieuweTrainingen = new ArrayList<>();
+		for(GegevenTraining gt:p.getTrainingen()) {
+			GegevenTraining tempGt = gtr.save(gt);
+			nieuweTrainingen.add(tempGt);
+		}
+		p.setTrainingen(nieuweTrainingen);
 		ps.save(p);
 		
 	}
 
-	public void testingFelix(Planning p, long trainingID) {
-		GegevenTraining gt = gtr.findById(trainingID).get();
-		p.getTraining().add(gt);
-		ps.save(p);
-	}
+
 
 
 	public Planning vindPlanningVoorSporter(long sporterID) {
