@@ -28,8 +28,6 @@ public class VragenlijstService {
 		Optional<GeregistreerdeSporter> sporter = gsr.findById(id);
 		GeregistreerdeSporter gs = sporter.get();
 		v.setSporter(gs);
-		//Voortgang voortgang = vor.findById(id2).get();
-		//v.setVoortgang(voortgang);
 		vr.save(v);
 	}
 	

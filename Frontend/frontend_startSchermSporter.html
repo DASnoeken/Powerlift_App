@@ -8,6 +8,7 @@
 
 <script>
 	var sporterID = new URL(window.location.href).searchParams.get("inlogID");
+
 	function veranderIets() {
 		document.getElementById("displayScherm").innerHTML = "<p>iets</p>";
 	}
@@ -118,10 +119,11 @@
 		var objJSON = JSON.stringify(voortgangObject);
 		var xhr = new XMLHttpRequest();
 		xhr.onreadystatechange = function () {
-			if (this.readyState == 4) {
+			if (this.readyState == 4) {	
+				window.location.href = "frontend_sporterVragenlijst.html?inlogID="+window.sporterID+"&VoortgangID="+this.responseText;			
 			}
 		};
-		xhr.open("POST", "http://localhost:8082/vulVoortgang" + "/" + oefening, true);
+		xhr.open("POST", "http://localhost:8082/vulVoortgang/" + oefening, true);
 		xhr.setRequestHeader("Content-Type", "application/json");
 		xhr.send(objJSON);
 		document.getElementById("displayScherm").innerHTML = document.getElementById("vragenlijstScherm").innerHTML;
@@ -148,7 +150,8 @@
 
 	function slaAntwoordOp() {
 		var xhr = new XMLHttpRequest();
-		var idVoortgang = document.getElementById("voortgangID").value;
+		//var idVoortgang = document.getElementById("voortgangID").value;
+		//console.log(idVoortgang);
 		var vragenlijsten = {};
 		if (document.getElementById("antwoord-goed").checked) {
 			vragenlijsten.antwoorden = "goed";
@@ -167,7 +170,7 @@
 		xhr.open("POST", "http://localhost:8082/save/antwoord/" + window.sporterID, true);
 		xhr.setRequestHeader("Content-Type", "application/json");
 		xhr.send(objJSON);
-		antwoordVoortgang(idVoortgang);
+		//antwoordVoortgang(idVoortgang);
 	}
 
 	function antwoordVoortgang(id) {
