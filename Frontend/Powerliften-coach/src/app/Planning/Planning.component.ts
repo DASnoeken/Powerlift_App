@@ -36,6 +36,7 @@ export class PlanningComponent {
         console.log(this.oefeningen);
         this.trainingen = [];
         this.oefeningen = [];
+        this.oefeningen.push(new Oefening());
     }
 
 
