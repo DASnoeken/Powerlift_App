@@ -27,3 +27,16 @@ Volgende korte sprint					--Joeri
 -deployen, online zetten
 -Voorbereiden echte presentatie
 Bedankje						--Joeri
+
+Tips 25-5-2020 generale repetitie toeschouwers:{
+Niet dingen ter plaatse oplossen. (Dit is wel een belangrijke)
+tweede helft: iets minder heldere structuur. (eerste helft wel goed). In de voorbereiding hier iets meer aandacht aan besteden. Dingen als: nog even wat laten zien, niet meer doen.
+Presenteren via 1 scherm was goed. (Dit was ook een belangrijke)
+Alvast alles wat we willen laten zien klaar zetten.
+Technische termen goed uitleggen.
+Eventueel ook screenshots maken en in de presentatie plakken.
+Hoe relevant is het om steeds die user stories erbij te pakken? Dit heen en weer switchen tussen, presentatie en hacknplan is misschien wat chaotisch.
+Goede verbetering ten opzichte van vorige keer.
+Ben je ervan bewust dat degene die kijkt niet zo heel goed weet waar in het scherm hij moet letten. Dus goed uitleggen waar mensen nou eigenlijk naar moeten kijken. Belangrijke dingen printscreenen en uitvergroten op de presentatie.
+Buiten bootstrap hebben we er niet een keer voor gekozen om een technische term te introduceren. Noem bijvoorbeeld JPA, selectors, SQL, REST en hoe we die gebruiken.
+}

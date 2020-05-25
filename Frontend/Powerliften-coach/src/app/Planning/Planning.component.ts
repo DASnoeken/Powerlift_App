@@ -63,7 +63,6 @@ export class PlanningComponent {
 
     }
     maakPlanning() {
-        
         console.log("test");
         document.getElementById("sporterScherm").hidden = false;
         document.getElementById("trainingScherm").hidden = true;
@@ -93,17 +92,14 @@ export class PlanningComponent {
         document.getElementById("verwijderScherm").hidden = true;
         document.getElementById("trainingenBekijken").hidden = false;
         this.trainingen = [];
+
         this.planningService.maakPlanning().subscribe(e => this.planning.id = e);
     }
     slaPlanningOp() {
         if (confirm('Are you sure you want to save this thing into the database?')) {
-            console.log(this.trainingen);
+            this.planning.trainingen = this.trainingen;
             this.planning.sporter = this.sporter;
-
-            this.planningService.saveTrainingen(this.trainingen).subscribe();
-            this.trainingen.forEach(training => {
-                this.planningService.vulPlanningTraining(this.planning.id, training).subscribe();
-            })
+            this.planningService.vulPlanningTraining2(this.planning).subscribe();
             console.log('Thing was saved to the database.');
         } else {
             console.log('Thing was not saved to the database.');
