@@ -23,11 +23,12 @@ public class VoortgangEndpoint {
 		return iv;
 	}
 	
-	@PostMapping("/vulVoortgang/{id}")
-	public double maakVoortgang(@RequestBody Voortgang voortgang, @PathVariable long id){
-		System.out.println("Voortgang: " + voortgang.getLiftaantal() + " is toegevoegd!");
-		vs.opslaanVoortgang(voortgang, id);
-		return voortgang.getGebruiktegewicht();
+	@PostMapping("/vulVoortgang/{naam}")
+	public long maakVoortgang(@RequestBody Voortgang voortgang, @PathVariable String naam){
+		System.out.println("Voortgang: " + voortgang.getLiftaantal() + " is toegevoegd! id = "+voortgang.getId());
+		vs.opslaanVoortgang(voortgang, naam);
+		System.out.println("In maakVoortgang() is het ID: "+vs.getID());
+		return vs.getID();
 	}
 	
 	@PostMapping("/verwijderOefening")
