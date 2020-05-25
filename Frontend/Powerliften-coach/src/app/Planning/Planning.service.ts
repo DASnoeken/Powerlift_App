@@ -57,9 +57,6 @@ export class PlanningService{
     vulPlanningTraining2(planning: Planning) {
         return this.http.post<Planning>("http://localhost:8082/vulPlanningOefening2/", JSON.stringify(planning), this.httpOptions);
     }
-
-
-
     saveTrainingen(trainingen: GegevenTraining[]){
         return this.http.post<GegevenTraining[]>("http://localhost:8082/voegTrainingenToe",JSON.stringify(trainingen),this.httpOptions);
 
@@ -69,9 +66,9 @@ export class PlanningService{
     }
 
 
-    voegTrainingToe(trainingen:GegevenTraining[]):Observable<GegevenTraining>{
-        console.log(trainingen);
-        return this.http.post<GegevenTraining>("http://localhost:8082/voegTrainingToe",JSON.stringify(trainingen),this.httpOptions);
+    voegTrainingToe(training:GegevenTraining):Observable<GegevenTraining>{
+        console.log(training);
+        return this.http.post<GegevenTraining>("http://localhost:8082/voegTrainingToe",JSON.stringify(training),this.httpOptions);
     }
 
     maakPlanningOefening(training:GegevenTraining,planning:Planning):Observable<GegevenTraining>{

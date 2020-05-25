@@ -31,11 +31,12 @@ export class PlanningComponent {
     constructor(private planningService: PlanningService) {
         this.planningService.getSporters().subscribe(x => { x.forEach(element => this.sporters.push(element)) });
         this.planningService.getOefeningen().subscribe(x => { x.forEach(element => this.oefeningen.push(element)) });
-        this.planningService.getOefeningByID(1).subscribe(oefening => this.oefening = oefening);
+        //this.planningService.getOefeningByID(1).subscribe(oefening => {console.log(oefening);this.oefening = oefening;});
         this.sporters.push(new Sporter());
         console.log(this.oefeningen);
         this.trainingen = [];
         this.oefeningen = [];
+        this.oefeningen.push(new Oefening());
     }
 
 
