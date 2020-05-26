@@ -72,4 +72,9 @@ public class OefeningenEndpoint {
 	public Oefening getOefeningByNaam(@PathVariable String naam) {
 		return os.getOefeningByNaam(naam).get();
 	}
+	
+	@GetMapping("/Oefening/{naam}/id")
+	public long getOefeningIDByNaam(@PathVariable String naam) {
+		return os.getOefeningByNaam(naam).get().getId();
+	}
 }
