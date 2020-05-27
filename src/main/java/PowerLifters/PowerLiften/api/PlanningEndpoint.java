@@ -4,6 +4,7 @@ import java.util.List;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 /*import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 */
@@ -102,6 +103,11 @@ public class PlanningEndpoint {
 			return null;
 		}
 		
+	}
+	
+	@DeleteMapping("/leegPlanning")
+	public void leegPlanning() {
+		ps.planningLeegmaken();
 	}
 	
 	@PostMapping("/stuurMail/{sporterID}")

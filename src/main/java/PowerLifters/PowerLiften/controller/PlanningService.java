@@ -64,9 +64,10 @@ public class PlanningService {
 		ps.save(p);
 		
 	}
-
-
-
+	
+	public void planningLeegmaken() {
+		ps.planningLeegmaken();
+	}
 
 	public Planning vindPlanningVoorSporter(long sporterID) {
 		GeregistreerdeSporter sporter = gsr.findById(sporterID).get();
