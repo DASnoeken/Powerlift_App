@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 
@@ -18,9 +19,11 @@ public class GegevenTraining {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
-	
-	@ManyToOne
+	@ManyToOne()
+	private Planning planning;
+	@ManyToOne()
 	private Oefening oefening;
+	
 	private LocalDateTime tijd;
 	private int aantalReps;
 	private int gewicht;
