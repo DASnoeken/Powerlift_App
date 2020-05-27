@@ -10,9 +10,9 @@
         document.getElementById("displayScherm").innerHTML = document.getElementById("inlogScherm").innerHTML;
     }
     function maakNaam() {
-        if(!document.getElementById("ifiscoach").checked) {
-            var naam = document.getElementById("exampleGebruikersnaam").value;
-            var wachtwoord = document.getElementById("exampleWachtwoord").value;
+        if(!document.getElementById("registerCoachCheck").checked) {
+            var naam = document.getElementById("registreerNaam").value;
+            var wachtwoord = document.getElementById("registreerWachtwoord").value;
             var naamBestaatAl = false;
             var hetObject = {};
             hetObject.naam = naam;
@@ -29,10 +29,11 @@
                         }
                     })
                     if (!naamBestaatAl) {
-                        alert("Je hebt je correct geregistreerd als sporter! Druk op inloggen om verder te gaan.");
                         xhr.open("POST", "http://localhost:8082/registreerdeSporter", true);
                         xhr.setRequestHeader("Content-Type", "application/json");
                         xhr.send(objJSON);
+                        alert("Je hebt correct geregistreerd als sporter. U kunt nu inloggen met uw accountgegevens!");
+                        showInlogScreen();
                     }
                 }
             };
@@ -40,8 +41,8 @@
         xhr.send();
         }
         else {
-            var naam = document.getElementById("exampleGebruikersnaam").value;
-            var wachtwoord = document.getElementById("exampleWachtwoord").value;
+            var naam = document.getElementById("registreerNaam").value;
+            var wachtwoord = document.getElementById("registreerWachtwoord").value;
             var email = "";
             var naamBestaatAl = false;
             var hetObject = {};
@@ -60,10 +61,11 @@
                         }
                     })
                     if (!naamBestaatAl) {
-                        alert("Je hebt je correct geregistreerd als coach! Druk op inloggen om verder te gaan.");
                         xhr.open("POST", "http://localhost:8082/set/coach", true);
                         xhr.setRequestHeader("Content-Type", "application/json");
                         xhr.send(objJSON);
+                        alert("Je hebt correct geregistreerd als coach. U kunt nu inloggen met uw accountgegevens!");
+                        showInlogScreen();
                     }
                 }
             };
@@ -71,6 +73,11 @@
         xhr.send();
         }
     }
+
+    function openRegistreerScherm() {
+        document.getElementById("displayScherm").innerHTML = document.getElementById("registratieScherm").innerHTML;
+    }
+
     function verstuurNaam(naam, ww) {
         if(!document.getElementById("ifiscoach").checked) {
             var inLijst = false;
@@ -217,7 +224,7 @@
             <input type=button value="Sign in" class="btn btn-outline-primary"
                 onclick="verstuurNaam(exampleGebruikersnaam.value, exampleWachtwoord.value)">
             <br><br>
-            <input type=button value="Register" class="btn btn-outline-primary" onclick="maakNaam()">
+            <input type=button value="Register" class="btn btn-outline-primary" onclick="openRegistreerScherm()">
         </form>
     </div>
 </body>
@@ -228,7 +235,38 @@
         <div class="jumbotron font-weight-bold text-center">
             <h2> Registreren </h2>
         </div>
+        <div class="font-italic text-center">
+            <label>Inlognaam: </label> <br>
+            <input type=text id="registreerNaam">
+        </div>
+        <div class="font-italic text-center">
+            <label>Wachtwoord: </label> <br>
+            <input type=text id="registreerWachtwoord"> 
+        </div>
+        <br>
+        <label for="coachcheck">Ben jij coach?</label>
+        <input type="checkbox" id="registerCoachCheck" name="coachcheck"> <br><br><br>
         
+        <div class="font-italic text-center">
+            <label>Naam: </label> <br>
+            <input type=text>
+        </div>
+        <div class="font-italic text-center">
+            <label>Leeftijd: </label> <br>
+            <input type=text>
+        </div>
+        <div class="font-italic text-center">
+            <label>Woonplaats: </label> <br>
+            <input type=text>
+        </div>
+        <div class="font-italic text-center">
+            <label>Postcode: </label> <br>
+            <input type=text>
+        </div>
+        <p align="center">
+            <br><input type="button" class="btn btn-outline-primary" value="Opslaan"
+                onclick="maakNaam()">
+        </p>
     </form>
 </div>
 
