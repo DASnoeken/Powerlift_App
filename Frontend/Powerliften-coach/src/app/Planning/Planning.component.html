@@ -1,21 +1,30 @@
 <html>
 <style>
-    th{
+    th {
         text-align: center;
     }
-    tr{
+
+    tr {
         text-align: center;
         font-size: larger;
     }
-    table{
+
+    table {
         width: 70%;
         border: 1px solid black;
     }
-    tr:nth-child(odd) {background-color: #666666;}
-    tr:nth-child(odd) {color: #ffffff}
+
+    tr:nth-child(odd) {
+        background-color: #666666;
+    }
+
+    tr:nth-child(odd) {
+        color: #ffffff
+    }
+
     .button {
-        background-color: white; 
-        color: black; 
+        background-color: white;
+        color: black;
         border: 2px solid #008CBA;
         padding: 1px 8px;
         text-align: center;
@@ -24,69 +33,89 @@
         font-size: 16px;
         margin: 4px 2px;
         cursor: pointer;
-        -webkit-transition-duration: 0.4s; /* Safari */
+        -webkit-transition-duration: 0.4s;
+        /* Safari */
         transition-duration: 0.4s;
         width: 20%;
     }
+
     input[type="file"] {
         display: none;
     }
+
     .button:hover {
-        box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+        box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
         background-color: #008CBA;
         color: white;
         border-radius: 12px;
     }
+
     table.center {
-        margin-left:auto; 
-        margin-right:auto;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    div {
+        font-size: medium;
     }
 </style>
-<div id="sporterScherm" >
-    <label>Sporter </label>
+<div id="sporterScherm">
+    <br> <label>Sporter: </label> <br>
     <select (change)="setSporter($event)">
-        <option  *ngFor="let x of sporters" value={{x.id}}>{{x.naam}}</option>
+        <option *ngFor="let x of sporters" value={{x.id}}>{{x.naam}}</option>
 
-    </select><br>
-    <input type="button" class="button button1" value="Voeg Sporter toe" (click)="maakPlanningSporter()">
+    </select><br><br>
+    <input type="button" class="button button1" value="Maak planning voor sporter" (click)="maakPlanningSporter()">
 </div>
 
 <div id="trainingScherm" hidden>
 
-    <table class="center" style="border: 1px white; width: 25%;" id="trainingInput"><tr style="background-color: white;color: black;"><td>
-    <label>Oefening</label></td><td>
-    <select (change)=setOefening($event)>
-        <option *ngFor="let x of oefeningen" value={{x.naam}}>{{x.naam}}</option>
-    </select>
-    </td></tr><tr style="background-color: white;color: black;"><td>
-    <label>Datum</label></td><td>
-    <input type="datetime-local" (change)="setTijd($event)"> </td></tr>
-    <tr style="background-color: white;color: black;"><td><label>Aantal Reps</label></td>
-    <td><input type="number" (change)="setAantalReps($event)"></td></tr>
-    <tr style="background-color: white;color: black;"><td><label>Gewicht</label></td>
-    <input type="number" (change)="setGewicht($event)"></tr></table>
+    <table class="center" style="border: 1px white; width: 25%;" id="trainingInput">
+        <tr style="background-color: white;color: black;">
+            <td>
+                <br><br><label>Oefening: </label></td>
+            <td>
+                <br><br><select (change)=setOefening($event)>
+                    <option *ngFor="let x of oefeningen" value={{x.naam}}>{{x.naam}}</option>
+                </select>
+            </td>
+        </tr>
+        <tr style="background-color: white;color: black;">
+            <td><label>Aantal Reps: </label></td>
+            <td><input type="number" (change)="setAantalReps($event)"></td>
+        </tr>
+        <tr style="background-color: white;color: black;">
+            <td><label>Gewicht: </label></td>
+            <input type="number" (change)="setGewicht($event)">
+        </tr>
+        <tr style="background-color: white;color: black;">
+            <td>
+                <label>Datum: </label></td>
+            <td>
+                <input type="datetime-local" (change)="setTijd($event)"> </td>
+        </tr>
+    </table> <br><br>
     <input type="button" class="button button1" value="Voeg training toe" (click)="saveTraining()">
     <input type="button" class="button button1" value="Verwijder training" (click)="verwijderTraining()">
     <input type="button" class="button button1" value="Sla de planning op" (click)="slaPlanningOp()">
-    <input type="button" class="button button1" value="Andere sporter" (click) = "maakPlanning()">
-
+    <input type="button" class="button button1" value="Andere sporter" (click)="maakPlanning()">
+    <br><br>
 </div>
 <div id="verwijderScherm" hidden>
     <input type=number [(ngModel)]=verwijderID>
-    <input type="button" class="button button1" (click) = "verwijderTrainingByID()" value="verwijder Oefening">
-    <input type="button" class="button button1" (click) = "gaTerug()" value="Ga terug"> 
+    <input type="button" class="button button1" (click)="verwijderTrainingByID()" value="verwijder Oefening">
+    <input type="button" class="button button1" (click)="gaTerug()" value="Ga terug">
 </div>
 <div id="trainingenBekijken" hidden>
     <table class="table center">
-            <tr>
-                <th scope="col">Index</th>
-                <th scope="col">Tijd</th>
-                <th scope="col">Oefening</th>
-                <th scope="col">Aantal Reps </th>
-                <th scope="col">Gewicht</th>
-            </tr>
-        </thead>
-        <tbody *ngFor = "let x of trainingen; index as i"> 
+        <tr>
+            <th scope="col">Index</th>
+            <th scope="col">Tijd</th>
+            <th scope="col">Oefening</th>
+            <th scope="col">Aantal Reps </th>
+            <th scope="col">Gewicht</th>
+        </tr>
+        <tbody *ngFor="let x of trainingen; index as i">
             <script>setIndex()</script>
             <tr>
                 <td>{{i}}</td>
@@ -97,4 +126,5 @@
             </tr>
     </table>
 </div>
+
 </html>
