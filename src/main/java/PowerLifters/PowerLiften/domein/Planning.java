@@ -22,7 +22,7 @@ public class Planning {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
-	@ManyToMany
+	@OneToMany(mappedBy = "planning")
 	private List<GegevenTraining> training = new ArrayList<GegevenTraining>();
 	@OneToOne
 	private GeregistreerdeSporter geregistreerdeSporter;

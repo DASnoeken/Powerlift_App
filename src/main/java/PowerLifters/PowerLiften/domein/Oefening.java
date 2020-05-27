@@ -1,12 +1,16 @@
 package PowerLifters.PowerLiften.domein;
 
 import java.io.*;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Oefening {
@@ -15,6 +19,12 @@ public class Oefening {
 	private String naam;
 	@Column(columnDefinition = "LONGBLOB")	//maakt automatisch longblob
 	private byte[] foto;
+	@JsonIgnore
+	@OneToMany(mappedBy = "oefening")
+	List<GegevenTraining> training;
+	@JsonIgnore
+	@OneToMany(mappedBy = "oefening")
+	List<Voortgang> voortgang;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
