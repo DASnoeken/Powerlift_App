@@ -15,28 +15,30 @@ import { ITS_JUST_ANGULAR } from '@angular/core/src/r3_symbols';
 
 export class PlanningComponent {
     planning: Planning = new Planning();
-    id: number = 0;
+    index: number = 0;
     sporters: Sporter[] = [];
     sporter: Sporter;
     training: GegevenTraining;
     trainingen: GegevenTraining[];
     oefeningen: Oefening[];
     oefening: Oefening;
-    tijd: Date;
-    aantalReps: number;
-    gewicht: number;
+    tijd: Date = undefined;
+    aantalReps: number = undefined;
+    gewicht: number = undefined;
     verwijderID: number;
     aantalVerwijderd: number = 0;
 
     constructor(private planningService: PlanningService) {
         this.planningService.getSporters().subscribe(x => { x.forEach(element => this.sporters.push(element)) });
         this.planningService.getOefeningen().subscribe(x => { x.forEach(element => this.oefeningen.push(element)) });
-        //this.planningService.getOefeningByID(1).subscribe(oefening => {console.log(oefening);this.oefening = oefening;});
+        this.planningService.getOefeningByID(1).subscribe(oefening => this.oefening = oefening);
         this.sporters.push(new Sporter());
         console.log(this.oefeningen);
         this.trainingen = [];
         this.oefeningen = [];
-        this.oefeningen.push(new Oefening());
+    }
+    setIndex(){
+        this.index=0;
     }
 
 
@@ -86,6 +88,12 @@ export class PlanningComponent {
         })
 
     }
+    gaTerug(){
+        document.getElementById("sporterScherm").hidden = true;
+        document.getElementById("trainingScherm").hidden = false;
+        document.getElementById("verwijderScherm").hidden = true;
+        document.getElementById("trainingenBekijken").hidden = false;
+    }
 
     maakPlanningSporter() {
         document.getElementById("sporterScherm").hidden = true;
@@ -93,7 +101,6 @@ export class PlanningComponent {
         document.getElementById("verwijderScherm").hidden = true;
         document.getElementById("trainingenBekijken").hidden = false;
         this.trainingen = [];
-
         this.planningService.maakPlanning().subscribe(e => this.planning.id = e);
     }
     slaPlanningOp() {
