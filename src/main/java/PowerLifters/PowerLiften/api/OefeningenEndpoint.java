@@ -71,7 +71,7 @@ public class OefeningenEndpoint {
 	@GetMapping("/Oefening/{naam}/get/image")
 	public byte[] downloadAfbeelding(@PathVariable String naam) {
 		Optional<Oefening> oefening = os.getOefeningByNaam(naam);
-		System.out.println("Zoeken naar de foto!");
+		System.out.println(naam+": Zoeken naar de foto!");
 		return oefening.get().getFoto();
 	}
 	

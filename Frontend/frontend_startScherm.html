@@ -136,12 +136,14 @@
 				var naam = "<h1>" + rijtjeOefeningen[i].naam + "</h1>";
 				var breakie = "<br>";
 				var uitleg = "<p>" + rijtjeOefeningen[i].uitleg + "</p>";
-				document.getElementById("displayScherm").innerHTML = naam + breakie + uitleg + "<br><img id=\"image\"/>";
+                document.getElementById("displayScherm").innerHTML = naam + breakie + uitleg +"<br><img width=\"600\" height=\"600\" id=\"image\"/>";
+                imageLoad(i+1);
 			}
 		};
 		xhr.open("GET", "http://localhost:8082/allOefeningen", true);
 		xhr.send();
     }
+    
     function PrintOefeningen(){
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function(){
@@ -174,43 +176,69 @@
         var naam = document.getElementById("oefening"+id).innerHTML; 
         console.log("naam: "+naam);
         var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function(){
+            if(this.readyState==4){
+                console.log(this.response);
+                var urlCreator = window.URL || window.webkitURL;
+                var imageUrl = urlCreator.createObjectURL(this.response);
+                console.log(imageUrl);
+                var callback = function(loaded) {
+                    if (loaded === true) {
+                        console.log("loaded");
+                        var img = this; // now `this` points to the image itself.
+                        console.log(img.src);
+                        document.getElementById("image").src += img.src;
+                    } else {
+                        console.log("not loaded");
+                        // show default image or 'image failed to load'.
+                        document.getElementById("image").src += "https://i.pinimg.com/236x/26/5c/64/265c64d86b95f3f85c9684d98250340b--question-mark-loaded-question.jpg";
+                    }
+                };
+                loadImg(imageUrl,callback)
+            }
+        };
         xhr.open("GET", "http://localhost:8082/Oefening/"+naam+"/get/image",true);
         xhr.responseType = "blob";
-        xhr.onload = response;
+        //xhr.onload = response;
         xhr.send();
     }
 
-    function response() {
-        console.log(this.response);
-        var urlCreator = window.URL || window.webkitURL;
-        var imageUrl = urlCreator.createObjectURL(this.response);
-        console.log(imageUrl);
-        var callback = function(loaded) {
-            if (loaded === true) {
-                console.log("loaded");
-                var img = this; // now `this` points to the image itself.
-                document.querySelector("#image").src = imageUrl;
-            } else {
-                console.log("not loaded");
-                // show default image or 'image failed to load'.
-            }
-        };
-        loadImg(imageUrl,callback)
-    }  
+    // function response() {
+    //     console.log(this.response);
+    //     var urlCreator = window.URL || window.webkitURL;
+    //     var imageUrl = urlCreator.createObjectURL(this.response);
+    //     console.log(imageUrl);
+    //     var callback = function(loaded) {
+    //         if (loaded === true) {
+    //             console.log("loaded");
+    //             var img = this; // now `this` points to the image itself.
+    //             console.log(img.src);
+    //             //document.getElementById("image").src = img.src;
+    //             document.getElementById("displayScherm").innerHTML += "<br><img width=\"600\" height=\"600\" id=\"image\" src=\""+img.src+"\"/>"
+    //         } else {
+    //             console.log("not loaded");
+    //         }
+    //     };
+    //     loadImg(imageUrl,callback)
+    // }  
 
     function loadImg(url, fn) {
         var img = new Image();
         img.src = url;
+        console.log("loadImg1");
         if (img.complete) { // If the image has been cached, just call the callback
             if (fn) fn.call(img, true);
+            console.log("loadImg2");
         } else {
             img.onerror = function() { // If fail to load the image
                 if (fn) fn.call(img, false);
+                console.log("loadImg3");
             };
             img.onload = function() { // If loaded successfully
                 if (fn) fn.call(img, true);
                 //On IE6, multiple frames in a image will fire the 'onload' event for multiple times. So set to null
-                img.onload = null; 
+                //img.onload = null; 
+                console.log("loadImg4");
             };
         };
     }
@@ -224,19 +252,19 @@
           <button type="button" class="btn btn-outline-primary" onclick = "showInlogScreen()">INLOGGEN</button>
         </li>
         <li class="nav-item">
-            <button type="button" id="oefening1" class="btn btn-outline-primary" onclick = "showOefening(1);imageLoad(1)"></button>
+            <button type="button" id="oefening1" class="btn btn-outline-primary" onclick = "showOefening(1);"></button>
         </li>
         <li class="nav-item">
-            <button type="button" id="oefening2" class="btn btn-outline-primary" onclick = "showOefening(2);imageLoad(2)"></button>
+            <button type="button" id="oefening2" class="btn btn-outline-primary" onclick = "showOefening(2);"></button>
         </li>
         <li class="nav-item">
-            <button type="button" id="oefening3" class="btn btn-outline-primary" onclick = "showOefening(3);imageLoad(3)"></button>
+            <button type="button" id="oefening3" class="btn btn-outline-primary" onclick = "showOefening(3);"></button>
         </li>
         <li class="nav-item">
-            <button type="button" id="oefening4" class="btn btn-outline-primary" onclick = "showOefening(4);imageLoad(4)"></button>
+            <button type="button" id="oefening4" class="btn btn-outline-primary" onclick = "showOefening(4);"></button>
         </li>
         <li class="nav-item">
-            <button type="button" id="oefening5" class="btn btn-outline-primary" onclick = "showOefening(5);imageLoad(5)"></button>
+            <button type="button" id="oefening5" class="btn btn-outline-primary" onclick = "showOefening(5);"></button>
         </li>
     </ul>
 
