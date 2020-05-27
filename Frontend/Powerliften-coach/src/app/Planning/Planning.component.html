@@ -5,9 +5,10 @@
     }
     tr{
         text-align: center;
+        font-size: larger;
     }
     table{
-        width: 100%;
+        width: 70%;
         border: 1px solid black;
     }
     tr:nth-child(odd) {background-color: #666666;}
@@ -25,7 +26,7 @@
         cursor: pointer;
         -webkit-transition-duration: 0.4s; /* Safari */
         transition-duration: 0.4s;
-        width: 40%;
+        width: 20%;
     }
     input[type="file"] {
         display: none;
@@ -35,6 +36,10 @@
         background-color: #008CBA;
         color: white;
         border-radius: 12px;
+    }
+    table.center {
+        margin-left:auto; 
+        margin-right:auto;
     }
 </style>
 <div id="sporterScherm" >
@@ -47,21 +52,24 @@
 </div>
 
 <div id="trainingScherm" hidden>
-    <label>Oefening</label>
+
+    <table class="center" style="border: 1px white; width: 25%;" id="trainingInput"><tr style="background-color: white;color: black;"><td>
+    <label>Oefening</label></td><td>
     <select (change)=setOefening($event)>
         <option *ngFor="let x of oefeningen" value={{x.naam}}>{{x.naam}}</option>
     </select>
-    <br>
-    <label>Datum</label>
-    <input type="datetime-local" (change)="setTijd($event)"> <br>
-    <label>Aantal Reps</label>
-    <input type="number" (change)="setAantalReps($event)"><br>
-    <label>Gewicht</label>
-    <input type="number" (change)="setGewicht($event)"><br>
+    </td></tr><tr style="background-color: white;color: black;"><td>
+    <label>Datum</label></td><td>
+    <input type="datetime-local" (change)="setTijd($event)"> </td></tr>
+    <tr style="background-color: white;color: black;"><td><label>Aantal Reps</label></td>
+    <td><input type="number" (change)="setAantalReps($event)"></td></tr>
+    <tr style="background-color: white;color: black;"><td><label>Gewicht</label></td>
+    <input type="number" (change)="setGewicht($event)"></tr></table>
     <input type="button" class="button button1" value="Voeg training toe" (click)="saveTraining()">
     <input type="button" class="button button1" value="Verwijder training" (click)="verwijderTraining()">
     <input type="button" class="button button1" value="Sla de planning op" (click)="slaPlanningOp()">
-    <input type="button" class="button button1" value="Maak Planning voor andere sporter" (click) = "maakPlanning()">
+    <input type="button" class="button button1" value="Andere sporter" (click) = "maakPlanning()">
+
 </div>
 <div id="verwijderScherm" hidden>
     <input type=number [(ngModel)]=verwijderID>
@@ -69,8 +77,7 @@
     <input type="button" class="button button1" (click) = "gaTerug()" value="Ga terug"> 
 </div>
 <div id="trainingenBekijken" hidden>
-    <table class="table">
-        <thead class="thead-dark">
+    <table class="table center">
             <tr>
                 <th scope="col">Index</th>
                 <th scope="col">Tijd</th>
@@ -88,7 +95,6 @@
                 <td>{{x.aantalReps}}</td>
                 <td>{{x.gewicht}}</td>
             </tr>
-        </tbody>
     </table>
 </div>
 </html>
