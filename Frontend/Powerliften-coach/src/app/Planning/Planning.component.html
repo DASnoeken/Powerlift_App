@@ -1,12 +1,49 @@
-
-
+<html>
+<style>
+    th{
+        text-align: center;
+    }
+    tr{
+        text-align: center;
+    }
+    table{
+        width: 100%;
+        border: 1px solid black;
+    }
+    tr:nth-child(odd) {background-color: #666666;}
+    tr:nth-child(odd) {color: #ffffff}
+    .button {
+        background-color: white; 
+        color: black; 
+        border: 2px solid #008CBA;
+        padding: 1px 8px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        -webkit-transition-duration: 0.4s; /* Safari */
+        transition-duration: 0.4s;
+        width: 40%;
+    }
+    input[type="file"] {
+        display: none;
+    }
+    .button:hover {
+        box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+        background-color: #008CBA;
+        color: white;
+        border-radius: 12px;
+    }
+</style>
 <div id="sporterScherm" >
     <label>Sporter </label>
     <select (change)="setSporter($event)">
         <option  *ngFor="let x of sporters" value={{x.id}}>{{x.naam}}</option>
 
     </select><br>
-    <input type="button" value="Voeg Sporter toe" (click)="maakPlanningSporter()">
+    <input type="button" class="button button1" value="Voeg Sporter toe" (click)="maakPlanningSporter()">
 </div>
 
 <div id="trainingScherm" hidden>
@@ -21,15 +58,15 @@
     <input type="number" (change)="setAantalReps($event)"><br>
     <label>Gewicht</label>
     <input type="number" (change)="setGewicht($event)"><br>
-    <input type="button" value="Voeg training toe" (click)="saveTraining()">
-    <input type="button" value="Verwijder training" (click)="verwijderTraining()">
-    <input type="button" value="Sla de planning op" (click)="slaPlanningOp()">
-    <input type="button" value="Maak Planning voor andere sporter" (click) = "maakPlanning()">
+    <input type="button" class="button button1" value="Voeg training toe" (click)="saveTraining()">
+    <input type="button" class="button button1" value="Verwijder training" (click)="verwijderTraining()">
+    <input type="button" class="button button1" value="Sla de planning op" (click)="slaPlanningOp()">
+    <input type="button" class="button button1" value="Maak Planning voor andere sporter" (click) = "maakPlanning()">
 </div>
 <div id="verwijderScherm" hidden>
     <input type=number [(ngModel)]=verwijderID>
-    <input type="button" (click) = "verwijderTrainingByID()" value="verwijder Oefening">
-    <input type="button" (click) = "maakPlanningSporter()" value="Ga terug"> 
+    <input type="button" class="button button1" (click) = "verwijderTrainingByID()" value="verwijder Oefening">
+    <input type="button" class="button button1" (click) = "maakPlanningSporter()" value="Ga terug"> 
 </div>
 <div id="trainingenBekijken" hidden>
     <table class="table">
@@ -50,7 +87,5 @@
             </tr>
         </tbody>
     </table>
-
-
-
 </div>
+</html>

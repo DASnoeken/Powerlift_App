@@ -1,0 +1,32 @@
+@OneToMany(mappedBy = "person")
+@JsonIgnore gebruiken om recursiviteit te voorkomen.
+
+@OneToMany in de ene klasse en @ManyToOne in de andere.
+
+Als je @ManyToMany aan beide kanten hebt dan hebben ze allebei een List naar elkaar
+
+mappedBy alleen maar aan 1 kant gebruiken
+
+fetch = FetchType.EAGER standaard op LAZY, beter voor performance.
+
+Bij het veranderen van variabelnamen, gelijk ook even naar de database en dit checken
+
+DTO objecten, Data Transfer Object
+class PersonDto, heeft id, name, grote verschil is dan dat die geen lijst aan hobbies heeft
+
+bv. Person heeft een BSN nummer die je echt prive wil houden en niet in de browser zetten,
+dan kan je een DTO aanmaken waar dat dus niet in zit en dan de DTO door te sturen.
+
+Koppelentiteit
+Person en ClassRoom, dan PersonClassRoom, heeft ook nog id, een person, een classroom en nog eventueel een boolean aanwezig.
+Dus tussen twee entiteiten wat informatie bijhouden.
+Nu heeft Person geen many to many met classroom, maar heeft een: 
+
+@OneToMany(mappedBy = "person")
+private List<PersonClassRoom> classRooms;
+
+En classroom krijgt:
+@OneToMany(mappedBy = "classrooom")
+private List<PersonClassRoom> persons;
+
+Er is dan ook een two way relatie, dus @ManyToOne in PersonClassRoom

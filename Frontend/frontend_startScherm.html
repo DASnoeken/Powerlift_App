@@ -26,7 +26,6 @@
                         if (element.naam == naam) {
                             naamBestaatAl = true;
                             alert("Naam bestaat al in het systeem, voer een nieuwe naam in");
-                        
                         }
                     })
                     if (!naamBestaatAl) {
@@ -143,29 +142,53 @@
 		xhr.open("GET", "http://localhost:8082/allOefeningen", true);
 		xhr.send();
     }
-    
+    function PrintOefeningen(){
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function(){
+            if(this.readyState==4){
+                var oefeningen = JSON.parse(this.responseText);
+                for(var i = 0;i<oefeningen.length;i++){
+                    if(i<5){
+                        var label = i+1;
+                        var id = "oefening"+label;
+                        document.getElementById(id).innerHTML = oefeningen[i].naam; 
+                    }else{
+                        var label = i+1;
+                        console.log(label);
+                        var tekst = "";
+                        tekst += "<li class=\"nav-item\">";
+                        tekst += "<button type=\"button\" id=\"oefening"+label+"\" class=\"btn btn-outline-primary\" onclick=\"showOefening("+label+")\">"+oefeningen[i].naam+"</button></li>";
+                        document.getElementById("knoppen_Boven").innerHTML += tekst;
+                        console.log(tekst);
+                    }
+                }           
+            }
+        };
+        xhr.open("GET","http://localhost:8082/allOefeningen",true);
+        xhr.send();
+    }
 
 </script>
 
-<body>
-    <ul class="nav nav-pills justify-content-center">
+<body onload="PrintOefeningen()">
+    <ul class="nav nav-pills justify-content-center" id="knoppen_Boven">
         <li class="nav-item">
           <button type="button" class="btn btn-outline-primary" onclick = "showInlogScreen()">INLOGGEN</button>
         </li>
         <li class="nav-item">
-            <button type="button" class="btn btn-outline-primary" onclick = "showOefening(1)">SQUATS</button>
+            <button type="button" id="oefening1" class="btn btn-outline-primary" onclick = "showOefening(1)"></button>
         </li>
         <li class="nav-item">
-            <button type="button" class="btn btn-outline-primary" onclick = "showOefening(2)">DEADLIFT</button>
+            <button type="button" id="oefening2" class="btn btn-outline-primary" onclick = "showOefening(2)"></button>
         </li>
         <li class="nav-item">
-            <button type="button" class="btn btn-outline-primary" onclick = "showOefening(3)">SHOULDER PRESS</button>
+            <button type="button" id="oefening3" class="btn btn-outline-primary" onclick = "showOefening(3)"></button>
         </li>
         <li class="nav-item">
-            <button type="button" class="btn btn-outline-primary" onclick = "showOefening(4)">BENCH PRESS</button>
+            <button type="button" id="oefening4" class="btn btn-outline-primary" onclick = "showOefening(4)"></button>
         </li>
         <li class="nav-item">
-            <button type="button" class="btn btn-outline-primary" onclick = "showOefening(5)">BARBLE ROW</button>
+            <button type="button" id="oefening5" class="btn btn-outline-primary" onclick = "showOefening(5)"></button>
         </li>
     </ul>
 
