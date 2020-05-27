@@ -8,6 +8,7 @@ then
 	echo "Verkeerde naam pipo"
 	exit 1
 fi
+git status
 git add .
 git commit
 ./gitU.sh $1

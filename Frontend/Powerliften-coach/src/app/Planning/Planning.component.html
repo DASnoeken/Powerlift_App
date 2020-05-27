@@ -108,6 +108,7 @@
 </div>
 <div id="trainingenBekijken" hidden>
     <table class="table center">
+<<<<<<< HEAD
         <tr>
             <th scope="col">Index</th>
             <th scope="col">Tijd</th>
@@ -116,6 +117,16 @@
             <th scope="col">Gewicht</th>
         </tr>
         <tbody *ngFor="let x of trainingen; index as i">
+=======
+            <tr>
+                <th scope="col">Index</th>
+                <th scope="col">Tijd</th>
+                <th scope="col">Oefening</th>
+                <th scope="col">Aantal Reps </th>
+                <th scope="col">Gewicht</th>
+            </tr>
+        <tbody *ngFor = "let x of trainingen; index as i"> 
+>>>>>>> master
             <script>setIndex()</script>
             <tr>
                 <td>{{i}}</td>

@@ -8,7 +8,7 @@ then
 	echo "Ongeldige naam pipo"
 	exit 1
 fi
-
+git status
 git checkout master
 git pull
 fbranch="feature"$1
