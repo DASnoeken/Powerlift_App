@@ -136,7 +136,7 @@
 				var naam = "<h1>" + rijtjeOefeningen[i].naam + "</h1>";
 				var breakie = "<br>";
 				var uitleg = "<p>" + rijtjeOefeningen[i].uitleg + "</p>";
-				document.getElementById("displayScherm").innerHTML = naam + breakie + uitleg;
+				document.getElementById("displayScherm").innerHTML = naam + breakie + uitleg + "<br><img id=\"image\"/>";
 			}
 		};
 		xhr.open("GET", "http://localhost:8082/allOefeningen", true);
@@ -157,7 +157,7 @@
                         console.log(label);
                         var tekst = "";
                         tekst += "<li class=\"nav-item\">";
-                        tekst += "<button type=\"button\" id=\"oefening"+label+"\" class=\"btn btn-outline-primary\" onclick=\"showOefening("+label+")\">"+oefeningen[i].naam+"</button></li>";
+                        tekst += "<button type=\"button\" id=\"oefening"+label+"\" class=\"btn btn-outline-primary\" onclick=\"showOefening("+label+");imgLoad("+label+")\">"+oefeningen[i].naam+"</button></li>";
                         document.getElementById("knoppen_Boven").innerHTML += tekst;
                         console.log(tekst);
                     }
@@ -168,6 +168,52 @@
         xhr.send();
     }
 
+    function imageLoad(){
+        console.log("imageLoad()");
+        var naam = "Deadlift"; 
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "http://localhost:8082/Oefening/"+naam+"/get/image",true);
+        xhr.responseType = "blob";
+        xhr.onload = response;
+        xhr.send();
+    }
+
+    function response() {
+        console.log(this.response);
+        var urlCreator = window.URL || window.webkitURL;
+        var imageUrl = urlCreator.createObjectURL(this.response);
+        console.log(imageUrl);
+        var callback = function(loaded) {
+            if (loaded === true) {
+                console.log("loaded");
+                var img = this; // now `this` points to the image itself.
+                document.querySelector("#image").src = imageUrl;
+            } else {
+                console.log("not loaded");
+                // show default image or 'image failed to load'.
+            }
+        };
+        loadImg(imageUrl,callback)
+    }  
+
+    function loadImg(url, fn) {
+        var img = new Image();
+        img.src = url;
+        if (img.complete) { // If the image has been cached, just call the callback
+            if (fn) fn.call(img, true);
+        } else {
+            img.onerror = function() { // If fail to load the image
+                if (fn) fn.call(img, false);
+            };
+            img.onload = function() { // If loaded successfully
+                if (fn) fn.call(img, true);
+                //On IE6, multiple frames in a image will fire the 'onload' event for multiple times. So set to null
+                img.onload = null; 
+            };
+        };
+    }
+
+
 </script>
 
 <body onload="PrintOefeningen()">
@@ -176,19 +222,19 @@
           <button type="button" class="btn btn-outline-primary" onclick = "showInlogScreen()">INLOGGEN</button>
         </li>
         <li class="nav-item">
-            <button type="button" id="oefening1" class="btn btn-outline-primary" onclick = "showOefening(1)"></button>
+            <button type="button" id="oefening1" class="btn btn-outline-primary" onclick = "showOefening(1);imageLoad(1)"></button>
         </li>
         <li class="nav-item">
-            <button type="button" id="oefening2" class="btn btn-outline-primary" onclick = "showOefening(2)"></button>
+            <button type="button" id="oefening2" class="btn btn-outline-primary" onclick = "showOefening(2);imageLoad(2)"></button>
         </li>
         <li class="nav-item">
-            <button type="button" id="oefening3" class="btn btn-outline-primary" onclick = "showOefening(3)"></button>
+            <button type="button" id="oefening3" class="btn btn-outline-primary" onclick = "showOefening(3);imageLoad(3)"></button>
         </li>
         <li class="nav-item">
-            <button type="button" id="oefening4" class="btn btn-outline-primary" onclick = "showOefening(4)"></button>
+            <button type="button" id="oefening4" class="btn btn-outline-primary" onclick = "showOefening(4);imageLoad(4)"></button>
         </li>
         <li class="nav-item">
-            <button type="button" id="oefening5" class="btn btn-outline-primary" onclick = "showOefening(5)"></button>
+            <button type="button" id="oefening5" class="btn btn-outline-primary" onclick = "showOefening(5);imageLoad(5)"></button>
         </li>
     </ul>
 
