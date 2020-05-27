@@ -8,7 +8,6 @@
 <script>
     function showInlogScreen() {
         document.getElementById("displayScherm").innerHTML = document.getElementById("inlogScherm").innerHTML;
-        ;
     }
     function maakNaam() {
         if(!document.getElementById("ifiscoach").checked) {
@@ -30,6 +29,7 @@
                         }
                     })
                     if (!naamBestaatAl) {
+                        alert("Je hebt je correct geregistreerd als sporter! Druk op inloggen om verder te gaan.");
                         xhr.open("POST", "http://localhost:8082/registreerdeSporter", true);
                         xhr.setRequestHeader("Content-Type", "application/json");
                         xhr.send(objJSON);
@@ -60,6 +60,7 @@
                         }
                     })
                     if (!naamBestaatAl) {
+                        alert("Je hebt je correct geregistreerd als coach! Druk op inloggen om verder te gaan.");
                         xhr.open("POST", "http://localhost:8082/set/coach", true);
                         xhr.setRequestHeader("Content-Type", "application/json");
                         xhr.send(objJSON);
@@ -220,6 +221,16 @@
         </form>
     </div>
 </body>
+
+<! -- REGISTRATIE SCHERM>
+<div id="registratieScherm" hidden>
+    <form class ="text-center">
+        <div class="jumbotron font-weight-bold text-center">
+            <h2> Registreren </h2>
+        </div>
+        
+    </form>
+</div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
     integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
