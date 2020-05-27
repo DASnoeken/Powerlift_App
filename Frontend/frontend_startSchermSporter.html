@@ -283,7 +283,11 @@
 		xhr.send();
 	}
 	function Logout() {
-		window.location.href = "frontend_startScherm.html";
+		if (confirm("Weet je zeker dat je uit wilt loggen?")) {
+    		window.location.href = "frontend_startScherm.html";
+  		} else {
+    		return;
+  		}
 	}
 </script>
 
