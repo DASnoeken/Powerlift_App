@@ -31,7 +31,7 @@
         cursor: pointer;
         -webkit-transition-duration: 0.4s; /* Safari */
         transition-duration: 0.4s;
-        width: 80%;
+        width: 100%;
 }
 input[type="file"] {
     display: none;
@@ -67,6 +67,10 @@ input[type="file"] {
 div{
     font-size: medium;
 }
+table.center{
+    margin-left: auto;
+    margin-right: auto;
+}
 
 </style>
 <head>
@@ -82,8 +86,33 @@ div{
         <tr style="background-color: white;color: black;"><td>
             <input type="button" class="button button1"  value="Oefening Toevoegen" (click)="oefeningToevoegen()"></td><td>
             <input type="button" class="button button1" value="Oefening Bewerken" (click)="oefeningBewerken()">
-        </td></tr>
+            </td><td>
+                <input type="button" class="button button1" value="Oefening Verwijderen" (click)="oefeningVerwijderen()">
+            </td></tr>
     </table>
+  </div>
+
+  <div id="verwijderSchermOefening" hidden>
+    <table class="center" id="Oefening-toevoegen" style="border: 1px white;">
+        <tr style="background-color: white;color: black;"><td>
+            Oefening naam: </td><td><input type="text" style="width: 80%;" [(ngModel)]="oefeningNaam"></td><td>
+                <input type="button" class="button button1" value="Verwijderen" (click)="deleteOefening()">
+            </td>
+        </tr><tr>
+            <td>
+                <input type="button" class="button button1" value="Laat oefeningen zien" (click)="getAllOefeningen()">
+            </td>
+        </tr>
+    </table>
+    <div id="Check id2" *ngIf="oefeningen.length>1">
+        <table class="center" id="ID Check" >
+            <tr style="font-size: larger; background-color: #333333;"><th>ID</th><th>Oefening naam</th></tr>
+            <tr *ngFor="let o of oefeningen">
+                <td>{{o.id}}</td>
+                <td>{{o.naam}}</td>
+            </tr>
+        </table>
+    </div>
   </div>
 
   <div id="toevoegScherm" hidden>
@@ -123,13 +152,13 @@ div{
 </table>
 
 <div id="Check id" *ngIf="oefeningen.length==1">
-    <table id="ID Check" *ngFor="let o of oefeningen">
+    <table class="center" id="ID Check" *ngFor="let o of oefeningen">
         <tr style="font-size: larger; background-color: #333333;"><th>ID</th><th>Oefening naam</th></tr>
         <tr><td>{{o.id}}</td> <td>{{o.naam}}</td></tr>
     </table>
 </div>
 <div id="Check id2" *ngIf="oefeningen.length>1">
-    <table id="ID Check" >
+    <table class="center" id="ID Check" >
         <tr style="font-size: larger; background-color: #333333;"><th>ID</th><th>Oefening naam</th></tr>
         <tr *ngFor="let o of oefeningen">
             <td>{{o.id}}</td>

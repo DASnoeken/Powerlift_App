@@ -42,16 +42,27 @@ export class OefeningComponent{
     oefeningBewerken(){
         document.getElementById("bewerkScherm").hidden = false;
         document.getElementById("toevoegScherm").hidden = true;
+        document.getElementById("verwijderSchermOefening").hidden = true;
     }
     oefeningToevoegen(){
         document.getElementById("bewerkScherm").hidden = true;
         document.getElementById("toevoegScherm").hidden = false;
+        document.getElementById("verwijderSchermOefening").hidden = true;
+    }
+    oefeningVerwijderen(){
+        console.log("hoi");
+        document.getElementById("bewerkScherm").hidden = true;
+        document.getElementById("toevoegScherm").hidden = true;
+        document.getElementById("verwijderSchermOefening").hidden = false;
     }
     saveNewOefening(){
         this.nieuweOefening = new Oefening();
         this.nieuweOefening.naam = this.oefeningNaam;
         this.nieuweOefening.uitleg = this.oefeningUitleg;
-        this.oefeningService.oefeningToevoegen(this.nieuweOefening);
+        this.oefeningService.oefeningToevoegen(this.nieuweOefening.naam,this.nieuweOefening.uitleg).subscribe();
+    }
+    deleteOefening(){
+        this.oefeningService.oefeningVerwijderen(this.oefeningNaam).subscribe();
     }
 
     getOefeningByNaam(){
