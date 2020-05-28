@@ -41,7 +41,6 @@ export class VoortgangComponent{
         document.getElementById("DivCheckID").hidden=false;
         document.getElementById("DeTabel").hidden=false;
         document.getElementById("knoppen").hidden=false;
-        document.getElementById("sporterScherm").hidden = true;
     }
 
     vulVoortgangen(){
