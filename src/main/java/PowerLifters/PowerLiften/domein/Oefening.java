@@ -26,6 +26,21 @@ public class Oefening {
 	@OneToMany(mappedBy = "oefening")
 	List<Voortgang> voortgang;
 	
+	public List<GegevenTraining> getTraining() {
+		return training;
+	}
+	public void setTraining(List<GegevenTraining> training) {
+		this.training = training;
+	}
+	public List<Voortgang> getVoortgang() {
+		return voortgang;
+	}
+	public void setVoortgang(List<Voortgang> voortgang) {
+		this.voortgang = voortgang;
+	}
+	public void setUitleg(String uitleg) {
+		this.uitleg = uitleg;
+	}
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;

@@ -69,10 +69,22 @@ public class PlanningEndpoint {
 	}
 	
 	@PostMapping("/vulPlanningOefening2")
-	public void maakPlanningOefening2(@RequestBody Planning p){
+	public void maakPlanningOefening2(@RequestBody Planning p)
+	{
+		List<GegevenTraining> trainingen = p.getTrainingen();
+		for(GegevenTraining training : trainingen) {
+			training.setPlanning(p);
+			gts.save(training);
+		}
+		GeregistreerdeSporter sporter = p.getSporter();
+		sporter.setPlanning(p);
+		gsr.opslaanRegistratie(sporter);
 		System.out.println(p);
 		ps.opslaanPlanning(p);
+		
+
 	}
+	
 	
 	@PostMapping("/verwijderPlanning")
 	public void verwijderOefening(@RequestBody long id) {
@@ -85,9 +97,8 @@ public class PlanningEndpoint {
 	@GetMapping("/toonPlanning/{sporterID}")
 	public Planning toonPlanning(@PathVariable long sporterID){
 		try {
-			System.out.println("ID: "+sporterID);
-			Planning ip = ps.vindPlanningVoorSporter(sporterID);
-			System.out.println("ip: "+ip);
+			GeregistreerdeSporter sporter = gsr.vindSporterByID(sporterID);
+			Planning ip = sporter.getPlanning();
 			List<GegevenTraining> lgt = ip.getTrainingen();
 			lgt.sort((a,b) -> a.getTijd().compareTo(b.getTijd()));
 			ip.setTrainingen(lgt);

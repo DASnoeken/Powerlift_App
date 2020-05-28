@@ -124,6 +124,7 @@
 		xhr.send();
 	}
 	function showPlanning() {
+		console.log("jojo");
 		var xhr = new XMLHttpRequest();
 		xhr.onreadystatechange = function () {
 			if (this.readyState == 4) {
@@ -138,6 +139,7 @@
 						+ "<th scope = \"col\">Aantal Reps </th>"
 						+ "<th scope = \"col\">Gewicht</th></tr></thead><tbody>";
 					for (var y = 0; y < planning.trainingen.length; y++) {
+						console.log(planning.trainingen[y]);
 						if (planning.trainingen[y])
 							eindtekst += "<tr>" +
 								"<td>" + planning.trainingen[y].tijd +

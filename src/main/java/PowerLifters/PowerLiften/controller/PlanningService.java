@@ -77,4 +77,15 @@ public class PlanningService {
 		System.out.println(planning);
 		return planning;
 	}
+
+
+	public void verwijderPlanningVoorSporter(GeregistreerdeSporter sporter) {
+		try{
+			Planning planning = ps.findByGeregistreerdeSporter(sporter);
+			ps.delete(planning);
+		} catch (Throwable a) {
+			
+		}
+		
+	}
 }
