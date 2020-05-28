@@ -13,9 +13,9 @@ export class VoortgangService{
     }
 
     //GET
-    getAllVoortgang() : Observable<Voortgang>{
+    getAllVoortgang(sporterID:number) : Observable<Voortgang>{
         console.log("getAllVoortgang()");
-        return this.http.get<Voortgang>("http://localhost:8082/allVoortgang");
+        return this.http.get<Voortgang>("http://localhost:8082/allVoortgang/"+sporterID);
     }
 
     //GET
