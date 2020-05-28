@@ -21,4 +21,9 @@ public class GegevenTrainingService {
 		return a.getId();
 	}
 
+	public void save(GegevenTraining training) {
+		gtr.save(training);
+		
+	}
+
 }
