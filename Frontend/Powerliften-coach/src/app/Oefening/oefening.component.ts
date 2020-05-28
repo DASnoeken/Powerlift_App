@@ -60,9 +60,11 @@ export class OefeningComponent{
         this.nieuweOefening.naam = this.oefeningNaam;
         this.nieuweOefening.uitleg = this.oefeningUitleg;
         this.oefeningService.oefeningToevoegen(this.nieuweOefening.naam,this.nieuweOefening.uitleg).subscribe();
+        alert("oefening "+this.oefeningNaam+" is opgeslagen!");
     }
     deleteOefening(){
         this.oefeningService.oefeningVerwijderen(this.oefeningNaam).subscribe();
+        alert("oefening "+this.oefeningNaam+" is verwijderd!");
     }
 
     getOefeningByNaam(){

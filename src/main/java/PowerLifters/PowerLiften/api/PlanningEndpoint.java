@@ -69,8 +69,7 @@ public class PlanningEndpoint {
 	}
 	
 	@PostMapping("/vulPlanningOefening2")
-	public void maakPlanningOefening2(@RequestBody Planning p)
-	{
+	public void maakPlanningOefening2(@RequestBody Planning p){
 		List<GegevenTraining> trainingen = p.getTrainingen();
 		for(GegevenTraining training : trainingen) {
 			training.setPlanning(p);
@@ -84,7 +83,6 @@ public class PlanningEndpoint {
 		
 
 	}
-	
 	
 	@PostMapping("/verwijderPlanning")
 	public void verwijderOefening(@RequestBody long id) {
