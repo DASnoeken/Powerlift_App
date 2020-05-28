@@ -6,6 +6,7 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -47,8 +48,11 @@ public class OefeningenEndpoint {
 	}
 	
 	@PostMapping("/OefeningToevoegen")
-	public void oefeningToevoegen() {
-		
+	public void oefeningToevoegen(@RequestBody HelperOefening o) {
+		Oefening oefening = new Oefening();
+		oefening.setNaam(o.getNaam());
+		oefening.setUitleg(o.getUitleg());
+		os.opslaanOefening(oefening);
 	}
 	
 	@PostMapping("/leegOefeningen")
@@ -90,4 +94,28 @@ public class OefeningenEndpoint {
 	public long getOefeningIDByNaam(@PathVariable String naam) {
 		return os.getOefeningByNaam(naam).get().getId();
 	}
+	
+	@DeleteMapping("/Oefening/{naam}/Delete")
+	public void verwijderOefening(@PathVariable String naam) {
+		System.out.println("Oefening: "+naam+" wordt verwijderd!");
+		os.verwijderOefeningByNaam(naam);
+	}
+}
+
+class HelperOefening{
+	private String naam;
+	private String uitleg;
+	public String getNaam() {
+		return naam;
+	}
+	public void setNaam(String naam) {
+		this.naam = naam;
+	}
+	public String getUitleg() {
+		return uitleg;
+	}
+	public void setUitleg(String uitleg) {
+		this.uitleg = uitleg;
+	}
+	
 }

@@ -17,4 +17,8 @@ public interface OefeningenRepository extends CrudRepository<Oefening,Long>{
 	
 	@Query("select o from Oefening o where o.naam=?1")
 	Optional<Oefening> findByNaam(String naam);
+	
+	@Modifying
+	@Query("delete from Oefening o where naam=?1")
+	int verwijderOefeningByNaam(String naam);
 }

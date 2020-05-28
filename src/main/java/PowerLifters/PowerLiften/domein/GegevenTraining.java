@@ -19,12 +19,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 public class GegevenTraining {
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
 	@JsonIgnore
 	@ManyToOne
-
 	private Planning planning;
+	
 	@ManyToOne
 	private Oefening oefening;
 	

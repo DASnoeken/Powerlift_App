@@ -69,14 +69,15 @@ public class PlanningEndpoint {
 	}
 	
 	@PostMapping("/vulPlanningOefening2")
-	public void maakPlanningOefening2(@RequestBody Planning p)
-	{
+	public void maakPlanningOefening2(@RequestBody Planning p){
 		List<GegevenTraining> trainingen = p.getTrainingen();
 		for(GegevenTraining training : trainingen) {
+			System.out.println(training.getOefening().getNaam()+" hier");
 			training.setPlanning(p);
 			gts.save(training);
 		}
 		GeregistreerdeSporter sporter = p.getSporter();
+		System.out.println(sporter.getNaam()+" hier");
 		sporter.setPlanning(p);
 		gsr.opslaanRegistratie(sporter);
 		System.out.println(p);
@@ -84,7 +85,6 @@ public class PlanningEndpoint {
 		
 
 	}
-	
 	
 	@PostMapping("/verwijderPlanning")
 	public void verwijderOefening(@RequestBody long id) {
