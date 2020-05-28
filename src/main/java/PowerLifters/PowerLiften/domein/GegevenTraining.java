@@ -23,6 +23,7 @@ public class GegevenTraining {
 	private long id;
 	@JsonIgnore
 	@ManyToOne
+
 	private Planning planning;
 	@ManyToOne
 	private Oefening oefening;
@@ -49,6 +50,12 @@ public class GegevenTraining {
 	}
 	public void setId(long id) {
 		this.id = id;
+	}
+	public Planning getPlanning() {
+		return planning;
+	}
+	public void setPlanning(Planning planning) {
+		this.planning = planning;
 	}
 	public Oefening getOefening() {
 		return oefening;

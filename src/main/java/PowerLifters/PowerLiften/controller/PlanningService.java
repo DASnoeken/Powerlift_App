@@ -57,6 +57,7 @@ public class PlanningService {
 	public void opslaanPlanning(Planning p) {
 		List<GegevenTraining> nieuweTrainingen = new ArrayList<>();
 		for(GegevenTraining gt:p.getTrainingen()) {
+			gt.setPlanning(p);
 			GegevenTraining tempGt = gtr.save(gt);
 			nieuweTrainingen.add(tempGt);
 		}

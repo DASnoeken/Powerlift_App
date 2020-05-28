@@ -3,6 +3,7 @@ package PowerLifters.PowerLiften.domein;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -34,6 +35,27 @@ public class Voortgang {
 	private int liftaantal;
 	private double gebruiktegewicht;
 	private LocalDateTime starttijd;
+	
+	@ManyToOne
+	private GeregistreerdeSporter sporter;
+	
+	public List<Vragenlijst> getVragenlijst() {
+		return vragenlijst;
+	}
+	public void setVragenlijst(List<Vragenlijst> vragenlijst) {
+		this.vragenlijst = vragenlijst;
+	}
+	
+	public GeregistreerdeSporter getSporter() {
+		return sporter;
+	}
+	public void setSporter(GeregistreerdeSporter sporter) {
+		this.sporter = sporter;
+	}
+	public void setId(long id) {
+		this.id = id;
+	}
+	@Column(columnDefinition = "TEXT")
 	private String feedback;
 	private String antwoorden;
 	
