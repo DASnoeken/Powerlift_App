@@ -41,12 +41,12 @@ export class VoortgangComponent{
         document.getElementById("DivCheckID").hidden=false;
         document.getElementById("DeTabel").hidden=false;
         document.getElementById("knoppen").hidden=false;
-        document.getElementById("sporterScherm").hidden=true;
+        document.getElementById("sporterScherm").hidden = true;
     }
 
     vulVoortgangen(){
         this.voortgangen = [];
-        this.voortgangService.getAllVoortgang().subscribe(voortgang => this.voortgangen.push(voortgang));
+        this.voortgangService.getAllVoortgang(this.sporter.id).subscribe(voortgang => this.voortgangen.push(voortgang));
         console.log(this.voortgangen);
     }
     setFeedback(feedback:string,id:number){

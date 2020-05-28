@@ -77,8 +77,6 @@ export class PlanningComponent {
         document.getElementById("sporterScherm").hidden = true;
         document.getElementById("trainingScherm").hidden = true;
         document.getElementById("verwijderScherm").hidden = false;
-
-
     }
     setSporter($event) {
         console.log($event.target.value);

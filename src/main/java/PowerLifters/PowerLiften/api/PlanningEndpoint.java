@@ -69,15 +69,9 @@ public class PlanningEndpoint {
 	}
 	
 	@PostMapping("/vulPlanningOefening2")
-	public void maakPlanningOefening2(@RequestBody Planning p)
-	{
+	public void maakPlanningOefening2(@RequestBody Planning p){
 		System.out.println(p);
 		ps.opslaanPlanning(p);
-		//System.out.println(gt.getTijd());
-		//long trainingID = gts.findTrainingID(gt);
-		//Planning p = ps.getPlanningByID(planningID);
-		//System.out.println("Planning:  is toegevoegd!");
-		//ps.opslaanOefening(p, trainingID);
 	}
 	
 	@PostMapping("/verwijderPlanning")

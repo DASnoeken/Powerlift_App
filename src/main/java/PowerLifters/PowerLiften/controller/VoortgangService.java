@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import PowerLifters.PowerLiften.domein.GeregistreerdeSporter;
 import PowerLifters.PowerLiften.domein.Oefening;
 import PowerLifters.PowerLiften.domein.Voortgang;
 
@@ -17,7 +18,11 @@ public class VoortgangService {
 	@Autowired
 	OefeningenRepository or;
 	
-	@Autowired VragenlijstRepository vlr;
+	@Autowired 
+	VragenlijstRepository vlr;
+	
+	@Autowired
+	GeregistreerdeSporterRepository gsr;
 	
 	private long hetID;
 	
@@ -25,6 +30,17 @@ public class VoortgangService {
 		System.out.println("Voortgang: " + v.getLiftaantal() + " wordt opgeslagen");
 		Oefening o = or.findByNaam(naam).get();
 		v.setOefening(o);
+		vr.save(v);
+		System.out.println("Het id was "+v.getId());
+		setID(v);
+	}
+	
+	public void opslaanVoortgang(Voortgang v, String naam,long sporterID) {
+		System.out.println("Voortgang: " + v.getLiftaantal() + " wordt opgeslagen");
+		Oefening o = or.findByNaam(naam).get();
+		v.setOefening(o);
+		GeregistreerdeSporter gs = gsr.findById(sporterID).get();
+		v.setSporter(gs);
 		vr.save(v);
 		System.out.println("Het id was "+v.getId());
 		setID(v);
@@ -45,6 +61,10 @@ public class VoortgangService {
 	
 	public Iterable<Voortgang> vindVoortgang(){
 		Iterable<Voortgang> v = vr.findAll();
+		return v;
+	}
+	public Iterable<Voortgang> vindVoortgang(long sporterID){
+		Iterable<Voortgang> v = vr.findAllSporterID(sporterID);
 		return v;
 	}
 	

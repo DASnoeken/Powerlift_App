@@ -22,11 +22,24 @@ public class VoortgangEndpoint {
 		Iterable<Voortgang> iv = vs.vindVoortgang();
 		return iv;
 	}
+	@GetMapping("/allVoortgang/{sporterID}")
+	public Iterable<Voortgang> getAllVoortgang(@PathVariable long sporterID){
+		Iterable<Voortgang> iv = vs.vindVoortgang(sporterID);
+		return iv;
+	}
 	
 	@PostMapping("/vulVoortgang/{naam}")
 	public long maakVoortgang(@RequestBody Voortgang voortgang, @PathVariable String naam){
 		System.out.println("Voortgang: " + voortgang.getLiftaantal() + " is toegevoegd! id = "+voortgang.getId());
 		vs.opslaanVoortgang(voortgang, naam);
+		System.out.println("In maakVoortgang() is het ID: "+vs.getID());
+		return vs.getID();
+	}
+	
+	@PostMapping("/vulVoortgang/{naam}/{sporterID}")
+	public long maakVoortgangSporter(@RequestBody Voortgang voortgang, @PathVariable String naam,@PathVariable long sporterID) {
+		System.out.println("Voortgang: " + voortgang.getLiftaantal() + " is toegevoegd! id = "+voortgang.getId());
+		vs.opslaanVoortgang(voortgang, naam,sporterID);
 		System.out.println("In maakVoortgang() is het ID: "+vs.getID());
 		return vs.getID();
 	}
