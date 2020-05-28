@@ -38,6 +38,13 @@ export class VoortgangComponent{
 
     }
 
+    maakVoortgangSporter(){
+        document.getElementById("DivCheckID").hidden=false;
+        document.getElementById("DeTabel").hidden=false;
+        document.getElementById("knoppen").hidden=false;
+        document.getElementById("sporterScherm").hidden=true;
+    }
+
     vulVoortgangen(){
         this.voortgangen = [];
         this.voortgangService.getAllVoortgang().subscribe(voortgang => this.voortgangen.push(voortgang));
