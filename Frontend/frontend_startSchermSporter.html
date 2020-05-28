@@ -124,10 +124,12 @@
 		xhr.send();
 	}
 	function showPlanning() {
+		console.log("jojo");
 		var xhr = new XMLHttpRequest();
 		xhr.onreadystatechange = function () {
 			if (this.readyState == 4) {
 				if (this.responseText) {
+					console.log(this.responseText);
 					var planning = JSON.parse(this.responseText);
 					console.log(planning);
 					var eindtekst = "<table class =\"table\">"
@@ -137,6 +139,7 @@
 						+ "<th scope = \"col\">Aantal Reps </th>"
 						+ "<th scope = \"col\">Gewicht</th></tr></thead><tbody>";
 					for (var y = 0; y < planning.trainingen.length; y++) {
+						console.log(planning.trainingen[y]);
 						if (planning.trainingen[y])
 							eindtekst += "<tr>" +
 								"<td>" + planning.trainingen[y].tijd +
@@ -187,7 +190,7 @@
 				window.location.href = "frontend_sporterVragenlijst.html?inlogID=" + window.sporterID + "&VoortgangID=" + this.responseText;
 			}
 		};
-		xhr.open("POST", "http://localhost:8082/vulVoortgang/" + oefening, true);
+		xhr.open("POST", "http://localhost:8082/vulVoortgang/" + oefening + "/" + window.sporterID, true);
 		xhr.setRequestHeader("Content-Type", "application/json");
 		xhr.send(objJSON);
 		document.getElementById("displayScherm").innerHTML = document.getElementById("vragenlijstScherm").innerHTML;
@@ -280,7 +283,7 @@
 
 			}
 		};
-		xhr.open("GET", "http://localhost:8082/allVoortgang", true);
+		xhr.open("GET", "http://localhost:8082/allVoortgang/"+window.sporterID, true);
 		xhr.send();
 	}
 	function verwijderOefening() {

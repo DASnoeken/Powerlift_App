@@ -16,7 +16,9 @@ export class OefeningComponent{
     oefeningen:Oefening[] = [];
     getOefeningClicked:Boolean=false;
     fileSelected:Boolean=false;
-    oefeningNaam:string;
+    oefeningNaam:string = "";
+    oefeningUitleg:string = "";
+    nieuweOefening:Oefening;
     constructor(private oefeningService : OefeningService){}
     isNumber(value: string | number): boolean{
        return ((value != null) &&
@@ -36,6 +38,22 @@ export class OefeningComponent{
         }
         
     }
+
+    oefeningBewerken(){
+        document.getElementById("bewerkScherm").hidden = false;
+        document.getElementById("toevoegScherm").hidden = true;
+    }
+    oefeningToevoegen(){
+        document.getElementById("bewerkScherm").hidden = true;
+        document.getElementById("toevoegScherm").hidden = false;
+    }
+    saveNewOefening(){
+        this.nieuweOefening = new Oefening();
+        this.nieuweOefening.naam = this.oefeningNaam;
+        this.nieuweOefening.uitleg = this.oefeningUitleg;
+        this.oefeningService.oefeningToevoegen(this.nieuweOefening);
+    }
+
     getOefeningByNaam(){
         this.oefeningen=[];
         this.oefeningService.getOefeningByNaam(this.oefeningNaam).subscribe(oefening => this.oefeningen.push(oefening))

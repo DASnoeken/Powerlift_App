@@ -9,6 +9,7 @@
         table{
             width: 100%;
             border: 1px solid black;
+            font-size: medium;
         }
         tr:nth-child(odd) {background-color: #666666;}
         tr:nth-child(odd) {color: #ffffff}
@@ -36,9 +37,22 @@ input[type="file"] {
   color: white;
   border-radius: 12px;
 }
+div {
+        font-size: medium;
+    }
     </style>
-    <body>
-<table style="width: 100%; border: 1px solid white;">
+    
+
+        <div id="sporterScherm" >
+            <br> <label>Sporter: </label> <br>
+            <select (change)="setSporter($event)">
+                <option *ngFor="let x of sporters" value={{x.id}}>{{x.naam}}</option>
+        
+            </select><br><br>
+            <input type="button" class="button button1" value="Bekijk voortgang" (click)="maakVoortgangSporter()">
+        </div>
+
+<table id="knoppen" style="width: 100%; border: 1px solid white;" hidden>
     <tr style="background-color: #ffffff;color: #000000;"><td><input type="button" style="width:99%" class="button button1" value="Voortgang Tabel" (click)="vulVoortgangen()">
     </td><td><input type="button" style="width:99%" class="button button1" value="Schoon scherm" (click)="schoonScherm()"> </td>
     <tr style="background-color: #ffffff;color: #000000;"><td>Feedback:</td> <td><input type="text" style="width:99%" id="feedback" [(ngModel)]="feedback" (change)="veranderFeedback($event)"></td></tr>
@@ -47,7 +61,7 @@ input[type="file"] {
 </table>
 
 <br><br><br>
-<div id="DivCheckID">
+<div id="DivCheckID" hidden>
     <table id="voortgangTabelIDCheck" *ngFor="let v of voortgangenIDCheck">
             <tr style="font-size: larger; background-color: #333333;"><th>Oefening naam</th><th>Voortgang id</th><th>Gebruikte gewicht</th><th>Aantal reps</th><th>Gevoel</th><th>Feedback</th></tr>
             <tr>
@@ -63,7 +77,7 @@ input[type="file"] {
 <div id="separator" *ngIf="voortgangenIDCheck.length>0">
     <br><br><br>
 </div>
-<div id="DeTabel">
+<div id="DeTabel" hidden>
 <table id="voortgangTabel" *ngFor="let voortgang of voortgangen">
     <tr style="font-size: larger; background-color: #333333;"><th>Oefening naam</th><th>Voortgang id</th><th>Gebruikte gewicht</th><th>Aantal reps</th><th>Gevoel</th><th>Feedback</th></tr>
     <tr *ngFor="let v of voortgang">
@@ -79,6 +93,6 @@ input[type="file"] {
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-</body>
+
 </html>
 

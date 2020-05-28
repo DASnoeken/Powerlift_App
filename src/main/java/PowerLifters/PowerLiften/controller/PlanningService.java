@@ -57,6 +57,7 @@ public class PlanningService {
 	public void opslaanPlanning(Planning p) {
 		List<GegevenTraining> nieuweTrainingen = new ArrayList<>();
 		for(GegevenTraining gt:p.getTrainingen()) {
+			gt.setPlanning(p);
 			GegevenTraining tempGt = gtr.save(gt);
 			nieuweTrainingen.add(tempGt);
 		}
@@ -75,5 +76,16 @@ public class PlanningService {
 		Planning planning = ps.findByGeregistreerdeSporter(sporter);
 		System.out.println(planning);
 		return planning;
+	}
+
+
+	public void verwijderPlanningVoorSporter(GeregistreerdeSporter sporter) {
+		try{
+			Planning planning = ps.findByGeregistreerdeSporter(sporter);
+			ps.delete(planning);
+		} catch (Throwable a) {
+			
+		}
+		
 	}
 }

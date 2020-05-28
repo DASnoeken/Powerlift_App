@@ -16,4 +16,7 @@ public interface VoortgangRepository extends CrudRepository<Voortgang,Long> {
 	@Modifying
 	@Query("update Voortgang v set v.feedback = ?1 where v.id = ?2")
 	int setFeedback(String feedback,long id);
+	
+	@Query("select v from Voortgang v where v.sporter.id=?1")
+	Iterable<Voortgang> findAllSporterID(long sporterID);
 }

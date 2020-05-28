@@ -27,6 +27,9 @@ public class Vragenlijst {
 	public GeregistreerdeSporter getSporter() {
 		return sporter;
 	}
+	public void setId(long id) {
+		this.id = id;
+	}
 	public void setSporter(GeregistreerdeSporter sporter) {
 		this.sporter = sporter;
 	}

@@ -20,7 +20,7 @@ export class PlanningComponent {
     sporter: Sporter;
     training: GegevenTraining;
     trainingen: GegevenTraining[];
-    oefeningen: Oefening[];
+    oefeningen: Oefening[] = [];
     oefening: Oefening;
     tijd: Date = undefined;
     aantalReps: number = undefined;
@@ -33,6 +33,7 @@ export class PlanningComponent {
         this.planningService.getOefeningen().subscribe(x => { x.forEach(element => this.oefeningen.push(element)) });
         this.planningService.getOefeningByID(1).subscribe(oefening => this.oefening = oefening);
         this.sporters.push(new Sporter());
+        this.oefeningen.push(new Oefening());
         console.log(this.oefeningen);
         this.trainingen = [];
         this.oefeningen = [];
@@ -77,8 +78,6 @@ export class PlanningComponent {
         document.getElementById("sporterScherm").hidden = true;
         document.getElementById("trainingScherm").hidden = true;
         document.getElementById("verwijderScherm").hidden = false;
-
-
     }
     setSporter($event) {
         console.log($event.target.value);

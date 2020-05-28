@@ -12,16 +12,20 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 
 @Entity
 public class GegevenTraining {
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
-	@ManyToOne()
+	@JsonIgnore
+	@ManyToOne
+
 	private Planning planning;
-	@ManyToOne()
+	@ManyToOne
 	private Oefening oefening;
 	
 	private LocalDateTime tijd;
@@ -40,6 +44,12 @@ public class GegevenTraining {
 	}
 	public void setId(long id) {
 		this.id = id;
+	}
+	public Planning getPlanning() {
+		return planning;
+	}
+	public void setPlanning(Planning planning) {
+		this.planning = planning;
 	}
 	public Oefening getOefening() {
 		return oefening;
