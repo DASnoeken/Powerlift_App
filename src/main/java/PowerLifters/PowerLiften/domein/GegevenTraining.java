@@ -19,12 +19,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 public class GegevenTraining {
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
-	@ManyToOne()
 	@JsonIgnore
+	@ManyToOne
+
 	private Planning planning;
-	@ManyToOne()
+	@ManyToOne
 	private Oefening oefening;
 	
 	private LocalDateTime tijd;
@@ -33,6 +34,12 @@ public class GegevenTraining {
 	
 	public LocalDateTime getTijd() {
 		return tijd;
+	}
+	public Planning getPlanning() {
+		return planning;
+	}
+	public void setPlanning(Planning planning) {
+		this.planning = planning;
 	}
 	public void setTijd(LocalDateTime tijd) {
 		this.tijd = tijd;

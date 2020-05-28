@@ -9,16 +9,32 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class GeregistreerdeSporter {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
+	@JsonIgnore
 	@OneToOne
 	private Planning planning;
+	@JsonIgnore
 	@OneToMany(mappedBy = "voortgang")
 	List<Vragenlijst> vragenlijst;
 	
+	public Planning getPlanning() {
+		return planning;
+	}
+	public void setPlanning(Planning planning) {
+		this.planning = planning;
+	}
+	public List<Vragenlijst> getVragenlijst() {
+		return vragenlijst;
+	}
+	public void setVragenlijst(List<Vragenlijst> vragenlijst) {
+		this.vragenlijst = vragenlijst;
+	}
 	private String naam;
 	private String wachtwoord;
 	

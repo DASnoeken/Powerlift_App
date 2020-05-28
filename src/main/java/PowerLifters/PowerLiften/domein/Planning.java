@@ -24,7 +24,7 @@ public class Planning {
 	private long id;
 	@OneToMany(mappedBy = "planning")
 	private List<GegevenTraining> training = new ArrayList<GegevenTraining>();
-	@OneToOne
+	@OneToOne(mappedBy = "planning")
 	private GeregistreerdeSporter geregistreerdeSporter;
 	
 	public long getId() {
