@@ -72,7 +72,15 @@ input[type="file"] {
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   </head>
-<body>
+  <div id="kiesScherm">
+    <table class="center" id="Kiezen" style="border: 1px white;"></table>
+  </div>
+
+  <div id="toevoegScherm">
+
+  </div>
+
+  <div id="bewerkScherm" hidden>
     <table class="center" id="de oefeningen" style="border: 1px white;">
     <tr style="background-color: white;color: black;"><td><label style="width: 50%;" class="custom-file-upload">
         <input type="file"  (change)="onFileSelected($event)"/>
@@ -105,5 +113,6 @@ input[type="file"] {
         </tr>
     </table>
 </div>
-</body>
+</div>
+
 </html>
