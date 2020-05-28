@@ -14,6 +14,7 @@
     table{
             width: 50%;
             border: 1px solid black;
+            font-size: medium;
     }
         tr:nth-child(odd) {background-color: #666666;}
         tr:nth-child(odd) {color: #ffffff}
@@ -30,7 +31,7 @@
         cursor: pointer;
         -webkit-transition-duration: 0.4s; /* Safari */
         transition-duration: 0.4s;
-        width: 40%;
+        width: 80%;
 }
 input[type="file"] {
     display: none;
@@ -55,7 +56,7 @@ input[type="file"] {
     -webkit-transition-duration: 0.4s; /* Safari */
     transition-duration: 0.4s;
     font-weight: lighter;
-    width: 50%;
+    width: 80%;
 }
 
 .custom-file-upload:hover{
@@ -63,6 +64,10 @@ input[type="file"] {
     background-color: rgb(186, 0, 0);
     color: white;
 }
+div{
+    font-size: medium;
+}
+
 </style>
 <head>
     <title>Coach Scherm</title>
@@ -73,16 +78,35 @@ input[type="file"] {
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   </head>
   <div id="kiesScherm">
-    <table class="center" id="Kiezen" style="border: 1px white;"></table>
+    <table class="center" id="Kiezen" style="border: 1px white;">
+        <tr style="background-color: white;color: black;"><td>
+            <input type="button" class="button button1"  value="Oefening Toevoegen" (click)="oefeningToevoegen()"></td><td>
+            <input type="button" class="button button1" value="Oefening Bewerken" (click)="oefeningBewerken()">
+        </td></tr>
+    </table>
   </div>
 
-  <div id="toevoegScherm">
+  <div id="toevoegScherm" hidden>
+        <table class="center" id="Oefening-toevoegen" style="border: 1px white;">
+            <tr style="background-color: white;color: black;"><td>
+                Oefening naam: </td><td><input type="text" style="width: 80%;" [(ngModel)]="oefeningNaam"></td>
+            </tr>
+            <tr style="background-color: white;color: black;">
+                
+                <td>Oefening Uitleg: </td><td><input type="text" style="width: 80%;" [(ngModel)]="oefeningUitleg"></td>
+                
+                </tr>
+                    <tr style="background-color: white;color: black;">
+                    
+            <td><input type="button" class="button button1" value="Opslaan" (click)="saveNewOefening()"></td></tr>
 
+            
+        </table>
   </div>
 
   <div id="bewerkScherm" hidden>
     <table class="center" id="de oefeningen" style="border: 1px white;">
-    <tr style="background-color: white;color: black;"><td><label style="width: 50%;" class="custom-file-upload">
+    <tr style="background-color: white;color: black;"><td><label class="custom-file-upload">
         <input type="file"  (change)="onFileSelected($event)"/>
         Selecteer een foto...
 </label><div id="foto-naam" *ngIf="fileSelected">
@@ -90,12 +114,12 @@ input[type="file"] {
     Geef de naam van de oefening op en klik op Upload te uploaden!
     <br>
 </div></td>
-<td><input type="button" style="width: 50%;" class="button button1" value="Upload" (click)="onUpload()"></td></tr>
+<td><input type="button" class="button button1" value="Upload" (click)="onUpload()"></td></tr>
 
-<tr style="background-color: white;color: black;"><td><input type="text" style="width: 50%;" [(ngModel)]="oefeningNaam"></td>
-<td><input type="button" style="width: 50%;" class="button button1" value="Check Oefening" (click)="getOefeningByNaam()"></td></tr>
-<tr style="background-color: white;color: black;"><td><input type="button" style="width: 50%;" class="button button1" value="Alle Oefeningen" (click)="getAllOefeningen()"></td>
-<td><input type="button" style="width: 50%;" class="button button1" value="Schoon scherm" (click)="schoonScherm()"></td></tr>
+<tr style="background-color: white;color: black;"><td><input type="text" style="width: 80%;" [(ngModel)]="oefeningNaam"></td>
+<td><input type="button" class="button button1" value="Check Oefening" (click)="getOefeningByNaam()"></td></tr>
+<tr style="background-color: white;color: black;"><td><input type="button" class="button button1" value="Alle Oefeningen" (click)="getAllOefeningen()"></td>
+<td><input type="button" class="button button1" value="Schoon scherm" (click)="schoonScherm()"></td></tr>
 </table>
 
 <div id="Check id" *ngIf="oefeningen.length==1">
