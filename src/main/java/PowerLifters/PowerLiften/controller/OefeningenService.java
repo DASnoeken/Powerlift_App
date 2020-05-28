@@ -37,4 +37,8 @@ public class OefeningenService {
 	public Optional<Oefening> getOefeningByNaam(String naam){
 		return or.findByNaam(naam);
 	}
+	
+	public void verwijderOefeningByNaam(String naam) {
+		or.verwijderOefeningByNaam(naam);
+	}
 }

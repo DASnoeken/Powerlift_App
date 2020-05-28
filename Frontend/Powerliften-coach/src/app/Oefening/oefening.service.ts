@@ -36,8 +36,14 @@ export class OefeningService{
     }
 
     //POST
-    oefeningToevoegen(oefening:Oefening) {
-        console.log(oefening)
-        return this.http.post<Oefening>("http://localhost:8082/vulOefeningen",this.httpOptions);
+    oefeningToevoegen(naam:string,uitleg:string) : Observable<Oefening>{
+        var oefeningObject = {oefeningObject};
+        oefeningObject.naam=naam;
+        oefeningObject.uitleg=uitleg;
+        return this.http.post<Oefening>("http://localhost:8082/OefeningToevoegen",JSON.stringify(oefeningObject),this.httpOptions);
+    }
+
+    oefeningVerwijderen(naam:string):Observable<Oefening>{
+        return this.http.delete<Oefening>("http://localhost:8082/Oefening/"+naam+"/Delete");
     }
 }
