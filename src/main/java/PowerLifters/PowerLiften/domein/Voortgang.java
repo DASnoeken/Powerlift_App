@@ -22,15 +22,7 @@ public class Voortgang {
 	
 	@ManyToOne
 	private Oefening oefening;
-	public List<Vragenlijst> getVragenlijst() {
-		return vragenlijst;
-	}
-	public void setVragenlijst(List<Vragenlijst> vragenlijst) {
-		this.vragenlijst = vragenlijst;
-	}
-	public void setId(long id) {
-		this.id = id;
-	}
+	
 	private float oefeningtijd;
 	private int liftaantal;
 	private double gebruiktegewicht;

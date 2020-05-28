@@ -34,4 +34,10 @@ export class OefeningService{
         fd.append('image',deFoto,deFoto.name);
         return this.http.post<Oefening>("http://localhost:8082/Oefening/"+naam+"/image",fd);
     }
+
+    //POST
+    oefeningToevoegen(oefening:Oefening) {
+        console.log(oefening)
+        return this.http.post<Oefening>("http://localhost:8082/vulOefeningen",this.httpOptions);
+    }
 }
