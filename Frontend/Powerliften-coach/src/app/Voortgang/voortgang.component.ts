@@ -35,7 +35,6 @@ export class VoortgangComponent{
             console.log(x);
             this.sporter = x;
         })
-
     }
 
     maakVoortgangSporter(){

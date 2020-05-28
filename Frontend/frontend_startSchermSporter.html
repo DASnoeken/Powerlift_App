@@ -128,6 +128,7 @@
 		xhr.onreadystatechange = function () {
 			if (this.readyState == 4) {
 				if (this.responseText) {
+					console.log(this.responseText);
 					var planning = JSON.parse(this.responseText);
 					console.log(planning);
 					var eindtekst = "<table class =\"table\">"

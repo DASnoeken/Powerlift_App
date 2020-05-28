@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 
 @Entity
@@ -20,6 +22,7 @@ public class GegevenTraining {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
 	@ManyToOne()
+	@JsonIgnore
 	private Planning planning;
 	@ManyToOne()
 	private Oefening oefening;
@@ -40,6 +43,12 @@ public class GegevenTraining {
 	}
 	public void setId(long id) {
 		this.id = id;
+	}
+	public Planning getPlanning() {
+		return planning;
+	}
+	public void setPlanning(Planning planning) {
+		this.planning = planning;
 	}
 	public Oefening getOefening() {
 		return oefening;

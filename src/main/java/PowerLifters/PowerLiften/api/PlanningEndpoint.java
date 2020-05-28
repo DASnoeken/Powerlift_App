@@ -91,9 +91,9 @@ public class PlanningEndpoint {
 	@GetMapping("/toonPlanning/{sporterID}")
 	public Planning toonPlanning(@PathVariable long sporterID){
 		try {
-			System.out.println(sporterID);
+			System.out.println("ID: "+sporterID);
 			Planning ip = ps.vindPlanningVoorSporter(sporterID);
-			System.out.println(ip);
+			System.out.println("ip: "+ip);
 			List<GegevenTraining> lgt = ip.getTrainingen();
 			lgt.sort((a,b) -> a.getTijd().compareTo(b.getTijd()));
 			ip.setTrainingen(lgt);
