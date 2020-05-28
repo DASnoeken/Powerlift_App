@@ -40,3 +40,16 @@ Goede verbetering ten opzichte van vorige keer.
 Ben je ervan bewust dat degene die kijkt niet zo heel goed weet waar in het scherm hij moet letten. Dus goed uitleggen waar mensen nou eigenlijk naar moeten kijken. Belangrijke dingen printscreenen en uitvergroten op de presentatie.
 Buiten bootstrap hebben we er niet een keer voor gekozen om een technische term te introduceren. Noem bijvoorbeeld JPA, selectors, SQL, REST en hoe we die gebruiken.
 }
+
+Intro.					-Joeri
+Wat doet de applicatie.			-Joeri
+Aanpak van het project.			-Marijn
+User stories.				-Marijn
+User story analyse.			-Daan
+Inlogscherm.				-Daan
+Sporteropties.				-Marijn
+coachopties.				-Joeri
+Leerdoelen buiten de applicatie.	-Daan
+Reflectie.				-Joeri, Daan, Marijn
+Bedankje.				-Marijn
+
