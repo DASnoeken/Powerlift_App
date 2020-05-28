@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Voortgang } from './voortgang';
 import { VoortgangService } from './voortgang.service';
 import { $ } from 'protractor';
+import { Sporter } from '../Sporter/Sporter';
 
 @Component({
     selector: 'de-voortgang',
@@ -14,6 +15,9 @@ export class VoortgangComponent{
     feedback : string = '';
     id:number = 0;
     voortgangenIDCheck : Voortgang[] = [];
+    sporter:Sporter;
+    sporters: Sporter[] = [];
+
     veranderFeedback($event){
         this.feedback = $event.target.value;
     }
@@ -21,9 +25,19 @@ export class VoortgangComponent{
         this.id = $event.target.value;
     }
     constructor(private voortgangService : VoortgangService){   //Dependency injection -- synoniem met @Autowired
-        this.voortgang1.gebruikteGewicht = 36;
-        console.log("constructor VoortgangComponent");
+        this.voortgangService.getSporters().subscribe(x => { x.forEach(element => this.sporters.push(element)) });
+        this.sporters.push(new Sporter());
     }
+
+    setSporter($event) {
+        console.log($event.target.value);
+        this.voortgangService.getSporterByID($event.target.value).subscribe(x => {
+            console.log(x);
+            this.sporter = x;
+        })
+
+    }
+
     vulVoortgangen(){
         this.voortgangen = [];
         this.voortgangService.getAllVoortgang().subscribe(voortgang => this.voortgangen.push(voortgang));

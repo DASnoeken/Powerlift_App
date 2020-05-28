@@ -38,6 +38,16 @@ input[type="file"] {
 }
     </style>
     <body>
+
+        <div id="sporterScherm">
+            <br> <label>Sporter: </label> <br>
+            <select (change)="setSporter($event)">
+                <option *ngFor="let x of sporters" value={{x.id}}>{{x.naam}}</option>
+        
+            </select><br><br>
+            <input type="button" class="button button1" value="Bekijk voortgang" (click)="maakVoortgangSporter()">
+        </div>
+
 <table style="width: 100%; border: 1px solid white;">
     <tr style="background-color: #ffffff;color: #000000;"><td><input type="button" style="width:99%" class="button button1" value="Voortgang Tabel" (click)="vulVoortgangen()">
     </td><td><input type="button" style="width:99%" class="button button1" value="Schoon scherm" (click)="schoonScherm()"> </td>

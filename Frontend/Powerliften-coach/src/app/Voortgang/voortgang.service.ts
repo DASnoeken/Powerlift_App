@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Voortgang } from './voortgang';
 import { Observable } from 'rxjs';
+import { Sporter } from '../Sporter/Sporter';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable()
@@ -20,6 +21,15 @@ export class VoortgangService{
     //GET
     bekijkID(id:number):Observable<Voortgang>{
         return this.http.get<Voortgang>("http://localhost:8082/checkID/"+id);
+    }
+
+    //GET
+    getSporterByID(id: number):Observable<Sporter> {
+        return this.http.get<Sporter>("http://localhost:8082/getSporter/" + id);
+    }
+
+    getSporters():Observable<Sporter[]>{
+        return this.http.get<Sporter[]>("http://localhost:8082/allSporters");
     }
 
     //POST
